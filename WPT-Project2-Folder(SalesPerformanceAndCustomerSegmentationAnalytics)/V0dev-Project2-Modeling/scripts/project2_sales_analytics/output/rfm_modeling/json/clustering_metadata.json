@@ -1,0 +1,22 @@
+{
+  "export_timestamp": "20251212_153809",
+  "n_customers": 814,
+  "n_clusters": 3,
+  "cluster_labels": {
+    "2": "High Value",
+    "0": "Medium Value",
+    "1": "Low Value"
+  },
+  "metrics": {
+    "n_clusters": 3,
+    "silhouette_score": 0.41667575911874205,
+    "calinski_harabasz_score": 285.3730643098378,
+    "davies_bouldin_score": 0.9072437828445624,
+    "inertia": 2388.839694667624
+  },
+  "cluster_distribution": {
+    "Medium Value": 457,
+    "Low Value": 354,
+    "High Value": 3
+  }
+}

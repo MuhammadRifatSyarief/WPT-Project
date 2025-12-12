@@ -1,0 +1,33 @@
+Metric,Value
+analysis_date,2025-12-11T13:09:22.841915
+period_start,01/10/2025
+period_end,31/12/2025
+validation_passed,True
+total_customers,814
+total_revenue,"273,687,672,156"
+avg_recency,"3,771.53"
+avg_frequency,6.18
+avg_monetary,"336,225,641"
+segment_distribution.Other,164
+segment_distribution.Loyal Customers,158
+segment_distribution.Champions,154
+segment_distribution.Hibernating,77
+segment_distribution.About To Sleep,59
+segment_distribution.Potential Loyalist,55
+segment_distribution.At Risk,52
+segment_distribution.Need Attention,35
+segment_distribution.Recent Customers,32
+segment_distribution.Promising,28
+top_segment,Other
+at_risk_count,52
+champion_count,154
+reference_date,2025-12-11 13:09:21.461731
+total_transactions,5031
+multi_item_transactions,2255
+unique_products,1658
+frequent_itemsets_1,57
+frequent_itemsets_2,16
+frequent_itemsets_3,True
+total_rules,21
+strong_associations,21
+moderate_associations,0

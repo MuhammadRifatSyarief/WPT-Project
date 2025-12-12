@@ -1,0 +1,61 @@
+{
+  "pipeline": "Market Basket Analysis",
+  "version": "1.0.0",
+  "created_at": "2025-12-11T16:52:36.229982",
+  "config": {
+    "input_path": "D:\\CTEST\\V0dev-Project2-Folder\\V0dev-Project2-Modeling\\scripts\\output\\features\\csv\\sales_details.csv",
+    "output_dir": "D:\\CTEST\\V0dev-Project2-Folder\\V0dev-Project2-Modeling\\scripts\\output\\mba",
+    "feature_engineering_dir": "D:\\CTEST\\V0dev-Project2-Folder\\V0dev-Project2-Modeling\\scripts\\project2_sales_analytics\\output\\features\\csv",
+    "transaction_id_col": "invoice_id",
+    "product_id_col": "product_id",
+    "product_name_col": "product_name",
+    "customer_id_col": "customer_id",
+    "min_support": 0.005,
+    "min_confidence": 0.2,
+    "min_lift": 1.0,
+    "max_length": 4,
+    "algorithm": "fpgrowth",
+    "use_colnames": true,
+    "min_items_per_transaction": 2,
+    "min_transactions_per_product": 5
+  },
+  "export_log": [
+    {
+      "filename": "association_rules.csv",
+      "format": "csv",
+      "rows": 197,
+      "timestamp": "2025-12-11T16:52:36.166524"
+    },
+    {
+      "filename": "association_rules.pkl",
+      "format": "pkl",
+      "rows": 197,
+      "timestamp": "2025-12-11T16:52:36.166524"
+    },
+    {
+      "filename": "frequent_itemsets.csv",
+      "format": "csv",
+      "rows": 239,
+      "timestamp": "2025-12-11T16:52:36.166524"
+    },
+    {
+      "filename": "analysis_results.json",
+      "format": "json",
+      "rows": 0,
+      "timestamp": "2025-12-11T16:52:36.213970"
+    },
+    {
+      "filename": "cross_sell_recommendations.csv",
+      "format": "csv",
+      "rows": 47,
+      "timestamp": "2025-12-11T16:52:36.213970"
+    },
+    {
+      "filename": "mba_streamlit_data.pkl",
+      "format": "pkl",
+      "rows": 0,
+      "timestamp": "2025-12-11T16:52:36.229982"
+    }
+  ],
+  "output_directory": "D:\\CTEST\\V0dev-Project2-Folder\\V0dev-Project2-Modeling\\scripts\\output\\mba"
+}

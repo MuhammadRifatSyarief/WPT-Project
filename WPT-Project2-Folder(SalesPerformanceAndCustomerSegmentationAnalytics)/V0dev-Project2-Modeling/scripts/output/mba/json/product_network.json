@@ -1,0 +1,2542 @@
+{
+  "nodes": [
+    {
+      "id": "S012005 EU Plug Power Supply",
+      "label": "S012005 EU Plug Power Supply",
+      "value": 6,
+      "title": "Degree: 6"
+    },
+    {
+      "id": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "label": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 6,
+      "title": "Degree: 6"
+    },
+    {
+      "id": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "label": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 6,
+      "title": "Degree: 6"
+    },
+    {
+      "id": "E003203 Wifi",
+      "label": "E003203 Wifi",
+      "value": 6,
+      "title": "Degree: 6"
+    },
+    {
+      "id": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "label": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 8,
+      "title": "Degree: 8"
+    },
+    {
+      "id": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "label": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 8,
+      "title": "Degree: 8"
+    },
+    {
+      "id": "02170477.HWA-01ideashare Key",
+      "label": "02170477.HWA-01ideashare Key",
+      "value": 8,
+      "title": "Degree: 8"
+    },
+    {
+      "id": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "label": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 6,
+      "title": "Degree: 6"
+    },
+    {
+      "id": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "label": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 6,
+      "title": "Degree: 6"
+    },
+    {
+      "id": "ER7212PC",
+      "label": "ER7212PC",
+      "value": 2,
+      "title": "Degree: 2"
+    },
+    {
+      "id": "EAP620HD(US)",
+      "label": "EAP620HD(US)",
+      "value": 2,
+      "title": "Degree: 2"
+    },
+    {
+      "id": "RG-EW1300G",
+      "label": "RG-EW1300G",
+      "value": 2,
+      "title": "Degree: 2"
+    },
+    {
+      "id": "RG-EW300N",
+      "label": "RG-EW300N",
+      "value": 5,
+      "title": "Degree: 5"
+    },
+    {
+      "id": "RG-EW1200",
+      "label": "RG-EW1200",
+      "value": 8,
+      "title": "Degree: 8"
+    },
+    {
+      "id": "RG-ES108GD",
+      "label": "RG-ES108GD",
+      "value": 2,
+      "title": "Degree: 2"
+    },
+    {
+      "id": "RG-EW1200G-PRO",
+      "label": "RG-EW1200G-PRO",
+      "value": 10,
+      "title": "Degree: 10"
+    },
+    {
+      "id": "RG-RAP2200(F)",
+      "label": "RG-RAP2200(F)",
+      "value": 4,
+      "title": "Degree: 4"
+    },
+    {
+      "id": "RG-ES226GC-P",
+      "label": "RG-ES226GC-P",
+      "value": 3,
+      "title": "Degree: 3"
+    },
+    {
+      "id": "RG-ES218GC-P",
+      "label": "RG-ES218GC-P",
+      "value": 3,
+      "title": "Degree: 3"
+    },
+    {
+      "id": "RG-RAP2200E",
+      "label": "RG-RAP2200E",
+      "value": 6,
+      "title": "Degree: 6"
+    },
+    {
+      "id": "RG-NBS3100-8GT2SFP-P V2",
+      "label": "RG-NBS3100-8GT2SFP-P V2",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-NBS3100-24GT4SFP-P V2",
+      "label": "RG-NBS3100-24GT4SFP-P V2",
+      "value": 2,
+      "title": "Degree: 2"
+    },
+    {
+      "id": "XG-SFP-SR-MM850",
+      "label": "XG-SFP-SR-MM850",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "XG-SFP-LR-SM1310",
+      "label": "XG-SFP-LR-SM1310",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-POE-AF15",
+      "label": "RG-POE-AF15",
+      "value": 2,
+      "title": "Degree: 2"
+    },
+    {
+      "id": "RG-EG105GW (T)",
+      "label": "RG-EG105GW (T)",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-AP180",
+      "label": "RG-AP180",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-AP820-L(V3)",
+      "label": "RG-AP820-L(V3)",
+      "value": 10,
+      "title": "Degree: 10"
+    },
+    {
+      "id": "RG-POE-AT30",
+      "label": "RG-POE-AT30",
+      "value": 3,
+      "title": "Degree: 3"
+    },
+    {
+      "id": "RG-RAP6262(G)",
+      "label": "RG-RAP6262(G)",
+      "value": 3,
+      "title": "Degree: 3"
+    },
+    {
+      "id": "RG-ES228GS-P",
+      "label": "RG-ES228GS-P",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-ES209GC-P",
+      "label": "RG-ES209GC-P",
+      "value": 5,
+      "title": "Degree: 5"
+    },
+    {
+      "id": "RG-E120(GE)",
+      "label": "RG-E120(GE)",
+      "value": 4,
+      "title": "Degree: 4"
+    },
+    {
+      "id": "RG-AP720-L",
+      "label": "RG-AP720-L",
+      "value": 2,
+      "title": "Degree: 2"
+    },
+    {
+      "id": "RG-ES220GS-P",
+      "label": "RG-ES220GS-P",
+      "value": 3,
+      "title": "Degree: 3"
+    },
+    {
+      "id": "RG-WS6008",
+      "label": "RG-WS6008",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-ES208GC",
+      "label": "RG-ES208GC",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-E130(GE)",
+      "label": "RG-E130(GE)",
+      "value": 3,
+      "title": "Degree: 3"
+    },
+    {
+      "id": "RG-ES205GC-P",
+      "label": "RG-ES205GC-P",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-RAP2260(G)",
+      "label": "RG-RAP2260(G)",
+      "value": 6,
+      "title": "Degree: 6"
+    },
+    {
+      "id": "RG-AP820-L(V2)",
+      "label": "RG-AP820-L(V2)",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-NBS3100-24GT4SFP-P",
+      "label": "RG-NBS3100-24GT4SFP-P",
+      "value": 2,
+      "title": "Degree: 2"
+    },
+    {
+      "id": "RG-CS83-24GT4XS-P",
+      "label": "RG-CS83-24GT4XS-P",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-RAP1200 (F)",
+      "label": "RG-RAP1200 (F)",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-ES210GS-P",
+      "label": "RG-ES210GS-P",
+      "value": 1,
+      "title": "Degree: 1"
+    },
+    {
+      "id": "RG-AP840-L",
+      "label": "RG-AP840-L",
+      "value": 1,
+      "title": "Degree: 1"
+    }
+  ],
+  "edges": [
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 78.95%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 78.95%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 100.00%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 107.36842105263158,
+      "title": "Lift: 107.37, Conf: 73.68%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 105.77777777777779,
+      "title": "Lift: 105.78, Conf: 93.33%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 105.77777777777779,
+      "title": "Lift: 105.78, Conf: 93.33%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 105.77777777777779,
+      "title": "Lift: 105.78, Conf: 93.33%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 105.77777777777779,
+      "title": "Lift: 105.78, Conf: 93.33%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 105.77777777777777,
+      "title": "Lift: 105.78, Conf: 77.78%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 105.77777777777777,
+      "title": "Lift: 105.78, Conf: 77.78%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 105.77777777777777,
+      "title": "Lift: 105.78, Conf: 77.78%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 105.77777777777777,
+      "title": "Lift: 105.78, Conf: 77.78%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 95.45%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 86.36%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 63.64%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 63.64%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 63.64%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 100.00%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 63.64%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 92.72727272727273,
+      "title": "Lift: 92.73, Conf: 63.64%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 92.72727272727272,
+      "title": "Lift: 92.73, Conf: 81.82%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 92.72727272727272,
+      "title": "Lift: 92.73, Conf: 81.82%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 92.72727272727272,
+      "title": "Lift: 92.73, Conf: 68.18%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 92.72727272727272,
+      "title": "Lift: 92.73, Conf: 68.18%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 85.71%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 85.71%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 94.74%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 94.74%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 85.71%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 85.71%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 94.74%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 94.74%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 85.71%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 92.03007518796993,
+      "title": "Lift: 92.03, Conf: 94.74%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 90.66666666666667,
+      "title": "Lift: 90.67, Conf: 93.33%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 90.66666666666666,
+      "title": "Lift: 90.67, Conf: 66.67%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 81.60000000000001,
+      "title": "Lift: 81.60, Conf: 44.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 81.6,
+      "title": "Lift: 81.60, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 77.52000000000001,
+      "title": "Lift: 77.52, Conf: 76.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 77.52,
+      "title": "Lift: 77.52, Conf: 95.00%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 73.20574162679426,
+      "title": "Lift: 73.21, Conf: 78.95%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 73.20574162679426,
+      "title": "Lift: 73.21, Conf: 78.95%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 73.20574162679426,
+      "title": "Lift: 73.21, Conf: 78.95%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 73.20574162679425,
+      "title": "Lift: 73.21, Conf: 68.18%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 73.20574162679425,
+      "title": "Lift: 73.21, Conf: 68.18%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 73.20574162679425,
+      "title": "Lift: 73.21, Conf: 68.18%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 72.12121212121212,
+      "title": "Lift: 72.12, Conf: 63.64%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 72.12121212121212,
+      "title": "Lift: 72.12, Conf: 63.64%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "S012005 EU Plug Power Supply",
+      "value": 72.12121212121212,
+      "title": "Lift: 72.12, Conf: 63.64%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 72.12121212121212,
+      "title": "Lift: 72.12, Conf: 63.64%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 72.12121212121212,
+      "title": "Lift: 72.12, Conf: 63.64%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 72.12121212121211,
+      "title": "Lift: 72.12, Conf: 77.78%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 72.12121212121211,
+      "title": "Lift: 72.12, Conf: 77.78%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 72.12121212121211,
+      "title": "Lift: 72.12, Conf: 77.78%"
+    },
+    {
+      "from": "S012005 EU Plug Power Supply",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 72.12121212121211,
+      "title": "Lift: 72.12, Conf: 77.78%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 72.12121212121211,
+      "title": "Lift: 72.12, Conf: 77.78%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 78.12%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 78.12%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 78.12%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 78.12%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 78.12%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 78.12%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 78.12%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 78.12%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 62.50%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 62.50%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 62.50%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 62.50%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 62.50%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "55150693. IHB2-86SUHUAWEI-IdeaHub Board 2, IHB2-86SU, Intelligent Collaboration Device 86-inch infrared screen, jade white,overseas.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 34.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 62.50%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 62.50%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "02170477.HWA-01ideashare Key",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 62.50%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 59.38%"
+    },
+    {
+      "from": "02170477.HWA-01ideashare Key",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21155908. WB1M0IDEAHUB07 HUAWEI Ideahub White Rolling Stand II ( 65/75/86 inches )",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "21156005. WB1M0BRACKET01Wall Mount Bracket.",
+      "to": "23080128. IHC Digital Conference System Components,IHC,IdeaHub,Controller,BULL",
+      "value": 63.75,
+      "title": "Lift: 63.75, Conf: 100.00%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 63.22314049586777,
+      "title": "Lift: 63.22, Conf: 68.18%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 63.22314049586777,
+      "title": "Lift: 63.22, Conf: 68.18%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 61.81818181818182,
+      "title": "Lift: 61.82, Conf: 63.64%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "value": 61.81818181818182,
+      "title": "Lift: 61.82, Conf: 63.64%"
+    },
+    {
+      "from": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "to": "E003203 Wifi",
+      "value": 61.81818181818182,
+      "title": "Lift: 61.82, Conf: 63.64%"
+    },
+    {
+      "from": "E003168 4G Cellular Rubber Antenna 824-960MHz,1710-2400MHz;",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 61.81818181818181,
+      "title": "Lift: 61.82, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 61.81818181818181,
+      "title": "Lift: 61.82, Conf: 66.67%"
+    },
+    {
+      "from": "E003203 Wifi",
+      "to": "A004700714. B048703. R1510-4L_EC25-AU.",
+      "value": 61.81818181818181,
+      "title": "Lift: 61.82, Conf: 66.67%"
+    },
+    {
+      "from": "ER7212PC",
+      "to": "EAP620HD(US)",
+      "value": 50.132325141776946,
+      "title": "Lift: 50.13, Conf: 56.52%"
+    },
+    {
+      "from": "EAP620HD(US)",
+      "to": "ER7212PC",
+      "value": 50.132325141776946,
+      "title": "Lift: 50.13, Conf: 56.52%"
+    },
+    {
+      "from": "RG-EW1300G",
+      "to": "RG-EW300N",
+      "value": 17.73913043478261,
+      "title": "Lift: 17.74, Conf: 47.83%"
+    },
+    {
+      "from": "RG-EW1200",
+      "to": "RG-EW1200G-PRO",
+      "value": 16.32,
+      "title": "Lift: 16.32, Conf: 100.00%"
+    },
+    {
+      "from": "RG-ES108GD",
+      "to": "RG-EW1200G-PRO",
+      "value": 16.32,
+      "title": "Lift: 16.32, Conf: 100.00%"
+    },
+    {
+      "from": "RG-EW300N",
+      "to": "RG-EW1200",
+      "value": 15.763636363636365,
+      "title": "Lift: 15.76, Conf: 68.00%"
+    },
+    {
+      "from": "RG-EW1200G-PRO",
+      "to": "RG-EW1200",
+      "value": 15.763636363636365,
+      "title": "Lift: 15.76, Conf: 68.00%"
+    },
+    {
+      "from": "RG-RAP2200(F)",
+      "to": "RG-EW1200G-PRO",
+      "value": 14.960000000000004,
+      "title": "Lift: 14.96, Conf: 91.67%"
+    },
+    {
+      "from": "RG-EW1200",
+      "to": "RG-EW1200G-PRO",
+      "value": 14.960000000000004,
+      "title": "Lift: 14.96, Conf: 91.67%"
+    },
+    {
+      "from": "RG-ES108GD",
+      "to": "RG-EW1200",
+      "value": 14.166666666666668,
+      "title": "Lift: 14.17, Conf: 61.11%"
+    },
+    {
+      "from": "RG-EW1200G-PRO",
+      "to": "RG-EW1200",
+      "value": 14.166666666666668,
+      "title": "Lift: 14.17, Conf: 61.11%"
+    },
+    {
+      "from": "RG-RAP2200(F)",
+      "to": "RG-EW1200",
+      "value": 14.166666666666668,
+      "title": "Lift: 14.17, Conf: 61.11%"
+    },
+    {
+      "from": "RG-EW1200G-PRO",
+      "to": "RG-EW1200",
+      "value": 14.166666666666668,
+      "title": "Lift: 14.17, Conf: 61.11%"
+    },
+    {
+      "from": "RG-EW1200",
+      "to": "RG-EW1200G-PRO",
+      "value": 13.872,
+      "title": "Lift: 13.87, Conf: 85.00%"
+    },
+    {
+      "from": "RG-EW300N",
+      "to": "RG-EW1200G-PRO",
+      "value": 13.872,
+      "title": "Lift: 13.87, Conf: 85.00%"
+    },
+    {
+      "from": "RG-EW1200",
+      "to": "RG-EW1200G-PRO",
+      "value": 11.127272727272727,
+      "title": "Lift: 11.13, Conf: 68.18%"
+    },
+    {
+      "from": "RG-EW1200G-PRO",
+      "to": "RG-EW1200",
+      "value": 11.127272727272727,
+      "title": "Lift: 11.13, Conf: 48.00%"
+    },
+    {
+      "from": "RG-EW300N",
+      "to": "RG-EW1200",
+      "value": 10.50909090909091,
+      "title": "Lift: 10.51, Conf: 30.91%"
+    },
+    {
+      "from": "RG-EW300N",
+      "to": "RG-EW1200G-PRO",
+      "value": 10.50909090909091,
+      "title": "Lift: 10.51, Conf: 30.91%"
+    },
+    {
+      "from": "RG-EW1200",
+      "to": "RG-EW300N",
+      "value": 10.509090909090908,
+      "title": "Lift: 10.51, Conf: 28.33%"
+    },
+    {
+      "from": "RG-EW1200G-PRO",
+      "to": "RG-EW300N",
+      "value": 10.509090909090908,
+      "title": "Lift: 10.51, Conf: 28.33%"
+    },
+    {
+      "from": "RG-ES226GC-P",
+      "to": "RG-ES218GC-P",
+      "value": 10.394021739130435,
+      "title": "Lift: 10.39, Conf: 32.61%"
+    },
+    {
+      "from": "RG-ES218GC-P",
+      "to": "RG-ES226GC-P",
+      "value": 10.394021739130435,
+      "title": "Lift: 10.39, Conf: 23.44%"
+    },
+    {
+      "from": "RG-RAP2200E",
+      "to": "RG-EW1200",
+      "value": 10.303030303030303,
+      "title": "Lift: 10.30, Conf: 44.44%"
+    },
+    {
+      "from": "RG-EW1200G-PRO",
+      "to": "RG-EW1200",
+      "value": 10.303030303030303,
+      "title": "Lift: 10.30, Conf: 44.44%"
+    },
+    {
+      "from": "RG-ES108GD",
+      "to": "RG-EW1200",
+      "value": 9.842105263157896,
+      "title": "Lift: 9.84, Conf: 28.95%"
+    },
+    {
+      "from": "RG-ES108GD",
+      "to": "RG-EW1200G-PRO",
+      "value": 9.842105263157896,
+      "title": "Lift: 9.84, Conf: 28.95%"
+    },
+    {
+      "from": "RG-EW1300G",
+      "to": "RG-EW1200G-PRO",
+      "value": 9.224347826086959,
+      "title": "Lift: 9.22, Conf: 56.52%"
+    },
+    {
+      "from": "RG-EW1200",
+      "to": "RG-EW1200G-PRO",
+      "value": 8.901818181818182,
+      "title": "Lift: 8.90, Conf: 54.55%"
+    },
+    {
+      "from": "RG-RAP2200E",
+      "to": "RG-EW1200G-PRO",
+      "value": 8.901818181818182,
+      "title": "Lift: 8.90, Conf: 54.55%"
+    },
+    {
+      "from": "RG-NBS3100-8GT2SFP-P V2",
+      "to": "RG-NBS3100-24GT4SFP-P V2",
+      "value": 8.817536276628587,
+      "title": "Lift: 8.82, Conf: 34.15%"
+    },
+    {
+      "from": "RG-EW300N",
+      "to": "RG-EW1200",
+      "value": 8.429752066115702,
+      "title": "Lift: 8.43, Conf: 36.36%"
+    },
+    {
+      "from": "RG-EW1200",
+      "to": "RG-EW300N",
+      "value": 8.429752066115702,
+      "title": "Lift: 8.43, Conf: 22.73%"
+    },
+    {
+      "from": "RG-ES108GD",
+      "to": "RG-EW1200G-PRO",
+      "value": 7.730526315789474,
+      "title": "Lift: 7.73, Conf: 47.37%"
+    },
+    {
+      "from": "RG-EW300N",
+      "to": "RG-EW1200G-PRO",
+      "value": 7.418181818181817,
+      "title": "Lift: 7.42, Conf: 45.45%"
+    },
+    {
+      "from": "XG-SFP-SR-MM850",
+      "to": "XG-SFP-LR-SM1310",
+      "value": 7.391304347826087,
+      "title": "Lift: 7.39, Conf: 23.91%"
+    },
+    {
+      "from": "RG-ES108GD",
+      "to": "RG-EW1200",
+      "value": 6.710526315789474,
+      "title": "Lift: 6.71, Conf: 28.95%"
+    },
+    {
+      "from": "RG-POE-AF15",
+      "to": "RG-RAP2200(F)",
+      "value": 6.494693877551021,
+      "title": "Lift: 6.49, Conf: 39.80%"
+    },
+    {
+      "from": "RG-RAP2200(F)",
+      "to": "RG-POE-AF15",
+      "value": 6.49469387755102,
+      "title": "Lift: 6.49, Conf: 31.20%"
+    },
+    {
+      "from": "RG-EG105GW (T)",
+      "to": "RG-EW1200G-PRO",
+      "value": 6.429090909090908,
+      "title": "Lift: 6.43, Conf: 39.39%"
+    },
+    {
+      "from": "RG-AP180",
+      "to": "RG-AP820-L(V3)",
+      "value": 5.386375638091885,
+      "title": "Lift: 5.39, Conf: 65.22%"
+    },
+    {
+      "from": "RG-POE-AT30",
+      "to": "RG-RAP6262(G)",
+      "value": 5.299356754082137,
+      "title": "Lift: 5.30, Conf: 22.34%"
+    },
+    {
+      "from": "RG-RAP6262(G)",
+      "to": "RG-POE-AT30",
+      "value": 5.299356754082137,
+      "title": "Lift: 5.30, Conf: 24.42%"
+    },
+    {
+      "from": "RG-ES228GS-P",
+      "to": "RG-ES209GC-P",
+      "value": 4.87052341597796,
+      "title": "Lift: 4.87, Conf: 39.39%"
+    },
+    {
+      "from": "RG-E120(GE)",
+      "to": "RG-AP720-L",
+      "value": 4.798036609060231,
+      "title": "Lift: 4.80, Conf: 29.87%"
+    },
+    {
+      "from": "RG-AP720-L",
+      "to": "RG-E120(GE)",
+      "value": 4.798036609060231,
+      "title": "Lift: 4.80, Conf: 36.22%"
+    },
+    {
+      "from": "RG-ES220GS-P",
+      "to": "RG-ES209GC-P",
+      "value": 4.755244755244755,
+      "title": "Lift: 4.76, Conf: 38.46%"
+    },
+    {
+      "from": "RG-WS6008",
+      "to": "RG-AP820-L(V3)",
+      "value": 3.950008801267383,
+      "title": "Lift: 3.95, Conf: 47.83%"
+    },
+    {
+      "from": "RG-ES208GC",
+      "to": "RG-ES209GC-P",
+      "value": 3.7777777777777777,
+      "title": "Lift: 3.78, Conf: 30.56%"
+    },
+    {
+      "from": "RG-AP820-L(V3)",
+      "to": "RG-E130(GE)",
+      "value": 3.503864556496136,
+      "title": "Lift: 3.50, Conf: 34.01%"
+    },
+    {
+      "from": "RG-E130(GE)",
+      "to": "RG-AP820-L(V3)",
+      "value": 3.5038645564961355,
+      "title": "Lift: 3.50, Conf: 42.42%"
+    },
+    {
+      "from": "RG-ES205GC-P",
+      "to": "RG-ES209GC-P",
+      "value": 3.445603576751118,
+      "title": "Lift: 3.45, Conf: 27.87%"
+    },
+    {
+      "from": "RG-ES218GC-P",
+      "to": "RG-ES209GC-P",
+      "value": 3.2840909090909087,
+      "title": "Lift: 3.28, Conf: 26.56%"
+    },
+    {
+      "from": "RG-E120(GE)",
+      "to": "RG-RAP2200E",
+      "value": 3.1890331890331898,
+      "title": "Lift: 3.19, Conf: 25.32%"
+    },
+    {
+      "from": "RG-RAP2200E",
+      "to": "RG-E120(GE)",
+      "value": 3.1890331890331898,
+      "title": "Lift: 3.19, Conf: 24.07%"
+    },
+    {
+      "from": "RG-POE-AT30",
+      "to": "RG-RAP2260(G)",
+      "value": 3.154379020286986,
+      "title": "Lift: 3.15, Conf: 26.60%"
+    },
+    {
+      "from": "RG-EW1200",
+      "to": "RG-RAP2200E",
+      "value": 3.1481481481481484,
+      "title": "Lift: 3.15, Conf: 25.00%"
+    },
+    {
+      "from": "RG-ES226GC-P",
+      "to": "RG-RAP2260(G)",
+      "value": 3.094034378159757,
+      "title": "Lift: 3.09, Conf: 26.09%"
+    },
+    {
+      "from": "RG-AP820-L(V2)",
+      "to": "RG-E130(GE)",
+      "value": 2.837066315327185,
+      "title": "Lift: 2.84, Conf: 27.54%"
+    },
+    {
+      "from": "RG-NBS3100-24GT4SFP-P",
+      "to": "RG-RAP2260(G)",
+      "value": 2.8033826638477795,
+      "title": "Lift: 2.80, Conf: 23.64%"
+    },
+    {
+      "from": "RG-ES220GS-P",
+      "to": "RG-RAP2260(G)",
+      "value": 2.737030411449016,
+      "title": "Lift: 2.74, Conf: 23.08%"
+    },
+    {
+      "from": "RG-EW1200G-PRO",
+      "to": "RG-RAP2200E",
+      "value": 2.72,
+      "title": "Lift: 2.72, Conf: 21.60%"
+    },
+    {
+      "from": "RG-CS83-24GT4XS-P",
+      "to": "RG-AP820-L(V3)",
+      "value": 2.6720647773279356,
+      "title": "Lift: 2.67, Conf: 32.35%"
+    },
+    {
+      "from": "RG-RAP1200 (F)",
+      "to": "RG-RAP2260(G)",
+      "value": 2.6093023255813956,
+      "title": "Lift: 2.61, Conf: 22.00%"
+    },
+    {
+      "from": "RG-RAP6262(G)",
+      "to": "RG-RAP2260(G)",
+      "value": 2.4824229313142236,
+      "title": "Lift: 2.48, Conf: 20.93%"
+    },
+    {
+      "from": "RG-ES220GS-P",
+      "to": "RG-AP820-L(V3)",
+      "value": 2.2871379632513236,
+      "title": "Lift: 2.29, Conf: 27.69%"
+    },
+    {
+      "from": "RG-NBS3100-24GT4SFP-P V2",
+      "to": "RG-AP820-L(V3)",
+      "value": 1.9863680623174294,
+      "title": "Lift: 1.99, Conf: 24.05%"
+    },
+    {
+      "from": "RG-ES210GS-P",
+      "to": "RG-AP820-L(V3)",
+      "value": 1.8540857638602,
+      "title": "Lift: 1.85, Conf: 22.45%"
+    },
+    {
+      "from": "RG-AP840-L",
+      "to": "RG-AP820-L(V3)",
+      "value": 1.8019874861980123,
+      "title": "Lift: 1.80, Conf: 21.82%"
+    },
+    {
+      "from": "RG-NBS3100-24GT4SFP-P",
+      "to": "RG-AP820-L(V3)",
+      "value": 1.8019874861980123,
+      "title": "Lift: 1.80, Conf: 21.82%"
+    }
+  ],
+  "stats": {
+    "node_count": 46,
+    "edge_count": 376
+  }
+}

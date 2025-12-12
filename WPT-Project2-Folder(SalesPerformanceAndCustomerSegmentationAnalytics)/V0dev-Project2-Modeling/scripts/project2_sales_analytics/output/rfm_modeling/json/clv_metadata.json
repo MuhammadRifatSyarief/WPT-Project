@@ -1,0 +1,37 @@
+{
+  "export_timestamp": "20251212_153815",
+  "n_customers": 814,
+  "total_predicted_clv": 120422952434.26389,
+  "avg_clv": 147939745.00523818,
+  "median_clv": 23660402.514570646,
+  "metrics": {
+    "mse": 1.4278470235404552e+17,
+    "rmse": 377868631.0796988,
+    "mae": 69043387.42854732,
+    "r2_score": 0.7387428762334592,
+    "mape": 25.84328571448445,
+    "explained_variance": 0.7420722302896228,
+    "mean_error": 42656651.48834549,
+    "error_std": 376610232.8042824
+  },
+  "distribution": {
+    "min": 93.07272230515886,
+    "max": 10820973261.062042,
+    "std": 588223839.7533104
+  },
+  "pareto_analysis": {
+    "top_pct_for_80_revenue": 13.022113022113022,
+    "top_20_pct_revenue_share": 86.6999527403602
+  },
+  "top_features": {
+    "monetary": 0.37988129575815077,
+    "total_spending": 0.3079552619658354,
+    "customer_tenure_days": 0.13911733012173788,
+    "purchase_velocity": 0.10244857239587728,
+    "avg_transaction_value": 0.04174430125486379,
+    "recency": 0.02230086691787382,
+    "transaction_count": 0.0029198968461279172,
+    "frequency": 0.002771559734445035,
+    "purchase_consistency": 0.000860915005088099
+  }
+}

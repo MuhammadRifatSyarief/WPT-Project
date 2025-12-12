@@ -1,0 +1,21 @@
+# Market Basket Analysis Dependencies
+# ===================================
+
+# Core Data Processing
+pandas>=1.5.0
+numpy>=1.21.0
+
+# Machine Learning & Association Rules
+mlxtend>=0.21.0
+scikit-learn>=1.0.0
+
+# Serialization
+joblib>=1.2.0
+
+# Optional: Visualization (if generate_visualizations=True)
+matplotlib>=3.5.0
+seaborn>=0.12.0
+networkx>=2.8.0
+
+# Optional: Progress bars
+tqdm>=4.64.0
