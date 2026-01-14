@@ -1,0 +1,185 @@
+u# Feature Engineering Pipeline for Project 1: Intelligent Inventory Optimization
+
+## Goal
+Transform 5 validated base datasets into a single **Master Inventory Feature Set** (`Master_Inventory_Feature_Set.csv`) that powers all dashboard components:
+- **Demand Forecasting** (Time-series metrics)
+- **Inventory Health** (ABC/XYZ classification, DIO)
+- **Stockout Alerts** (Days until stockout prediction)
+- **Reorder Point** (ROP recommendation engine)
+
+---
+
+## Input Data Sources
+
+| File | Key Columns | Purpose |
+|------|-------------|---------|
+| [1_Sales_Details.csv](file:///d:/AA-WPT-PROJECT/AA-WPT-PROJECT/WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)/Logic_Development_Project1/field_mapping_csv_output/1_Sales_Details.csv) | `trans_date`, `item_no`, `quantity`, `unit_price`, `total_price` | Daily demand patterns |
+| [2_PO_Details.csv](file:///d:/AA-WPT-PROJECT/AA-WPT-PROJECT/WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)/Logic_Development_Project1/field_mapping_csv_output/2_PO_Details.csv) | `item_no`, `lead_time_days`, `is_real_lead_time` | Lead time profiling |
+| [3_Stock_Mutations.csv](file:///d:/AA-WPT-PROJECT/AA-WPT-PROJECT/WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)/Logic_Development_Project1/field_mapping_csv_output/3_Stock_Mutations.csv) | `item_no`, `date`, `type`, `qty_change` | Stock movement history |
+| [4_Current_Stock.csv](file:///d:/AA-WPT-PROJECT/AA-WPT-PROJECT/WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)/Logic_Development_Project1/field_mapping_csv_output/4_Current_Stock.csv) | `item_no`, `on_stock`, `avg_cost`, `incoming_qty` | Current inventory state |
+| [5_Master_Items.csv](file:///d:/AA-WPT-PROJECT/AA-WPT-PROJECT/WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)/Logic_Development_Project1/field_mapping_csv_output/5_Master_Items.csv) | `no`, `name`, `itemType`, `category`, `unitPrice` | Item master data |
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> This pipeline assumes the input CSVs in `field_mapping_csv_output/` are the validated "Golden Source". Any issues in source data will propagate to the output.
+
+> [!NOTE]
+> **Service Level**: Default Z-score of 1.65 (95% service level) will be used for Safety Stock calculation. Adjust if needed.
+
+---
+
+## Proposed Changes
+
+### New Feature Engineering Module
+
+We will create a new directory `Feature_Engineering` containing the main pipeline script.
+
+---
+
+#### [NEW] Feature_Engineering/feature_engineering_pipeline.py
+
+A comprehensive pipeline with 5 sequential stages:
+
+##### Stage 1: Data Loading & Cleaning
+```python
+# Load all 5 datasets
+sales_df = pd.read_csv('1_Sales_Details.csv')
+po_df = pd.read_csv('2_PO_Details.csv') 
+mutations_df = pd.read_csv('3_Stock_Mutations.csv')
+current_stock_df = pd.read_csv('4_Current_Stock.csv')
+master_items_df = pd.read_csv('5_Master_Items.csv')
+
+# Type standardization
+- item_no: str (ensure consistent join keys)
+- trans_date/date: datetime64
+- quantity/qty_change: float
+- Aggregate current_stock by item_no (sum across warehouses where applicable)
+```
+
+##### Stage 2: Time-Series Metrics Engine
+For each item, calculate:
+- **Daily Sales Matrix**: Resample sales to daily frequency, filling gaps with 0
+- **Rolling Averages**: 7-day, 30-day, 90-day moving averages
+- **Demand Volatility**: Standard deviation of daily sales (for XYZ classification)
+- **Total Revenue**: Sum of `total_price` for ABC classification
+
+```python
+# Example calculation
+daily_sales = sales_df.groupby(['item_no', 'trans_date'])['quantity'].sum()
+rolling_7d = daily_sales.rolling(7).mean()
+sales_volatility = daily_sales.std()
+```
+
+##### Stage 3: Advanced Product Profiling
+
+**ABC Analysis (Revenue-based)**:
+| Class | Revenue Contribution | Criteria |
+|-------|---------------------|----------|
+| A | Top 80% | High-value items |
+| B | Next 15% | Medium-value items |
+| C | Bottom 5% | Low-value items |
+
+**XYZ Analysis (Volatility-based)**:
+| Class | Coefficient of Variation (CV) | Demand Pattern |
+|-------|-------------------------------|----------------|
+| X | CV < 0.5 | Stable/Predictable |
+| Y | 0.5 <= CV < 1.0 | Variable |
+| Z | CV >= 1.0 | Erratic/Unpredictable |
+
+**Lead Time Profiling** (from [2_PO_Details.csv](file:///D:/AA-WPT-PROJECT/AA-WPT-PROJECT/WPT-Project1-Folder%28IntelligentInventoryOptimizationAndStockoutPrediction%29/Logic_Development_Project1/field_mapping_csv_output/2_PO_Details.csv)):
+```python
+lead_time_stats = po_df.groupby('item_no')['lead_time_days'].agg([
+    'mean',    # Avg_Lead_Time
+    'max',     # Max_Lead_Time  
+    'std'      # Lead_Time_StdDev
+])
+```
+
+##### Stage 4: Predictive Metrics Calculation
+
+**Safety Stock** (Dynamic formula):
+```
+Safety_Stock = Z_score × Demand_StdDev × sqrt(Avg_Lead_Time)
+Where Z_score = 1.65 for 95% service level
+```
+
+**Reorder Point (ROP)**:
+```
+ROP = (Avg_Daily_Sales × Avg_Lead_Time) + Safety_Stock
+```
+
+**Days Inventory Outstanding (DIO)**:
+```
+DIO = Current_Stock / Avg_Daily_Sales
+(If Avg_Daily_Sales = 0, DIO = 999 indicating slow/no movement)
+```
+
+**Days Until Stockout**:
+```
+Days_Until_Stockout = (Current_Stock + Incoming_Qty) / Avg_Daily_Sales
+```
+
+##### Stage 5: Master Aggregation & Export
+
+Merge all calculated metrics into a single table keyed by `item_no`:
+
+| Output Column | Source | Description |
+|---------------|--------|-------------|
+| `item_no` | Master | Primary key |
+| `item_name` | 5_Master_Items | Product name |
+| `category` | 5_Master_Items | Product category |
+| `current_stock` | 4_Current_Stock | Current on-hand qty |
+| `avg_cost` | 4_Current_Stock | Average cost |
+| `unit_price` | 5_Master_Items | Selling price |
+| `incoming_qty` | 4_Current_Stock | Pending PO qty |
+| `avg_daily_sales` | Calculated | 30-day avg sales |
+| `sales_7d` | Calculated | 7-day rolling avg |
+| `sales_30d` | Calculated | 30-day rolling avg |
+| `sales_90d` | Calculated | 90-day rolling avg |
+| `sales_volatility` | Calculated | Demand std dev |
+| `total_revenue` | Calculated | Cumulative revenue |
+| `abc_class` | Calculated | A/B/C classification |
+| `xyz_class` | Calculated | X/Y/Z classification |
+| `abc_xyz_class` | Calculated | Combined (e.g., AX, BY) |
+| `avg_lead_time` | 2_PO_Details | Avg supplier lead time |
+| `max_lead_time` | 2_PO_Details | Max observed lead time |
+| `lead_time_stddev` | 2_PO_Details | Lead time variability |
+| `safety_stock` | Calculated | Buffer stock qty |
+| `reorder_point` | Calculated | ROP threshold |
+| `dio_days` | Calculated | Days of inventory |
+| `days_until_stockout` | Calculated | Estimated days before out |
+| `needs_reorder` | Calculated | Boolean: stock < ROP |
+| `stockout_risk` | Calculated | High/Medium/Low |
+
+---
+
+## Verification Plan
+
+### Automated Checks (Built into pipeline)
+1. **Row Count Integrity**: Output rows ≈ unique items in [4_Current_Stock.csv](file:///D:/AA-WPT-PROJECT/AA-WPT-PROJECT/WPT-Project1-Folder%28IntelligentInventoryOptimizationAndStockoutPrediction%29/Logic_Development_Project1/field_mapping_csv_output/4_Current_Stock.csv)
+2. **Non-negative Validation**: `ROP >= 0`, `Safety_Stock >= 0`, `DIO >= 0`
+3. **Classification Coverage**: All items have ABC and XYZ classes assigned
+4. **Null Value Report**: Log any critical missing values
+
+### Manual Verification
+1. Spot-check 5 random items for calculation accuracy
+2. Verify ABC distribution (~80/15/5 ratio)
+3. Confirm output schema matches Streamlit dashboard requirements
+
+---
+
+## Output
+
+#### [NEW] Feature_Engineering/Master_Inventory_Feature_Set.csv
+The final analytical table ready for dashboard consumption.
+
+---
+
+## Execution Command
+```bash
+cd Feature_Engineering
+py feature_engineering_pipeline.py
+```

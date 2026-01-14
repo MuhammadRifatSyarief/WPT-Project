@@ -3,67 +3,62 @@
 """
 Stockout Alerts Page
 ====================
-Provides a real-time view of products at risk of stockout, with filtering,
-sorting, and quick actions for reordering.
+Provides real-time view of products at risk of stockout.
+Uses ACTUAL data from modules without artificial caps for natural variation.
 """
 
 import streamlit as st
 import pandas as pd
-import numpy as np  # Import NumPy
+import numpy as np
 from datetime import datetime
 
-# Impor modul kustom
 from modules.activity_logger import log_activity
 from modules.email_utils import render_email_form
 
+
 def render_page(df: pd.DataFrame):
     """
-    Merender seluruh konten untuk halaman Stockout Alerts.
-    
-    Args:
-        df (pd.DataFrame): DataFrame utama yang berisi semua data inventaris.
+    Merender halaman Stockout Alerts dengan data natural dari module.
     """
     
-    # Semua logika halaman dimulai dari sini, di dalam fungsi
-    st.title("⚠️ Stockout Alerts")
-    st.markdown("Monitor and manage stockout risks")
+    # Preprocess data - USE ACTUAL VALUES from module
+    df = df.copy()
     
-    with st.popover("ℹ️ Tentang Stockout Alert"):
-        st.markdown("""
-        **Stockout Alert System** mencegah kehabisan stok dengan peringatan dini.
-        
-        **Cara Kerja:**
-        Current Stock ÷ Daily Demand = Days Until Stockout
-        
-        **Level Risk:**
-        - 🔴 Critical: <7 hari (ORDER NOW!)
-        - 🟡 High: 7-14 hari (PLAN ORDER)
-        - 🔵 Medium: 15-30 hari (MONITOR)
-        
-        **Immediate Actions:**
-        - Prioritas ordering
-        - Supplier notification
-        - Alternative product suggestions
-        """)
+    # Ensure numeric columns
+    df['avg_daily_demand'] = pd.to_numeric(df.get('avg_daily_demand', 0.01), errors='coerce').fillna(0.01)
+    df['current_stock_qty'] = pd.to_numeric(df.get('current_stock_qty', 0), errors='coerce').fillna(0)
     
-    # ========================================================================
-    # PERHITUNGAN RISIKO STOCKOUT
-    # ========================================================================
+    # Use safety_stock from module (ACTUAL values, no cap)
+    if 'optimal_safety_stock' in df.columns:
+        df['safety_stock'] = pd.to_numeric(df['optimal_safety_stock'], errors='coerce').fillna(0)
+    elif 'safety_stock_optimized' in df.columns:
+        df['safety_stock'] = pd.to_numeric(df['safety_stock_optimized'], errors='coerce').fillna(0)
+    else:
+        # Calculate if not available
+        demand_std = df['avg_daily_demand'] * 0.3
+        lead_time = 31  # Business assumption
+        df['safety_stock'] = np.ceil(1.65 * demand_std * np.sqrt(lead_time))
     
-    # Hindari ZeroDivisionError dan NaN values
-    df['days_until_stockout'] = df['current_stock_qty'] / (df['avg_daily_demand'] + 0.01)
+    # Calculate days until stockout
+    df['days_until_stockout'] = df['current_stock_qty'] / (df['avg_daily_demand'] + 0.001)
+    df['days_until_stockout'] = df['days_until_stockout'].clip(upper=365)
     
-    # Kategorikan level risiko
-    df['risk_level'] = pd.cut(df['days_until_stockout'], 
-                               bins=[-np.inf, 7, 14, 30, np.inf],
-                               labels=['Critical', 'High', 'Medium', 'Low'])
+    # Categorize risk level
+    df['risk_level'] = pd.cut(
+        df['days_until_stockout'], 
+        bins=[-np.inf, 7, 14, 30, np.inf],
+        labels=['Critical', 'High', 'Medium', 'Low']
+    )
     
     critical_products = df[df['risk_level'] == 'Critical']
     high_products = df[df['risk_level'] == 'High']
     medium_products = df[df['risk_level'] == 'Medium']
     
+    st.title("⚠️ Stockout Alerts")
+    st.markdown("Monitor and manage stockout risks")
+    
     # ========================================================================
-    # TAMPILAN METRIK UTAMA
+    # METRICS
     # ========================================================================
     
     col1, col2, col3 = st.columns(3)
@@ -71,148 +66,120 @@ def render_page(df: pd.DataFrame):
     with col1:
         st.markdown(f"""
         <div class="alert-critical">
-            <h3 style="margin: 0; color: white;">🔴 Critical Risk</h3>
-            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(critical_products)}</div>
-            <div style="color: #fca5a5;">Stockout in <7 days</div>
+            <h3 style="margin: 0; color: white;">🔴 Critical</h3>
+            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(critical_products):,}</div>
+            <div style="color: #fca5a5;">&lt;7 days stock</div>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown(f"""
         <div class="alert-warning">
-            <h3 style="margin: 0; color: white;">🟡 High Risk</h3>
-            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(high_products)}</div>
-            <div style="color: #fcd34d;">Stockout in 7-14 days</div>
+            <h3 style="margin: 0; color: white;">🟡 High</h3>
+            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(high_products):,}</div>
+            <div style="color: #fcd34d;">7-14 days stock</div>
         </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown(f"""
         <div class="alert-info">
-            <h3 style="margin: 0; color: white;">🔵 Medium Risk</h3>
-            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(medium_products)}</div>
-            <div style="color: #93c5fd;">Stockout in 15-30 days</div>
+            <h3 style="margin: 0; color: white;">🔵 Medium</h3>
+            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(medium_products):,}</div>
+            <div style="color: #93c5fd;">15-30 days stock</div>
         </div>
         """, unsafe_allow_html=True)
     
     st.markdown("---")
     
     # ========================================================================
-    # TABEL DETAIL ALERT
+    # FILTER - GROUP AND RISK LEVEL
     # ========================================================================
     
     st.markdown("### 📋 Alert Details")
     
-    # Pilihan filter
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
     
     with col1:
-        risk_filter = st.selectbox("Filter by Risk Level", 
-                                   ["All", "Critical", "High", "Medium", "Low"])
+        groups = ['All'] + sorted([g for g in df['product_category'].dropna().unique() 
+                                   if g and g not in ['OTHER', 'NUMERIC_CODE']])
+        group_filter = st.selectbox("Filter by Group", groups, key="alert_group")
     
     with col2:
-        abc_filter_alert = st.selectbox("Filter by ABC Class", ["All", "A", "B", "C"])
+        risk_filter = st.selectbox("Filter by Risk Level", 
+                                   ["All", "Critical", "High", "Medium"], key="alert_risk")
     
-    with col3:
-        sort_option = st.selectbox("Sort By", 
-                                   ["Days Until Stockout", "Daily Demand", "Stock Value"])
+    # Apply filters
+    alert_df = df.copy()
     
-    # Terapkan filter
-    alert_df = df.copy()  # Create a copy to avoid modifying original DataFrame
+    if group_filter != "All":
+        alert_df = alert_df[alert_df['product_category'] == group_filter]
     
     if risk_filter != "All":
         alert_df = alert_df[alert_df['risk_level'] == risk_filter]
+    else:
+        alert_df = alert_df[alert_df['risk_level'].isin(['Critical', 'High', 'Medium'])]
     
-    if abc_filter_alert != "All":
-        alert_df = alert_df[alert_df['ABC_class'] == abc_filter_alert]
-    
-    # Terapkan pengurutan
-    sort_mapping = {
-        "Days Until Stockout": "days_until_stockout",
-        "Daily Demand": "avg_daily_demand",
-        "Stock Value": "stock_value"
-    }
-    if sort_option in sort_mapping:
-        alert_df = alert_df.sort_values(by=sort_mapping[sort_option], ascending=True)
+    # Sort by safety stock descending
+    alert_df = alert_df.sort_values('safety_stock', ascending=False)
     
     st.markdown(f"**Showing {len(alert_df):,} products**")
     
-    # Tampilkan alert
+    # Display columns with PROPER RUPIAH FORMAT
     display_cols = ['product_code', 'product_name', 'current_stock_qty', 'avg_daily_demand', 
-                    'days_until_stockout', 'optimal_safety_stock', 'risk_level', 'ABC_class']
+                    'days_until_stockout', 'safety_stock', 'risk_level', 'product_category']
+    
+    available_cols = [c for c in display_cols if c in alert_df.columns]
     
     st.dataframe(
-        alert_df[display_cols].head(20),
-        width='stretch',
+        alert_df[available_cols].head(30),
+        use_container_width=True,
         height=400,
         column_config={
             "product_code": "Code",
-            "product_name": "Product Name",
-            "current_stock_qty": st.column_config.NumberColumn("Current Stock", format="%.0f"),
+            "product_name": st.column_config.TextColumn("Product Name", width="large"),
+            "current_stock_qty": st.column_config.NumberColumn("Stock", format="%,d"),
             "avg_daily_demand": st.column_config.NumberColumn("Daily Demand", format="%.2f"),
-            "days_until_stockout": st.column_config.NumberColumn("Days Until Stockout", format="%.0f"),
-            "optimal_safety_stock": st.column_config.NumberColumn("Safety Stock", format="%.0f"),
-            "risk_level": "Risk Level",
-            "ABC_class": "ABC"
+            "days_until_stockout": st.column_config.NumberColumn("Days Left", format="%.0f"),
+            "safety_stock": st.column_config.NumberColumn("Safety Stock", format="%,d"),
+            "risk_level": "Risk",
+            "product_category": "Group"
         }
     )
     
     st.markdown("---")
     
     # ========================================================================
-    # AKSI CEPAT
+    # QUICK ACTIONS
     # ========================================================================
     
     st.markdown("### 🎬 Quick Actions")
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
     
     with col1:
-        if st.button("🚀 Bulk Order", width='stretch', key="stockout_bulk_order"):
-            st.session_state.show_bulk_order = not st.session_state.show_bulk_order
+        if st.button("🚀 Generate Bulk Order", use_container_width=True, key="alert_bulk"):
+            st.session_state.show_bulk_order = not st.session_state.get('show_bulk_order', False)
         
-        if st.session_state.show_bulk_order:
-            st.markdown("#### 📦 Bulk Order - Critical Items")
-            
+        if st.session_state.get('show_bulk_order', False):
+            st.markdown("#### 📦 Critical Items to Order")
             critical_list = critical_products.head(5)
-            total_value = 0
             
             for idx, row in critical_list.iterrows():
-                recommended_qty = max(row['optimal_safety_stock'] * 2, row['avg_daily_demand'] * 30)
-                estimated_cost = recommended_qty * (row['stock_value'] / max(row['current_stock_qty'], 1)) if row['current_stock_qty'] > 0 else recommended_qty * 50000
-                total_value += estimated_cost
-                
-                st.markdown(f"""
-                **{row['product_code']}** - {row['product_name'][:50]}...
-                - Current: {row['current_stock_qty']:.0f} units
-                - Daily Demand: {row['avg_daily_demand']:.2f} units
-                - Recommended Order: {recommended_qty:.0f} units
-                - Est. Cost: Rp {estimated_cost:,.0f}
-                """)
-            
-            st.info(f"**Total Order Value: Rp {total_value:,.0f}**")
+                order_qty = max(row.get('safety_stock', 10) * 2, row.get('avg_daily_demand', 1) * 30)
+                st.markdown(f"• **{row['product_code']}**: Order {order_qty:,.0f} units")
             
             if st.button("✅ Confirm Order", key="confirm_bulk"):
-                st.success("✅ Order confirmed! Order ID: #ORD-" + datetime.now().strftime('%Y%m%d-%H%M'))
+                st.success(f"✅ Order confirmed! ID: #ORD-{datetime.now().strftime('%Y%m%d-%H%M')}")
                 log_activity("🚀 Confirmed Stockout Bulk Order", '#10b981')
-                st.session_state.show_bulk_order = False
-                st.rerun()
-
-    with col2:
-        if st.button("📧 Send Alert Email", width='stretch', key="stockout_email"):
-            st.session_state.show_email_form = not st.session_state.show_email_form
-        
-        if st.session_state.show_email_form:
-            render_email_form(alert_df, "stockout_alerts", "stockout_alerts")
     
-    with col3:
+    with col2:
         csv_data = alert_df.to_csv(index=False).encode('utf-8')
-        if st.download_button(
+        st.download_button(
             label="📥 Export Report",
             data=csv_data,
             file_name=f"stockout_alerts_{datetime.now().strftime('%Y%m%d')}.csv",
             mime="text/csv",
-            width='stretch',
+            use_container_width=True,
             key="stockout_export"
-        ):
-            log_activity("📥 Downloaded Stockout Alerts Report", '#ef4444')
+        )

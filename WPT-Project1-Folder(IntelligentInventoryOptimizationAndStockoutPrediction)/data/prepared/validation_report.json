@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-01-14T10:40:08.137115",
+  "validation_results": {
+    "items": {
+      "total_records": 2325,
+      "quality_score": 90.39,
+      "passed": "True",
+      "columns": {
+        "id": {
+          "null_count": 0,
+          "zero_count": 0,
+          "completeness": 100.0
+        },
+        "name": {
+          "null_count": 0,
+          "zero_count": 0,
+          "completeness": 100.0
+        },
+        "unitPrice": {
+          "null_count": 851,
+          "zero_count": 0,
+          "completeness": 63.4
+        },
+        "avgCost": {
+          "null_count": 43,
+          "zero_count": 0,
+          "completeness": 98.15
+        }
+      }
+    },
+    "current_stock": {
+      "total_records": 2118,
+      "zero_quantity": 1454,
+      "reliable_count": 1,
+      "reliability_ratio": 0.05
+    }
+  },
+  "overall_passed": true
+}

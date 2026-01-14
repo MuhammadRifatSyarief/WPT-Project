@@ -1,0 +1,14 @@
+{
+  "mba": {
+    "rules_count": "0",
+    "itemsets_count": "0",
+    "cooccurrence_count": "11180",
+    "output_path": "data\\processed\\project2_mba\\product_cooccurrence.csv"
+  },
+  "rfm_modeling": {
+    "segmentation_path": "data\\processed\\project2_rfm\\rfm_segmentation.csv",
+    "n_segments": "5",
+    "customers": "814"
+  },
+  "timestamp": "2025-12-14T17:38:02.165085"
+}

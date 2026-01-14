@@ -1,0 +1,62 @@
+# Task: Feature Engineering Pipeline Implementation
+
+## Goal
+Transform 5 base datasets into a unified `Master_Inventory_Feature_Set.csv` for Project 1 dashboard components (demand forecasting, inventory health, stockout alerts, reorder point).
+
+---
+
+## Phase 1: Setup Environment
+- [x] Create [Feature_Engineering](file:///D:/AA-WPT-PROJECT/AA-WPT-PROJECT/WPT-Project1-Folder%28IntelligentInventoryOptimizationAndStockoutPrediction%29/Feature_Engineering) directory <!-- id: 1 -->
+- [x] Verify all 5 input CSV paths exist <!-- id: 2 -->
+
+## Phase 2: Create Feature Engineering Pipeline Script
+- [x] **Stage 1: Data Loading & Cleaning** <!-- id: 3 -->
+    - [x] Load 5 CSVs using pandas <!-- id: 4 -->
+    - [x] Standardize datatypes (IDs as str, Dates as datetime) <!-- id: 5 -->
+    - [x] Handle missing values and duplicates <!-- id: 6 -->
+
+- [x] **Stage 2: Time-Series Metrics Engine** <!-- id: 7 -->
+    - [x] Create daily sales matrix per item <!-- id: 8 -->
+    - [x] Resample to fill missing dates with 0 <!-- id: 9 -->
+    - [x] Calculate rolling averages (7d, 30d) <!-- id: 10 -->
+    - [x] Calculate demand volatility (StdDev) per item <!-- id: 11 -->
+
+- [x] **Stage 3: Advanced Product Profiling** <!-- id: 12 -->
+    - [x] ABC Analysis (Revenue-based: A=80%, B=15%, C=5%) <!-- id: 13 -->
+    - [x] XYZ Analysis (Volatility: X=Stable, Y=Variable, Z=Erratic) <!-- id: 14 -->
+    - [x] Lead Time Profiling (Avg, Max, StdDev from PO data) <!-- id: 15 -->
+
+- [x] **Stage 4: Predictive Metrics Calculation** <!-- id: 16 -->
+    - [x] Safety Stock (Dynamic: Z-score * Volatility * LeadTime) <!-- id: 17 -->
+    - [x] Reorder Point (ROP = AvgDailySales * AvgLeadTime + SafetyStock) <!-- id: 18 -->
+    - [x] Days Inventory Outstanding (DIO = CurrentStock / AvgDailySales) <!-- id: 19 -->
+    - [x] Days Until Stockout prediction <!-- id: 20 -->
+
+- [x] **Stage 5: Master Aggregation & Export** <!-- id: 21 -->
+    - [x] Merge all metrics into item-centric table <!-- id: 22 -->
+    - [x] Enrich with current stock and incoming qty <!-- id: 23 -->
+    - [x] Final cleanup (fillna, rounding, validation) <!-- id: 24 -->
+    - [x] Export to `Master_Inventory_Feature_Set.csv` <!-- id: 25 -->
+    - [x] Export to `Master_Inventory_Feature_Set_PerWarehouse.csv` <!-- id: 26 -->
+
+## Phase 3: Verification
+- [x] Run pipeline successfully without errors <!-- id: 27 -->
+- [x] Validate output row count matches active items <!-- id: 28 -->
+- [x] Check column completeness and data quality <!-- id: 29 -->
+- [x] Verify key metrics (ROP >= 0, SafetyStock >= 0) <!-- id: 30 -->
+
+---
+
+## Results Summary
+
+| Metric | Value |
+|--------|-------|
+| Total Items (Aggregated) | 1,701 |
+| Total Rows (Per-Warehouse) | 2,064 |
+| Output Columns | 26 |
+| ABC Distribution | A=196, B=298, C=1207 |
+| XYZ Distribution | X=0, Y=22, Z=1679 |
+| Items Needing Reorder | 1,436 (84.4%) |
+| HIGH Stockout Risk | 167 items |
+| MEDIUM Stockout Risk | 36 items |
+| LOW Stockout Risk | 1,498 items |

@@ -4,155 +4,171 @@
 Reorder Optimization Page
 =========================
 Calculates and displays reorder points and recommended order quantities.
+Uses ACTUAL data from modules for natural variation.
 """
 
-# 1. Impor library yang dibutuhkan
 import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime
 
-# 2. Impor fungsi dari modul kustom Anda
 from modules.activity_logger import log_activity
 from modules.email_utils import render_email_form
 
-# 3. Definisikan fungsi render halaman
+
 def render_page(df: pd.DataFrame):
     """
-    Merender seluruh konten untuk halaman Reorder Optimization.
-    
-    Args:
-        df (pd.DataFrame): DataFrame utama yang berisi semua data inventaris.
+    Merender halaman Reorder Optimization dengan data natural dari module.
     """
+    
+    # Preprocess data - USE ACTUAL VALUES from module
+    df = df.copy()
+    
+    # Handle column aliases
+    if 'lead_time_days' in df.columns and 'estimated_lead_time' not in df.columns:
+        df['estimated_lead_time'] = df['lead_time_days']
+    if 'safety_stock_optimized' in df.columns and 'optimal_safety_stock' not in df.columns:
+        df['optimal_safety_stock'] = df['safety_stock_optimized']
+    if 'reorder_point_optimized' in df.columns:
+        df['reorder_point_calc'] = df['reorder_point_optimized']
+    
+    # Ensure numeric columns - USE ACTUAL VALUES (no artificial caps)
+    df['optimal_safety_stock'] = pd.to_numeric(df.get('optimal_safety_stock', 0), errors='coerce').fillna(0)
+    df['estimated_lead_time'] = pd.to_numeric(df.get('estimated_lead_time', 31), errors='coerce').fillna(31)
+    df['avg_daily_demand'] = pd.to_numeric(df.get('avg_daily_demand', 0.01), errors='coerce').fillna(0.01)
+    df['current_stock_qty'] = pd.to_numeric(df.get('current_stock_qty', 0), errors='coerce').fillna(0)
+    
+    # FILTER: Exclude Dead Stock and Slow Moving products
+    if 'movement_class' in df.columns:
+        df_filtered = df[~df['movement_class'].isin(['Dead Stock', 'Slow Moving'])].copy()
+        excluded_count = len(df) - len(df_filtered)
+    else:
+        df_filtered = df.copy()
+        excluded_count = 0
     
     st.title("🔄 Reorder Optimization")
     st.markdown("Safety Stock & Reorder Point Calculation")
     
-    with st.popover("ℹ️ Tentang Reorder Optimization"):
+    if excluded_count > 0:
+        st.info(f"ℹ️ Excluded {excluded_count:,} Dead Stock/Slow Moving items (focus on Normal/Fast Moving)")
+    
+    with st.popover("ℹ️ About Reorder Optimization"):
         st.markdown("""
-        **Reorder Optimization** menghitung kapan dan berapa banyak yang harus diorder ulang.
+        **Reorder Optimization** calculates when and how much to reorder.
         
-        **Formula Kunci:**
-        - **Safety Stock (SS)**: `Z × σ × √LT` (Buffer untuk ketidakpastian)
-        - **Reorder Point (ROP)**: `(Avg Demand × Lead Time) + SS` (Pemicu untuk memesan)
+        **Key Formulas:**
+        - **Safety Stock (SS)**: `Z × σ × √LT` (Buffer for uncertainty)
+        - **Reorder Point (ROP)**: `(Avg Demand × Lead Time) + SS`
+        
+        **Note:** Dead Stock and Slow Moving items are excluded.
         """)
     
     # ========================================================================
-    # KARTU METRIK UTAMA
+    # METRICS
     # ========================================================================
     
     col1, col2, col3, col4 = st.columns(4)
+    
     with col1:
-        avg_safety_stock = df['optimal_safety_stock'].mean()
+        avg_ss = df_filtered['optimal_safety_stock'].mean()
         st.markdown(f"""
         <div class="metric-card">
             <div class="metric-label">Avg Safety Stock</div>
-            <div class="metric-value">{avg_safety_stock:.0f}</div>
+            <div class="metric-value">{avg_ss:,.0f}</div>
             <div class="metric-delta positive">Units</div>
         </div>""", unsafe_allow_html=True)
+    
     with col2:
-        avg_lead_time = df['estimated_lead_time'].mean()
+        avg_lt = df_filtered['estimated_lead_time'].mean()
         st.markdown(f"""
         <div class="metric-card">
             <div class="metric-label">Avg Lead Time</div>
-            <div class="metric-value">{avg_lead_time:.0f}</div>
+            <div class="metric-value">{avg_lt:,.0f}</div>
             <div class="metric-delta positive">Days</div>
         </div>""", unsafe_allow_html=True)
+    
     with col3:
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-label">Reorder Points</div>
-            <div class="metric-value">{len(df):,}</div>
-            <div class="metric-delta positive">Calculated</div>
+            <div class="metric-label">Active Products</div>
+            <div class="metric-value">{len(df_filtered):,}</div>
+            <div class="metric-delta positive">Items</div>
         </div>""", unsafe_allow_html=True)
+    
     with col4:
-        st.markdown("""
+        # Count items needing reorder
+        if 'reorder_point_calc' not in df_filtered.columns:
+            df_filtered['reorder_point_calc'] = (df_filtered['avg_daily_demand'] * df_filtered['estimated_lead_time']) + df_filtered['optimal_safety_stock']
+        need_reorder = len(df_filtered[df_filtered['current_stock_qty'] < df_filtered['reorder_point_calc']])
+        st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-label">Cost Savings</div>
-            <div class="metric-value">~15%</div>
-            <div class="metric-delta positive">Potential</div>
+            <div class="metric-label">Need Reorder</div>
+            <div class="metric-value">{need_reorder:,}</div>
+            <div class="metric-delta negative">Below ROP</div>
         </div>""", unsafe_allow_html=True)
     
     st.markdown("---")
     
     # ========================================================================
-    # TABEL REKOMENDASI PEMESANAN ULANG
+    # FILTER BY GROUP
     # ========================================================================
     
     st.markdown("### 🎯 Reorder Recommendations")
     
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        abc_reorder_filter = st.selectbox("Filter by ABC Class", ["All", "A", "B", "C"], key="reorder_abc")
-    with col2:
-        min_demand = st.number_input("Min Daily Demand", min_value=0.0, value=0.0, step=0.1)
-    with col3:
-        sort_reorder = st.selectbox("Sort By", ["Urgency", "Daily Demand", "Stock Value"])
+    groups = ['All'] + sorted([g for g in df_filtered['product_category'].dropna().unique() 
+                               if g and g not in ['OTHER', 'NUMERIC_CODE']])
+    group_filter = st.selectbox("Filter by Group", groups, key="reorder_group")
     
-    # Hitung rekomendasi
-    reorder_df = df.copy()
-    reorder_df['reorder_point_calc'] = (reorder_df['avg_daily_demand'] * reorder_df['estimated_lead_time']) + reorder_df['optimal_safety_stock']
+    # Calculate recommendations using ACTUAL values
+    reorder_df = df_filtered.copy()
+    if 'reorder_point_calc' not in reorder_df.columns:
+        reorder_df['reorder_point_calc'] = (reorder_df['avg_daily_demand'] * reorder_df['estimated_lead_time']) + reorder_df['optimal_safety_stock']
+    
     reorder_df['recommended_order_qty'] = np.maximum(reorder_df['reorder_point_calc'] - reorder_df['current_stock_qty'], 0)
-    reorder_df['urgency_score'] = reorder_df['recommended_order_qty'] / (reorder_df['reorder_point_calc'] + 0.01)
     
-    # Terapkan filter
-    if abc_reorder_filter != "All":
-        reorder_df = reorder_df[reorder_df['ABC_class'] == abc_reorder_filter]
-    if min_demand > 0:
-        reorder_df = reorder_df[reorder_df['avg_daily_demand'] >= min_demand]
+    # Apply filter
+    if group_filter != "All":
+        reorder_df = reorder_df[reorder_df['product_category'] == group_filter]
     
-    # Hanya tampilkan produk yang perlu diorder
+    # Only show products that need reorder
     reorder_df = reorder_df[reorder_df['recommended_order_qty'] > 0]
-
-    # Terapkan pengurutan
-    sort_map = {
-        "Urgency": "urgency_score",
-        "Daily Demand": "avg_daily_demand",
-        "Stock Value": "stock_value"
-    }
-    reorder_df = reorder_df.sort_values(by=sort_map[sort_reorder], ascending=False)
     
-    st.markdown(f"**Menampilkan {len(reorder_df):,} produk yang direkomendasikan untuk diorder ulang**")
+    # Sort by recommended order qty descending
+    reorder_df = reorder_df.sort_values('recommended_order_qty', ascending=False)
     
-    display_cols = ['product_code', 'product_name', 'current_stock_qty', 'reorder_point_calc', 'recommended_order_qty', 'estimated_lead_time', 'ABC_class']
+    st.markdown(f"**{len(reorder_df):,} products need reorder**")
+    
+    display_cols = ['product_code', 'product_name', 'current_stock_qty', 'reorder_point_calc', 
+                    'recommended_order_qty', 'estimated_lead_time', 'product_category']
+    available_cols = [c for c in display_cols if c in reorder_df.columns]
+    
+    # Display with PROPER number formatting (commas for thousands)
     st.dataframe(
-        reorder_df[display_cols].head(50),
-        width='stretch',
+        reorder_df[available_cols].head(50),
+        use_container_width=True,
         height=400,
         column_config={
             "product_code": "Code",
-            "product_name": "Product Name",
-            "current_stock_qty": st.column_config.NumberColumn("Stock", format="%d"),
-            "reorder_point_calc": st.column_config.NumberColumn("Reorder Point", format="%d"),
-            "recommended_order_qty": st.column_config.NumberColumn("Order Qty", format="%d"),
+            "product_name": st.column_config.TextColumn("Product Name", width="large"),
+            "current_stock_qty": st.column_config.NumberColumn("Stock", format="%,d"),
+            "reorder_point_calc": st.column_config.NumberColumn("Reorder Point", format="%,d"),
+            "recommended_order_qty": st.column_config.NumberColumn("Order Qty", format="%,d"),
             "estimated_lead_time": st.column_config.NumberColumn("Lead Time", format="%d days"),
-            "ABC_class": "ABC"
+            "product_category": "Group"
         }
     )
     
     # ========================================================================
-    # EKSPOR & AKSI
+    # EXPORT
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📤 Export & Share Reorder Plan")
     
-    col1, col2 = st.columns(2)
-    with col1:
-        csv_data = reorder_df.to_csv(index=False).encode('utf-8')
-        if st.download_button(
-            label="📥 Download Reorder Report",
-            data=csv_data,
-            file_name=f"reorder_optimization_{datetime.now().strftime('%Y%m%d')}.csv",
-            mime="text/csv",
-            width='stretch',
-            key="reorder_report_download"
-        ):
-            log_activity("📥 Downloaded Reorder Optimization Report", '#6366f1')
-    
-    with col2:
-        if st.button("📧 Email Reorder Plan", width='stretch', key="reorder_email_button"):
-            st.session_state.show_email_reorder = not st.session_state.get('show_email_reorder', False)
-    
-    if st.session_state.get('show_email_reorder', False):
-        render_email_form(reorder_df, "reorder", "reorder_optimization")
+    csv_data = reorder_df.to_csv(index=False).encode('utf-8')
+    st.download_button(
+        label="📥 Download Reorder Report",
+        data=csv_data,
+        file_name=f"reorder_{datetime.now().strftime('%Y%m%d')}.csv",
+        mime="text/csv",
+        key="reorder_download"
+    )

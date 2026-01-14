@@ -18,6 +18,26 @@ from modules.email_utils import render_email_form
 def render_page(df: pd.DataFrame):
     """Merender halaman utama dashboard."""
     
+    # Validate required columns exist
+    if df is None or len(df) == 0:
+        st.error("❌ No data available. Please check your data sources.")
+        return
+    
+    # Ensure required columns exist
+    required_cols = ['product_code', 'product_name', 'avg_daily_demand', 'current_stock_qty']
+    missing_cols = [col for col in required_cols if col not in df.columns]
+    
+    if missing_cols:
+        st.warning(f"⚠️ Missing columns: {', '.join(missing_cols)}. Some features may not work correctly.")
+        # Create placeholder columns if missing
+        if 'product_code' not in df.columns:
+            if 'product_id' in df.columns:
+                df['product_code'] = df['product_id'].astype(str)
+            else:
+                df['product_code'] = [f"PROD-{i}" for i in range(len(df))]
+        if 'product_name' not in df.columns:
+            df['product_name'] = 'Product ' + df['product_code'].astype(str)
+    
     st.title("🏠 Inventory Intelligence Hub")
     st.markdown("Real-time overview of your inventory health")
 
@@ -54,24 +74,34 @@ def render_page(df: pd.DataFrame):
     # Metric 2: Inventory Turnover
     with col2:
         with st.popover("ℹ️"):
-            st.markdown("### 🔄 Inventory Turnover Ratio")
-            st.markdown("**Definisi:** Berapa kali inventory terjual dan diganti dalam setahun.")
-            st.markdown("**Formula (Weighted Average):**")
-            st.code("Turnover = (Sum Total Sales 90d) / (Sum Total Stock Value)")
-            st.markdown("**Benchmark IT Products:** 6-8x: Ideal")
+            st.markdown("### 🔄 Inventory Turnover Ratio (30-day)")
+            st.markdown("**Definisi:** Kecepatan inventory terjual dalam periode 30 hari.")
+            st.markdown("**Formula:** Units Sold (30d) / Average Inventory")
+            st.markdown("**Benchmark IT Products:** 1-3x per 30 hari = Ideal")
 
-        total_sales_value = df['total_sales_90d'].sum()
-        total_stock_value = df['stock_value'].sum()
+        # USE PRE-CALCULATED VALUES FROM DATA_LOADER
+        # Average turnover weighted by stock value
+        if 'turnover_ratio_30d' in df.columns:
+            # Calculate weighted average: sum(turnover * stock_value) / sum(stock_value)
+            df_with_stock = df[df['stock_value'] > 0]
+            if not df_with_stock.empty:
+                weighted_turnover = (df_with_stock['turnover_ratio_30d'] * df_with_stock['stock_value']).sum()
+                total_weight = df_with_stock['stock_value'].sum()
+                avg_turnover_30d = weighted_turnover / total_weight if total_weight > 0 else 0
+            else:
+                avg_turnover_30d = df['turnover_ratio_30d'].mean()
+        else:
+            avg_turnover_30d = 1.0  # Default fallback
         
-        weighted_avg_turnover_90d = total_sales_value / total_stock_value if total_stock_value > 0 else 0
-        annualized_turnover = min(weighted_avg_turnover_90d * (365 / 90), 100)
-        days_to_refresh = 365 / (annualized_turnover + 0.01)
+        # Cap display at 10x for realism
+        avg_turnover_30d = min(avg_turnover_30d, 10.0)
+        days_to_refresh = 30 / (avg_turnover_30d + 0.01)
 
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-label">Inventory Turnover</div>
-            <div class="metric-value">{annualized_turnover:.1f}x</div>
-            <div class="metric-delta positive">↑ 0.5x vs last month</div>
+            <div class="metric-label">Turnover (30d)</div>
+            <div class="metric-value">{avg_turnover_30d:.2f}x</div>
+            <div class="metric-delta positive">Avg weighted by stock value</div>
             <div class="metric-insight">Inventory refresh: ~{days_to_refresh:.0f} days</div>
         </div>
         """, unsafe_allow_html=True)
@@ -128,11 +158,11 @@ def render_page(df: pd.DataFrame):
         performance_data = pd.DataFrame({
             'Month': months.strftime('%b %Y'),
             'Service Level': [service_level - 3.0, service_level - 1.7, service_level - 1.1, service_level - 1.4, service_level - 0.3, service_level],
-            'Turnover Rate': [annualized_turnover - 0.7, annualized_turnover - 0.5, annualized_turnover - 0.3, annualized_turnover - 0.4, annualized_turnover - 0.1, annualized_turnover]
+            'Turnover Rate': [avg_turnover_30d - 0.7, avg_turnover_30d - 0.5, avg_turnover_30d - 0.3, avg_turnover_30d - 0.4, avg_turnover_30d - 0.1, avg_turnover_30d]
         })
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=performance_data['Month'], y=performance_data['Service Level'], name='Service Level (%)', line=dict(color='#10b981', width=3), mode='lines+markers'))
-        fig.add_trace(go.Scatter(x=performance_data['Month'], y=performance_data['Turnover Rate'] * (100 / (annualized_turnover or 1)), name='Turnover Rate (Scaled)', line=dict(color='#6366f1', width=3), mode='lines+markers', yaxis='y2', customdata=performance_data['Turnover Rate'], hovertemplate='<b>%{x}</b><br>Turnover: %{customdata:.1f}x<extra></extra>'))
+        fig.add_trace(go.Scatter(x=performance_data['Month'], y=performance_data['Turnover Rate'] * (100 / (avg_turnover_30d or 1)), name='Turnover Rate (Scaled)', line=dict(color='#6366f1', width=3), mode='lines+markers', yaxis='y2', customdata=performance_data['Turnover Rate'], hovertemplate='<b>%{x}</b><br>Turnover: %{customdata:.1f}x<extra></extra>'))
         fig.update_layout(template='plotly_dark', paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=280, margin=dict(l=0, r=0, t=10, b=0), legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1), hovermode='x unified', yaxis=dict(title="Service Level (%)", range=[85, 100]), yaxis2=dict(title="Turnover Rate", overlaying='y', side='right', showgrid=False, tickvals=[]))
         st.plotly_chart(fig, width='stretch')
 
@@ -275,23 +305,38 @@ def render_page(df: pd.DataFrame):
     with col1:
         st.markdown("### 🚀 Top 5 Fast-Moving Products")
         
+        # Use forecast_30d from demand forecasting module if available (more bounded)
+        if 'forecast_30d' in df.columns:
+            demand_col = 'forecast_30d'
+            df_valid = df[df['forecast_30d'].notna() & (df['forecast_30d'] > 0)]
+            display_label = "Forecasted Daily Demand"
+        else:
+            demand_col = 'avg_daily_demand'
+            df_valid = df[df['avg_daily_demand'].notna() & (df['avg_daily_demand'] > 0)]
+            display_label = "Daily Demand"
+        
         # Get top 5 products by demand
-        top_products = df.nlargest(5, 'avg_daily_demand')[
-            ['product_code', 'product_name', 'avg_daily_demand', 'current_stock_qty']
+        top_products = df_valid.nlargest(5, demand_col)[
+            ['product_code', 'product_name', demand_col, 'current_stock_qty']
         ].copy()
         
         # Create horizontal bar chart
         fig = go.Figure()
         
         for i, row in enumerate(top_products.itertuples()):
-            # Shorten product name for display
-            short_name = ' '.join(row.product_name.split()[:3])
-            if len(short_name) > 20:
-                short_name = short_name[:17] + "..."
+            product_name = str(row.product_name) if pd.notna(row.product_name) else f"Product {row.product_code}"
+            demand_value = getattr(row, demand_col.replace('-', '_'))
+            
+            try:
+                short_name = ' '.join(product_name.split()[:3])
+                if len(short_name) > 20:
+                    short_name = short_name[:17] + "..."
+            except (AttributeError, TypeError):
+                short_name = product_name[:20] if len(product_name) > 20 else product_name
             
             fig.add_trace(go.Bar(
                 y=[f"{row.product_code}"],
-                x=[row.avg_daily_demand],
+                x=[demand_value],
                 orientation='h',
                 marker_color='#10b981' if i == 0 else '#6366f1',
                 text=f"{short_name}<br>{row.current_stock_qty:.0f} units in stock",
@@ -300,8 +345,8 @@ def render_page(df: pd.DataFrame):
                 textfont=dict(color='white', size=10),
                 hovertemplate=(
                     '<b>%{y}</b><br>' +
-                    f'{row.product_name}<br>' +
-                    'Daily Demand: %{x:.2f} units<br>' +
+                    f'{product_name}<br>' +
+                    f'{display_label}: ' + '%{x:.2f} units<br>' +
                     f'Stock: {row.current_stock_qty:.0f} units' +
                     '<extra></extra>'
                 ),
@@ -314,7 +359,7 @@ def render_page(df: pd.DataFrame):
             plot_bgcolor='rgba(0,0,0,0)',
             height=280,
             margin=dict(l=0, r=0, t=10, b=0),
-            xaxis_title="Daily Demand (units)",
+            xaxis_title=f"{display_label} (units/day)",
             yaxis_title="",
             yaxis={'categoryorder':'total ascending'},
             xaxis=dict(
@@ -324,6 +369,7 @@ def render_page(df: pd.DataFrame):
         )
         
         st.plotly_chart(fig, width='stretch')
+        st.caption(f"📊 Data source: {demand_col}")
     
     with col2:
         st.markdown("### 🎬 Quick Actions")
@@ -664,9 +710,15 @@ def render_page(df: pd.DataFrame):
     if selected_category != 'Semua Kategori':
         display_data = display_data[display_data['health_category'] == selected_category]
     
-    # Apply Product Category filter
+    # 🎯 FIX: Product Category filter - search in both product_category AND product_code
+    # This allows filtering by SKU patterns like 'omada' matching 'omada-001', 'omada-002', etc.
     if selected_product_category != 'Semua Kategori':
-        display_data = display_data[display_data['product_category'] == selected_product_category]
+        category_upper = selected_product_category.upper()
+        # Match product_category OR product_code containing the filter value
+        category_mask = display_data['product_category'].str.upper() == category_upper
+        code_mask = display_data['product_code'].str.upper().str.contains(category_upper, na=False)
+        name_mask = display_data['product_name'].str.upper().str.contains(category_upper, na=False)
+        display_data = display_data[category_mask | code_mask | name_mask]
 
     # Apply ABC filter
     if abc_filter_options:
@@ -730,6 +782,35 @@ def render_page(df: pd.DataFrame):
         with col_d:
             total_value = display_data['stock_value'].sum()
             st.metric("Total Value", f"Rp {total_value/1_000_000:.1f}M")
+    
+    # ========================================================================
+    # ABC CLASSIFICATION LEGEND (NEW)
+    # ========================================================================
+    st.markdown("---")
+    st.markdown("### 📖 Keterangan Klasifikasi")
+    
+    legend_cols = st.columns(3)
+    with legend_cols[0]:
+        st.markdown("""
+        **🅰️ Class A - Fast Moving**
+        - Produk dengan kontribusi revenue tinggi (80% total)
+        - Prioritas utama untuk ketersediaan stok
+        - Monitoring harian, reorder cepat
+        """)
+    with legend_cols[1]:
+        st.markdown("""
+        **🅱️ Class B - Moderate Moving**
+        - Kontribusi revenue sedang (15% total)
+        - Prioritas menengah
+        - Monitoring mingguan
+        """)
+    with legend_cols[2]:
+        st.markdown("""
+        **©️ Class C - Slow Moving**
+        - Kontribusi revenue rendah (5% total)
+        - Prioritas rendah, perlu evaluasi
+        - Pertimbangkan promosi atau discontinue
+        """)
     
     # ========================================================================
     # EXPORT & SHARE SECTION
@@ -847,11 +928,12 @@ def render_page(df: pd.DataFrame):
         })
     
     # Insight 2: Turnover
-    if annualized_turnover < 6:
+    # Insight 2: Turnover
+    if avg_turnover_30d < 0.5:
         insights.append({
             'type': 'warning',
             'title': '📉 Low Inventory Turnover',
-            'message': f'Turnover rate of {annualized_turnover:.1f}x is below industry benchmark (6-8x). Consider reducing slow-moving inventory.',
+            'message': f'Turnover rate of {avg_turnover_30d:.2f}x (30d) is below target (>0.5x). Consider reducing slow-moving inventory.',
             'action': 'Implement promotions for slow-moving items'
         })
     
@@ -865,14 +947,13 @@ def render_page(df: pd.DataFrame):
         })
     
     # Insight 4: Dead Stock
-    dead_stock_count = len(df[df['turnover_ratio_90d'] < 0.3])
+    dead_stock_count = len(df[df['turnover_ratio_30d'] < 0.1])
     if dead_stock_count > 0:
-        dead_stock_value = df[df['turnover_ratio_90d'] < 0.3]['stock_value'].sum()
         insights.append({
-            'type': 'info',
-            'title': '💰 Capital Optimization Opportunity',
-            'message': f'{dead_stock_count} products with very low turnover. Potential to free up Rp {dead_stock_value/1_000_000:.1f}M in capital.',
-            'action': 'Consider clearance sales or supplier returns'
+            'type': 'warning',
+            'title': '📦 Dead Stock Detected',
+            'message': f'{dead_stock_count} products have very low turnover (<0.1x). Consider clearance sale.',
+            'action': 'Identify and discount dead stock'
         })
     
     # Display insights in cards
@@ -907,7 +988,7 @@ def render_page(df: pd.DataFrame):
         'current_stock_qty': 'sum',
         'stock_value': 'sum',
         'avg_daily_demand': 'mean',
-        'turnover_ratio_90d': 'mean'
+        'turnover_ratio_30d': 'mean'
     }).reset_index()
     
     
@@ -960,7 +1041,7 @@ def render_page(df: pd.DataFrame):
                 </div>
                 <div style="margin: 0.5rem 0; padding-top: 0.5rem; border-top: 1px solid #334155;">
                     <div style="font-size: 0.85rem; color: #94a3b8;">Turnover</div>
-                    <div style="font-size: 1.1rem; color: #f59e0b; font-weight: 600;">{row['turnover_ratio_90d']:.2f}x</div>
+                    <div style="font-size: 1.1rem; color: #f59e0b; font-weight: 600;">{row['turnover_ratio_30d']:.2f}x</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)

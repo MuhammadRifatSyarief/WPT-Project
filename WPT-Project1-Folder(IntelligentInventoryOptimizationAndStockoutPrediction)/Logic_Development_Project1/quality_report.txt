@@ -1,0 +1,27 @@
+=== DATA QUALITY REPORT ===
+
+2_PO_Details: 481 rows
+  unit_price > 0: 475 (98.8%)
+  total_price > 0: 475 (98.8%)
+
+4_Current_Stock: 2060 rows
+  items with stock>0: 669
+  avg_cost > 0 (where stock>0): 662 (99.0%)
+  unit_price > 0 (where stock>0): 101 (15.1%)
+
+5_Master_Items: 2266 rows, columns: ['unitPrice', 'no', 'itemType', 'name', 'id', 'upcNo']
+  unitPrice > 0: 51 (2.3%)
+  id > 0: 2266 (100.0%)
+
+1_Sales_Details: 318 rows
+  unit_price > 0: 268 (84.3%)
+  total_price > 0: 268 (84.3%)
+
+3_Stock_Mutations: 2000 rows
+  value_in > 0 (where increase>0): 200/500 (40.0%)
+  value_out > 0 (where decrease>0): 1400/1500 (93.3%)
+
+Cross-check PO item_no -> Master no:
+  PO unique items: 304
+  Master unique items: 2265
+  Matched: 304 (100.0% of PO items)

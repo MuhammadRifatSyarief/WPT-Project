@@ -1,0 +1,28 @@
+a. Gudang: 
+Mutasi per barang:($F{history.item.name}$F{history.warehouse.name}$F{historyValue.number}$F{historyValue.referenceNumber}$F{historyValue.transDate}$F{historyValue.transactionType}$F{historyValue.description}$F{historyValue.increase}$F{historyValue.valueUnitIn}$F{historyValue.valueIn}$F{historyValue.decrease}$F{historyValue.valueUnitOut}$F{historyValue.valueOut}$F{balanceValue.balance}$F{history.item.no})
+Ringkasan mutasi gudang:
+($F{history.warehouse.name}$F{history.item.name}$F{historyValue.openBalance}$F{historyValue.openValueBalance}$F{historyValue.increase}$F{historyValue.valueIn}$F{historyValue.decrease}$F{historyValue.valueOut}$F{historyValue.endBalance}$F{historyValue.endValueBalance})
+Stok nomor seri/produksi per barang:
+($F{serialNumber.item.no}$F{serialNumber.item.name}$F{serialNumberQuantity.warehouse.name}$F{serialNumberQuantity.warehouse.location.address}$F{serialNumber.number}$F{serialNumberQuantity.quantity}$F{serialNumber.expiredDate}$F{dayRange.dayRange})
+
+b. Persediaan: 
+Kartu stok persediaan:
+($F{item.itemCategory.name}$F{item.name}$F{historyPerItem.transDate}$F{historyPerItem.transactionType}$F{historyPerItem.number}$F{historyPerItem.description}$F{historyPerItem.quantityIn}$F{historyPerItem.quantityOut}$F{balanceQuantity.balance}$F{historyPerItem.warehouse.name}$F{item.no})
+Ketersediaan stok penjualan:
+($F{item.itemCategory.name}$F{item.no}$F{item.name}$F{item.unit1.name}$F{inventoryAnalysis.onStock}$F{multiUnitOnStock.quantityUnit2}$F{multiUnitOnStock.quantityUnit3}$F{multiUnitOnStock.quantityUnit4}$F{multiUnitOnStock.quantityUnit5}$F{inventoryAnalysis.onOrder}$F{multiUnitOnOrder.quantityUnit2}$F{multiUnitOnOrder.quantityUnit3}$F{multiUnitOnOrder.quantityUnit4}$F{multiUnitOnOrder.quantityUnit5}$F{inventoryAnalysis.onSales}$F{multiUnitOnSales.quantityUnit2}$F{multiUnitOnSales.quantityUnit3}$F{multiUnitOnSales.quantityUnit4}$F{multiUnitOnSales.quantityUnit5}$F{inventoryAnalysis.availableQty}$F{multiUnitAvailableQty.quantityUnit2}$F{multiUnitAvailableQty.quantityUnit3}$F{multiUnitAvailableQty.quantityUnit4}$F{multiUnitAvailableQty.quantityUnit5}$F{inventoryAnalysis.salesWeek}$F{multiUnitSalesWeek.quantityUnit2}$F{multiUnitSalesWeek.quantityUnit3}$F{multiUnitSalesWeek.quantityUnit4}$F{multiUnitSalesWeek.quantityUnit5}$F{inventoryAnalysis.onOrderPo}$F{inventoryAnalysis.onOrderReverseInvoice}$F{inventoryAnalysis.onSalesSo}$F{inventoryAnalysis.onSalesReverseInvoice})
+Umur persediaan:
+($F{item.no}$F{item.name}$F{item.unit1.name}$F{inventoryAgingDetail.number}$F{inventoryAgingDetail.transDate}$F{inventoryAgingDetail.description}$F{inventoryAgingDetail.transactionType}$F{inventoryAgingDetail.quantity}$F{inventoryAge.age1}$F{inventoryAge.age2}$F{inventoryAge.age3}$F{inventoryAge.age4}$F{inventoryAge.age5})
+
+c. Penjualan: 
+Penjualan per barang:
+($F{salesItem.item.no}$F{salesItem.item.name}$F{salesItem.transactionType}$F{salesItem.transDate}$F{salesItem.quantity}$F{salesItem.item.unit1.name}$F{salesItem.salesAmount})
+Barang paling laku:
+($F{sellingItemFrequency.no}$F{sellingItemFrequency.name}$F{sellingItemFrequency.frequency}$F{sellingItemFrequency.quantity}$F{sellingItemFrequency.amount})
+Rincian penjualan per barang (data historis):
+($F{salesDetail.number}$F{salesDetail.transDate}$F{salesDetail.description}$F{salesDetail.item.no}$F{salesDetail.item.name}$F{salesDetail.quantityDefault}$F{salesDetail.quantity}$F{salesDetail.itemUnit.name}$F{salesDetail.unitPrice}$F{salesDetail.totalPrice}$F{salesDetail.salesAmountBase})
+
+d. Pembelian: 
+Rincian pesanan pembelian:
+($F{purchaseOrderDetail.item.no}$F{purchaseOrderDetail.detailName}$F{purchaseOrderDetail.quantity}$F{purchaseOrderDetail.unitPrice}$F{purchaseOrderDetail.totalPrice}$F{purchaseOrderDetail.purchaseOrder.number}$F{purchaseOrderDetail.purchaseOrder.transDate}$F{purchaseOrderDetail.purchaseOrder.vendor.name}$F{purchaseOrderDetail.purchaseOrder.currency.name}$F{expense.expenseList}$F{purchaseOrderDetail.purchaseOrder.subTotal}$F{purchaseOrderDetail.purchaseOrder.totalExpense}$F{purchaseOrderDetail.purchaseOrder.totalAmount})
+Rincian penerimaan barang (untuk lead time):
+$F{receiveItemDetail.item.no}$F{receiveItemDetail.detailName}$F{receiveItemDetail.quantity}$F{receiveItemDetail.itemUnit.name}$F{receiveItemDetail.receiveItem.number}$F{receiveItemDetail.receiveItem.transDate}$F{receiveItemDetail.receiveItem.vendor.name}$F{receiveItemDetail.purchaseOrderDetail.quantity}$F{receiveItemDetailSerialNumber.serialNumber}

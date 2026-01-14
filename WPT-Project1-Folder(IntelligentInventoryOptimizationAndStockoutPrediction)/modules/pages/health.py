@@ -26,6 +26,12 @@ def render_page(df: pd.DataFrame):
         df (pd.DataFrame): DataFrame utama yang berisi semua data inventaris.
     """
     
+    # Preprocess data - fill NaN values
+    df = df.copy()
+    df['avg_daily_demand'] = pd.to_numeric(df['avg_daily_demand'], errors='coerce').fillna(0.01)
+    df['current_stock_qty'] = pd.to_numeric(df['current_stock_qty'], errors='coerce').fillna(0)
+    df['turnover_ratio_90d'] = pd.to_numeric(df['turnover_ratio_90d'], errors='coerce').fillna(1.0)
+    
     # Semua logika halaman dimulai dari sini, di dalam fungsi
     st.title("📊 Inventory Health")
     st.markdown("Monitor inventory status and health indicators")
@@ -74,15 +80,27 @@ def render_page(df: pd.DataFrame):
         """, unsafe_allow_html=True)
     
     with col3:
-        total_sales_value = df['total_sales_90d'].sum()
-        total_stock_value = df['stock_value'].sum()
-        weighted_avg_turnover_90d = total_sales_value / total_stock_value if total_stock_value > 0 else 0
-        annualized_turnover = min(weighted_avg_turnover_90d * (365 / 90), 100)
+        # Calculate turnover more accurately
+        if 'turnover_ratio_90d' in df.columns:
+            # Use individual turnover values, cap at 12x for realism
+            df_for_turnover = df[df['turnover_ratio_90d'].notna() & (df['turnover_ratio_90d'] < 100)]
+            avg_turnover = df_for_turnover['turnover_ratio_90d'].mean() if len(df_for_turnover) > 0 else 1.0
+            # Convert 90-day to annual
+            annualized_turnover = min(avg_turnover * (365 / 90), 12.0)  # Cap at 12x
+        else:
+            # Fallback calculation
+            if 'total_sales_90d' in df.columns and 'stock_value' in df.columns:
+                total_sales = df['total_sales_90d'].sum()
+                total_stock = df['stock_value'].sum()
+                annualized_turnover = min((total_sales / total_stock * (365/90)) if total_stock > 0 else 0, 12.0)
+            else:
+                annualized_turnover = 2.0  # Default
+        
         st.markdown(f"""
         <div class="metric-card">
             <div class="metric-label">Turnover Rate (Annual)</div>
             <div class="metric-value">{annualized_turnover:.1f}x</div>
-            <div class="metric-delta positive">Weighted Average</div>
+            <div class="metric-delta positive">Avg across products</div>
         </div>
         """, unsafe_allow_html=True)
     

@@ -81,10 +81,40 @@ def render_activity_log_sidebar(max_initial_entries: int = 5):
     # Expander untuk older activities (jika ada)
     if len(older_activities) > 0:
         with st.expander(f"📜 View {len(older_activities)} older activities"):
-            older_container = st.container()
-            with older_container:
-                for activity in older_activities:
-                    _render_single_activity(activity)
+            # 🎯 FIX: Add scrollable container with max-height to prevent double scrollbars
+            st.markdown("""
+            <style>
+            .activity-scroll-container {
+                max-height: 300px;
+                overflow-y: auto;
+                padding-right: 8px;
+            }
+            .activity-scroll-container::-webkit-scrollbar {
+                width: 6px;
+            }
+            .activity-scroll-container::-webkit-scrollbar-track {
+                background: rgba(30, 41, 59, 0.5);
+                border-radius: 3px;
+            }
+            .activity-scroll-container::-webkit-scrollbar-thumb {
+                background: #64748b;
+                border-radius: 3px;
+            }
+            </style>
+            """, unsafe_allow_html=True)
+            
+            # Build all activities HTML
+            activities_html = '<div class="activity-scroll-container">'
+            for activity in older_activities:
+                activities_html += f"""
+                <div style="background: rgba(45, 55, 72, 0.5); padding: 0.6rem; border-radius: 8px; 
+                            margin-bottom: 0.5rem; border-left: 4px solid {activity['color']}; font-size: 0.85rem;">
+                    <div style="font-size: 0.7rem; color: #a0aec0;">{activity.get('time', 'N/A')}</div>
+                    <div style="color: #e2e8f0; margin-top: 0.2rem;">{activity.get('action', 'Unknown')}</div>
+                </div>
+                """
+            activities_html += '</div>'
+            st.markdown(activities_html, unsafe_allow_html=True)
                     
 def export_activity_log() -> str:
     """Exports the activity log as a formatted string."""

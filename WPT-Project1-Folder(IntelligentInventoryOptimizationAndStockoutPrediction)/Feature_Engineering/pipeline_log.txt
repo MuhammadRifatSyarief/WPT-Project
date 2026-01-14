@@ -1,0 +1,99 @@
+=== STDOUT ===
+
+============================================================
+FEATURE ENGINEERING PIPELINE
+Project 1: Intelligent Inventory Optimization
+============================================================
+Started at: 2025-12-24 06:39:08
+
+============================================================
+STAGE 1: DATA LOADING & CLEANING
+============================================================
+  [INFO] Loading 1_Sales_Details.csv...
+  [✓] Sales: 10,698 rows, 1,701 unique items
+  [INFO] Loading 2_PO_Details.csv...
+  [✓] PO Details: 5,099 rows, 1,712 unique items
+  [INFO] Loading 3_Stock_Mutations.csv...
+  [✓] Mutations: 779,197 rows, 2,270 unique items
+  [INFO] Loading 4_Current_Stock.csv...
+  [✓] Current Stock: 2,064 rows, 2,064 unique items
+  [INFO] Loading 5_Master_Items.csv...
+  [✓] Master Items: 2,270 rows
+
+============================================================
+STAGE 2: TIME-SERIES METRICS ENGINE
+============================================================
+  [INFO] Valid sales records: 10,698
+  [INFO] Date range: 2023-11-03 to 2025-12-22
+  [INFO] Aggregating daily sales per item...
+  [INFO] Creating complete daily matrix with zero-filling...
+  [INFO] Total unique items (Sales + Stock): 2,194
+  [✓] Daily matrix: 1,713,514 records (2,194 items x 781 days)
+  [INFO] Calculating rolling averages and volatility...
+  [✓] Time-series metrics calculated for 2,194 items
+
+============================================================
+STAGE 3: ADVANCED PRODUCT PROFILING
+============================================================
+  [INFO] Calculating ABC classification (revenue-based)...
+  [✓] ABC Distribution: A=196, B=298, C=1700
+  [INFO] Calculating XYZ classification (volatility-based)...
+  [✓] XYZ Distribution: X=0, Y=22, Z=2172
+  [INFO] Calculating lead time statistics from PO data...
+  [✓] Lead time stats calculated for 1,712 items
+
+============================================================
+STAGE 4: PREDICTIVE METRICS CALCULATION
+============================================================
+  [INFO] Calculating Safety Stock (Z-score = 1.65)...
+  [✓] Safety Stock calculated. Range: 0 - 88562
+  [INFO] Calculating Reorder Point (ROP)...
+  [✓] ROP calculated. Range: 0 - 138562
+
+============================================================
+STAGE 5: MASTER AGGREGATION & EXPORT
+============================================================
+  [INFO] Preparing current stock data...
+  [INFO] Creating AGGREGATED output (sum across warehouses)...
+  [INFO] Calculating DIO and Days Until Stockout...
+  [✓] Aggregated output: 2,194 items, 26 columns
+  [INFO] Creating PER-WAREHOUSE output...
+  [INFO] Current stock columns: ['item_no', 'warehouse', 'current_stock', 'avg_cost', 'unit_price', 'stock_value', 'potential_revenue', 'incoming_qty_x', 'avg_incoming_eta_days_x', 'projected_stock', 'incoming_qty_y', 'avg_incoming_eta_days_y', 'incoming_qty', 'avg_incoming_eta_days']
+  [✓] Per-warehouse output: 2,064 rows
+  [INFO] Exporting to CSV files...
+  [✓] Exported: D:\AA-WPT-PROJECT\AA-WPT-PROJECT\WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)\Feature_Engineering\Master_Inventory_Feature_Set.csv
+  [✓] Exported: D:\AA-WPT-PROJECT\AA-WPT-PROJECT\WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)\Feature_Engineering\Master_Inventory_Feature_Set_PerWarehouse.csv
+
+============================================================
+STAGE 6: VERIFICATION
+============================================================
+  [✓] Row count OK: 2194 items (expected ~2064)
+  [✓] All ROP values non-negative ✓
+  [✓] All Safety Stock values non-negative ✓
+  [✓] All items classified (ABC/XYZ) ✓
+  [✓] No critical null values ✓
+  [INFO] ABC Distribution: A=8.9%, B=13.6%, C=77.5%
+  [INFO] Stockout Risk: HIGH=167, MEDIUM=36, LOW=1991
+  [INFO] Items needing reorder: 1665 (75.9%)
+
+============================================================
+VERIFICATION SUMMARY
+============================================================
+
+✅ ALL CHECKS PASSED!
+
+============================================================
+PIPELINE COMPLETED
+============================================================
+Finished at: 2025-12-24 06:41:53
+
+Output files:
+  1. D:\AA-WPT-PROJECT\AA-WPT-PROJECT\WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)\Feature_Engineering\Master_Inventory_Feature_Set.csv
+  2. D:\AA-WPT-PROJECT\AA-WPT-PROJECT\WPT-Project1-Folder(IntelligentInventoryOptimizationAndStockoutPrediction)\Feature_Engineering\Master_Inventory_Feature_Set_PerWarehouse.csv
+
+
+=== STDERR ===
+
+
+=== RESULT ===
+Success: True

@@ -1,0 +1,12 @@
+{
+  "sales_rows": 601,
+  "sales_price_coverage": 88.6855241264559,
+  "po_rows": 864,
+  "po_price_coverage": 98.95833333333334,
+  "stock_rows": 2064,
+  "stock_cost_coverage": 33.04597701149425,
+  "stock_price_coverage": 41.810344827586206,
+  "master_rows": 2270,
+  "master_price_coverage": 23.788546255506606,
+  "master_cost_coverage": 19.867841409691632
+}

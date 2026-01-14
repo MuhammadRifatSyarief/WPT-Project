@@ -4,8 +4,6 @@ PROJECT 2: SALES PERFORMANCE & CUSTOMER SEGMENTATION ANALYTICS
 ==========================================================================
 File: modules/rfm_analyzer.py
 Purpose: RFM (Recency, Frequency, Monetary) Analysis for customer segmentation
-Author: v0
-Created: 2025
 ==========================================================================
 
 OVERVIEW:

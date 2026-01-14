@@ -1,0 +1,9 @@
+Stock Items (Unique): 2064
+Sales Items (Unique): 1701
+Master Items (Unique): 2270
+
+Items in Stock but NO Sales (The missing 363?): 493
+Examples: ['Rocware-017', 'ALTAI-007', 'Umum-011', 'Huawei-103', 'RENT-159', 'SonicWall-128', 'Dahua-002', 'Sangfor-027', 'Umum-211', 'RENT-120']
+
+Items in Sales but NO Stock: 130
+Examples: ['Group-008', 'One-017', 'Group-034', 'Alicloud - 001', 'One-008-1', 'DP-999 (Non-Aktif)', 'Quest-123', '100010-SMB', 'SonicWall-124', 'DP-003 (Non-Aktif)']

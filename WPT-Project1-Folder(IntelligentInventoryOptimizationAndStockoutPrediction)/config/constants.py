@@ -5,9 +5,6 @@ Global Constants and Configuration
 Modul ini berisi semua konstanta global, default values, dan konfigurasi
 yang digunakan di seluruh aplikasi.
 
-Author: Data Science Team
-Date: 2025-11-18
-Version: 1.0
 """
 
 # ============================================================================
@@ -18,7 +15,7 @@ APP_TITLE = "Inventory Intelligence Hub - PT Wahana Piranti Teknologi"
 APP_ICON = "📦"
 APP_VERSION = "1.0 PRODUCTION"
 APP_COMPANY = "PT Wahana Piranti Teknologi"
-AUTHOR = "Data Science Team"
+AUTHOR = "Muhammad Rif'at Syarief"
 LAST_MODIFIED = "2025-11-18"
 
 # ============================================================================
@@ -32,6 +29,8 @@ PAGES = [
     "⚠️ Stockout Alerts",
     "🔄 Reorder Optimization",
     "📋 Slow-Moving Analysis",
+    "👥 RFM Analysis",
+    "🛒 Market Basket Analysis",
     "⚙️ Settings"
 ]
 
@@ -181,6 +180,12 @@ ACTIVITY_LOG_FORMAT = "%H:%M:%S"  # Time format for activity log
 # ============================================================================
 
 DEFAULT_SESSION_STATE = {
+    # Authentication
+    "authenticated": False,
+    "username": None,
+    "role": None,
+    "user_id": None,
+    
     # Konfigurasi Email
     "email_sender": "",
     "email_password": "",
@@ -246,4 +251,121 @@ POPOVERS = {
         'description': 'Quick Stats memberikan snapshot real-time dari kondisi inventory Anda.',
         'items': '- Active Alerts: Produk yang memerlukan perhatian segera\n- Products Monitored: Total produk dalam sistem\n- Last Updated: Waktu sinkronisasi data terakhir'
     }
+}
+
+# ============================================================================
+# RFM ANALYSIS CONFIGURATION
+# ============================================================================
+RFM_CONFIG = {
+    # Scoring ranges (1-5, where 5 is best for F/M, worst for R)
+    'SCORE_RANGE': (1, 5),
+    
+    # RFM Segment Definitions
+    # Format: (R_range, F_range, M_range) -> Segment Name
+    'SEGMENTS': {
+        'Champions': {'R': (4, 5), 'F': (4, 5), 'M': (4, 5)},
+        'Loyal Customers': {'R': (3, 5), 'F': (3, 5), 'M': (3, 5)},
+        'Potential Loyalist': {'R': (4, 5), 'F': (2, 4), 'M': (2, 4)},
+        'Recent Customers': {'R': (4, 5), 'F': (1, 2), 'M': (1, 2)},
+        'Promising': {'R': (3, 4), 'F': (1, 2), 'M': (1, 2)},
+        'Need Attention': {'R': (2, 3), 'F': (2, 3), 'M': (2, 3)},
+        'About To Sleep': {'R': (2, 3), 'F': (1, 2), 'M': (1, 2)},
+        'At Risk': {'R': (1, 2), 'F': (3, 5), 'M': (3, 5)},
+        'Cannot Lose Them': {'R': (1, 2), 'F': (4, 5), 'M': (4, 5)},
+        'Hibernating': {'R': (1, 2), 'F': (1, 2), 'M': (1, 2)},
+        'Lost': {'R': (1, 1), 'F': (1, 2), 'M': (1, 2)},
+    },
+    
+    # Segment Colors for visualization
+    'SEGMENT_COLORS': {
+        'Champions': '#2E7D32',          # Green
+        'Loyal Customers': '#4CAF50',    # Light Green
+        'Potential Loyalist': '#8BC34A', # Lime
+        'Recent Customers': '#03A9F4',   # Light Blue
+        'Promising': '#00BCD4',          # Cyan
+        'Need Attention': '#FF9800',     # Orange
+        'About To Sleep': '#FFC107',     # Amber
+        'At Risk': '#FF5722',            # Deep Orange
+        'Cannot Lose Them': '#F44336',   # Red
+        'Hibernating': '#9E9E9E',        # Grey
+        'Lost': '#607D8B',               # Blue Grey
+    },
+    
+    # Priority weights for segment scoring
+    'SEGMENT_PRIORITY': {
+        'Champions': 10,
+        'Loyal Customers': 9,
+        'Cannot Lose Them': 8,
+        'At Risk': 7,
+        'Potential Loyalist': 6,
+        'Need Attention': 5,
+        'Recent Customers': 4,
+        'Promising': 3,
+        'About To Sleep': 2,
+        'Hibernating': 1,
+        'Lost': 0,
+    },
+    
+    # Recommended Actions per Segment
+    'SEGMENT_ACTIONS': {
+        'Champions': 'Reward them. Can be early adopters for new products.',
+        'Loyal Customers': 'Upsell higher value products. Engage them.',
+        'Potential Loyalist': 'Offer membership/loyalty program. Recommend other products.',
+        'Recent Customers': 'Start building relationship. Provide onboarding support.',
+        'Promising': 'Create brand awareness. Offer free trials.',
+        'Need Attention': 'Make limited time offers. Recommend based on purchase history.',
+        'About To Sleep': 'Share valuable resources. Recommend popular products.',
+        'At Risk': 'Send personalized emails. Offer renewals and helpful products.',
+        'Cannot Lose Them': 'Win them back via renewals/special products. Talk to them.',
+        'Hibernating': 'Offer other relevant products. Special discounts.',
+        'Lost': 'Revive interest with reach out campaign. Ignore otherwise.',
+    },
+}
+
+# ============================================================================
+# MARKET BASKET ANALYSIS CONFIGURATION
+# ============================================================================
+MBA_CONFIG = {
+    # Minimum support threshold
+    'MIN_SUPPORT': 0.005,  # 0.5% of transactions
+    
+    # Minimum confidence threshold
+    'MIN_CONFIDENCE': 0.20,  # 20%
+    
+    # Minimum lift threshold
+    'MIN_LIFT': 1.0,  # Must be > 1 for positive association
+    
+    # Maximum itemset size
+    'MAX_ITEMSET_SIZE': 3,
+    
+    # Top N rules to display
+    'TOP_N_RULES': 50,
+    
+    # Association strength categories
+    'LIFT_CATEGORIES': {
+        'Strong': (3.0, float('inf')),
+        'Moderate': (1.5, 3.0),
+        'Weak': (1.0, 1.5),
+    },
+}
+
+# ============================================================================
+# CUSTOMER VALUE METRICS
+# ============================================================================
+CUSTOMER_VALUE_CONFIG = {
+    # CLV (Customer Lifetime Value) calculation period in months
+    'CLV_PERIOD_MONTHS': 12,
+    
+    # Customer activity thresholds (days)
+    'ACTIVE_THRESHOLD_DAYS': 90,
+    'AT_RISK_THRESHOLD_DAYS': 180,
+    'CHURNED_THRESHOLD_DAYS': 365,
+    
+    # Revenue tiers
+    'REVENUE_TIERS': {
+        'Platinum': 0.90,  # Top 10%
+        'Gold': 0.70,      # Top 30%
+        'Silver': 0.40,    # Top 60%
+        'Bronze': 0.0,     # Rest
+    },
 }

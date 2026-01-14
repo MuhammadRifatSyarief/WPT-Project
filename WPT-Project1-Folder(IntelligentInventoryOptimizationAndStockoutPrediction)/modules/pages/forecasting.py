@@ -59,7 +59,8 @@ def render_page(df: pd.DataFrame):
         )
     
     with col2:
-        product_categories = ['All'] + sorted([c for c in df['product_category'].unique() if c and c != 'OTHER'])
+        product_categories = ['All'] + sorted([c for c in df['product_category'].unique() 
+                                               if c and c not in ['OTHER', 'NUMERIC_CODE']])
         forecast_category_filter = st.selectbox(
             "Product Group", 
             product_categories,
@@ -67,7 +68,7 @@ def render_page(df: pd.DataFrame):
         )
     
     with col3:
-        forecast_days = st.slider("Forecast Days", 7, 90, 30)
+        forecast_days = st.slider("Forecast Days", 7, 30, 14)  # Changed: max 30 days for realistic short-term forecasting
     
     with col4:
         abc_class_filter = st.selectbox("ABC Class", ["All", "A", "B", "C"])
@@ -100,19 +101,40 @@ def render_page(df: pd.DataFrame):
     
     with col1:
         st.markdown("### 📊 Demand Distribution")
-        fig = px.histogram(forecast_df, x='avg_daily_demand', nbins=50, 
-                          title="Daily Demand Distribution", 
+        # Use forecast_30d if available, otherwise fallback to avg_daily_demand
+        demand_col = 'forecast_30d' if 'forecast_30d' in forecast_df.columns else 'avg_daily_demand'
+        valid_demand_df = forecast_df[forecast_df[demand_col].notna() & (forecast_df[demand_col] > 0)]
+        
+        fig = px.histogram(valid_demand_df, x=demand_col, nbins=50, 
+                          title=f"Daily Demand Distribution (from {demand_col})", 
                           template="plotly_dark")
         fig.update_layout(height=400, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
         st.plotly_chart(fig,  width='stretch')
+        
+        # Show stats
+        if not valid_demand_df.empty:
+            st.caption(f"Max: {valid_demand_df[demand_col].max():.2f} | Mean: {valid_demand_df[demand_col].mean():.2f} units/day")
     
     with col2:
-        st.markdown(f"### 📈 Top 10 Products Forecast ({forecast_days} Days)")
-        top_products = forecast_df.nlargest(10, 'avg_daily_demand')[['product_code', 'avg_daily_demand']].copy()
-        top_products['forecast'] = top_products['avg_daily_demand'] * forecast_days
+        # 🎯 NEW: Add slider to control number of top products shown
+        top_n_products = st.slider("Top N Products", 5, 50, 10, key="forecast_top_n")
+        st.markdown(f"### 📈 Top {top_n_products} Products Forecast ({forecast_days} Days)")
+        
+        # Use forecast_30d if available (from demand forecasting module)
+        if 'forecast_30d' in forecast_df.columns:
+            # Use the bounded forecast from the module
+            valid_df = forecast_df[forecast_df['forecast_30d'].notna()].copy()
+            top_products = valid_df.nlargest(top_n_products, 'forecast_30d')[['product_code', 'forecast_30d', 'forecast_model']].copy()
+            top_products['forecast'] = top_products['forecast_30d'] * forecast_days
+            chart_title = f"{forecast_days}-Day Forecast (from Prophet/Statistical Model)"
+        else:
+            # Fallback to avg_daily_demand
+            top_products = forecast_df.nlargest(top_n_products, 'avg_daily_demand')[['product_code', 'avg_daily_demand']].copy()
+            top_products['forecast'] = top_products['avg_daily_demand'] * forecast_days
+            chart_title = f"{forecast_days}-Day Forecast (from Historical Average)"
         
         fig = px.bar(top_products, x='product_code', y='forecast', 
-                    title=f"{forecast_days}-Day Forecast (Top 10)", 
+                    title=chart_title, 
                     template="plotly_dark",
                     labels={'product_code': 'Product Code', 'forecast': 'Forecasted Demand'})
         fig.update_layout(height=400, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
@@ -124,14 +146,33 @@ def render_page(df: pd.DataFrame):
     # TABEL DETAIL PRODUK
     # ========================================================================
     
-    st.markdown(f"### Top Products by Demand (Forecast for {forecast_days} days)")
+    st.markdown(f"### Top Products by Forecast (for {forecast_days} days)")
     
-    top_df = forecast_df.nlargest(15, 'avg_daily_demand')[
-        ['product_code', 'product_name', 'avg_daily_demand', 'ABC_class', 'segment_label', 'current_stock_qty', 'product_category']
-    ].copy()
-    
-    top_df['forecast_demand'] = top_df['avg_daily_demand'] * forecast_days
-    top_df['stock_coverage_days'] = top_df['current_stock_qty'] / (top_df['avg_daily_demand'] + 0.01)
+    # Use forecast_30d if available from the demand forecasting module
+    if 'forecast_30d' in forecast_df.columns:
+        valid_df = forecast_df[forecast_df['forecast_30d'].notna()].copy()
+        
+        # Define columns to include
+        base_cols = ['product_code', 'product_name', 'forecast_30d', 'ABC_class', 'current_stock_qty', 'product_category']
+        if 'forecast_model' in valid_df.columns:
+            base_cols.insert(3, 'forecast_model')
+        
+        available_cols = [c for c in base_cols if c in valid_df.columns]
+        top_df = valid_df.nlargest(15, 'forecast_30d')[available_cols].copy()
+        
+        top_df['forecast_demand'] = top_df['forecast_30d'] * forecast_days
+        top_df['stock_coverage_days'] = top_df['current_stock_qty'] / (top_df['forecast_30d'] + 0.01)
+        demand_col_name = "Forecast/Day"
+    else:
+        # Fallback to avg_daily_demand
+        top_df = forecast_df.nlargest(15, 'avg_daily_demand')[
+            ['product_code', 'product_name', 'avg_daily_demand', 'ABC_class', 'current_stock_qty', 'product_category']
+        ].copy()
+        
+        top_df['forecast_demand'] = top_df['avg_daily_demand'] * forecast_days
+        top_df['stock_coverage_days'] = top_df['current_stock_qty'] / (top_df['avg_daily_demand'] + 0.01)
+        top_df['forecast_30d'] = top_df['avg_daily_demand']  # Alias for display
+        demand_col_name = "Daily Demand"
     
     st.dataframe(
         top_df,
@@ -140,15 +181,40 @@ def render_page(df: pd.DataFrame):
         column_config={
             "product_code": "Code",
             "product_name": st.column_config.TextColumn("Product Name", width="large"),
-            "avg_daily_demand": st.column_config.NumberColumn("Daily Demand", format="%.2f"),
+            "forecast_30d": st.column_config.NumberColumn(demand_col_name, format="%.2f"),
+            "forecast_model": "Model",
             "forecast_demand": st.column_config.NumberColumn(f"{forecast_days}-Day Forecast", format="%.0f"),
             "current_stock_qty": st.column_config.NumberColumn("Current Stock", format="%.0f"),
             "stock_coverage_days": st.column_config.NumberColumn("Coverage (days)", format="%.0f"),
             "ABC_class": "ABC",
-            "segment_label": "Segment",
             "product_category": "Group"
         }
     )
+    
+    # ========================================================================
+    # ABC & SEGMENT CLASSIFICATION LEGENDS (NEW)
+    # ========================================================================
+    st.markdown("---")
+    st.markdown("### 📖 Keterangan Klasifikasi")
+    
+    with st.expander("📊 Penjelasan ABC Class", expanded=False):
+        st.markdown("""
+        | Class | Kontribusi Revenue | Prioritas | Aksi |
+        |-------|-------------------|-----------|------|
+        | **A** | ~80% total | Tinggi | Monitoring ketat, stock optimal |
+        | **B** | ~15% total | Sedang | Monitoring reguler |
+        | **C** | ~5% total | Rendah | Review kebutuhan |
+        """)
+    
+    with st.expander("🔤 Penjelasan Segment (ABC-XYZ)", expanded=False):
+        st.markdown("""
+        | Segment | Artinya | Rekomendasi |
+        |---------|---------|-------------|
+        | **AX, BX** | Revenue tinggi/sedang, demand stabil | Fokus utama, forecast akurat |
+        | **AY, BY** | Revenue tinggi/sedang, demand fluktuatif | Butuh safety stock lebih |
+        | **AZ, BZ** | Revenue tinggi/sedang, demand tidak stabil | Perlu monitoring intensif |
+        | **CX, CY, CZ** | Revenue rendah | Evaluasi untuk discontinue |
+        """)
     
     # ========================================================================
     # EKSPOR & AKSI

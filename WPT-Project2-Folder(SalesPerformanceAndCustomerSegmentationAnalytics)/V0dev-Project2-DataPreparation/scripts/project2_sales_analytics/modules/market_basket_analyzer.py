@@ -4,8 +4,6 @@ PROJECT 2: SALES PERFORMANCE & CUSTOMER SEGMENTATION ANALYTICS
 ==========================================================================
 File: modules/market_basket_analyzer.py
 Purpose: Market Basket Analysis for product association discovery
-Author: v0
-Created: 2025
 ==========================================================================
 
 OVERVIEW:

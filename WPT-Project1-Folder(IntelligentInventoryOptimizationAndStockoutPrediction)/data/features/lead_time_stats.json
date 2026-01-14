@@ -1,0 +1,16 @@
+{
+  "calculated_at": "2026-01-14T11:28:54.567803",
+  "statistics": {
+    "total_products_with_lead_time": 670,
+    "overall_mean": 67.3,
+    "overall_median": 54.0,
+    "products_lt_7_days": 20,
+    "products_7_14_days": 36,
+    "products_14_30_days": 130,
+    "products_30_60_days": 175,
+    "products_60plus_days": 309
+  },
+  "default_lead_time_recommendation": 54,
+  "safe_lead_time_recommendation": 67,
+  "data_source": "Calculated from purchase_details.trans_date to stock_mutations.transactionDate (RI)"
+}

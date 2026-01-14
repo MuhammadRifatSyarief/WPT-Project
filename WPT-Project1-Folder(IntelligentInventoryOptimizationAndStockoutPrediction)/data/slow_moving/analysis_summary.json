@@ -1,0 +1,197 @@
+{
+  "generated_at": "2026-01-14T14:21:11.351400",
+  "total_items_analyzed": 2325,
+  "classification_summary": {
+    "Dead Stock": 1444,
+    "Slow Moving": 664,
+    "Fast Moving": 215,
+    "Normal": 2
+  },
+  "aging_summary": {
+    "181-365 days": 952,
+    "365+ days": 491,
+    "0-30 days": 315,
+    "91-180 days": 212,
+    "31-60 days": 192,
+    "61-90 days": 163
+  },
+  "recommendation_summary": {
+    "No Action (No Stock)": 1662,
+    "Dispose/Write-off": 304,
+    "No Action (Fast Moving)": 152,
+    "Promotional Sale (20% off)": 120,
+    "Markdown (35% off)": 44,
+    "Clearance Sale (70% off)": 41,
+    "Monitor": 2
+  },
+  "financial_impact": {
+    "total_slow_moving_items": 2108,
+    "total_slow_moving_stock_value": 8271179730.0,
+    "annual_holding_cost_waste": 1654235946.0,
+    "dead_stock_value": 4350339978.0,
+    "slow_moving_value": 3920839752.0,
+    "potential_recovery": 2481353919.0
+  },
+  "top_priority_items": [
+    {
+      "id": 1506,
+      "no": "SANGFOR-012",
+      "name": "USB-Key, Superdog USB Key for license activation, one key per cluster, please do specify the quantity, mandatory item",
+      "movement_class": "Dead Stock",
+      "priority_score": 94.8,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 33700,
+      "no": "UMUM-179",
+      "name": "Dapustor NVME QLC U.2 30.72 TB",
+      "movement_class": "Dead Stock",
+      "priority_score": 76.2,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 28056,
+      "no": "HUAWEI-068",
+      "name": "02317346S-SFP-GE-LH40-SM1310Optical Transceiver,eSFP,GE,Single-mode. Module(1310nm,40km,LC)",
+      "movement_class": "Dead Stock",
+      "priority_score": 64.7,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 34054,
+      "no": "RSMB-062-1",
+      "name": "RG-NBS3200-24GT4XS-P-V2",
+      "movement_class": "Dead Stock",
+      "priority_score": 64.5,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 35551,
+      "no": "H_DATACOMM-063",
+      "name": "98012516S220S-24P4JS220S-24P4J(24*10/100/1000BASE-T ports(400 W PoE+),4*2.5*GE SFP ports, built-in AC power)",
+      "movement_class": "Dead Stock",
+      "priority_score": 64.4,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 260,
+      "no": "ZCOM-003",
+      "name": "ZCOM SP230 Wireless LAN outdoor Access Point",
+      "movement_class": "Dead Stock",
+      "priority_score": 64.3,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 30952,
+      "no": "UMUM-151",
+      "name": "Dapustor dual port NVME 30,72TB",
+      "movement_class": "Dead Stock",
+      "priority_score": 63.4,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 38101,
+      "no": "RSMB-432",
+      "name": "RG-NBS3200-48GT4XS-P-V2",
+      "movement_class": "Dead Stock",
+      "priority_score": 63.4,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 262,
+      "no": "ZCOM-001",
+      "name": "POE Injector PPSE101",
+      "movement_class": "Dead Stock",
+      "priority_score": 63.2,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 261,
+      "no": "ZCOM-002",
+      "name": "Switch Adaptor MU24-B1480-KCOS 100V 24 W, IMS LA 106, Edavos LA 107",
+      "movement_class": "Dead Stock",
+      "priority_score": 63.2,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 33701,
+      "no": "UMUM-181",
+      "name": "Dapustor NVME U.2 QLC 7.68 TB",
+      "movement_class": "Dead Stock",
+      "priority_score": 62.7,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 322,
+      "no": "RSMB-037",
+      "name": "RG-ES105D",
+      "movement_class": "Dead Stock",
+      "priority_score": 62.6,
+      "recommendation": "Clearance Sale (70% off)"
+    },
+    {
+      "id": 436,
+      "no": "H3C1-001",
+      "name": "ADP040-54V-GL",
+      "movement_class": "Dead Stock",
+      "priority_score": 62.5,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 32350,
+      "no": "H_DATACOMM-050",
+      "name": "50086816. AP160 AP160(11ax indoor, 2+2 dual bands, smart antenna )",
+      "movement_class": "Dead Stock",
+      "priority_score": 62.4,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 347,
+      "no": "RSMB-053",
+      "name": "RG-M5000E-AC500P",
+      "movement_class": "Dead Stock",
+      "priority_score": 61.9,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 437,
+      "no": "H3C1-003",
+      "name": "EWP-WA536-WW-FIT",
+      "movement_class": "Dead Stock",
+      "priority_score": 61.9,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 349,
+      "no": "RSMB-022",
+      "name": "RG-AP710",
+      "movement_class": "Dead Stock",
+      "priority_score": 61.3,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 266,
+      "no": "TPLK-044",
+      "name": "TL-WN8200ND(UN)",
+      "movement_class": "Dead Stock",
+      "priority_score": 61.3,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 36950,
+      "no": "H_DATACOMM-069",
+      "name": "50088144AP673EAP673E( 11be indoor,2+2+4 tri bands,smart antena,USB PoE OUT )",
+      "movement_class": "Dead Stock",
+      "priority_score": 61.2,
+      "recommendation": "Dispose/Write-off"
+    },
+    {
+      "id": 15150,
+      "no": "DAHUA-004",
+      "name": "AX15M",
+      "movement_class": "Dead Stock",
+      "priority_score": 61.2,
+      "recommendation": "Dispose/Write-off"
+    }
+  ]
+}

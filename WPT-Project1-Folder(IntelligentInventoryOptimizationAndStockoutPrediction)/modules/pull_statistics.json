@@ -1,0 +1,152 @@
+{
+  "pull_stats": {
+    "items": {
+      "total": 2326,
+      "unitPrice_null": "2275",
+      "avgCost_null": 2326,
+      "category_null": 0
+    },
+    "current_stock": {
+      "total": 2118,
+      "zero_quantity": "1454",
+      "zero_available": 0
+    },
+    "stock_mutations": {
+      "total_records": 43420,
+      "items_with_data": 2171,
+      "items_empty": 0
+    },
+    "sales_invoices": {
+      "total": 5000,
+      "customerId_null": 5000
+    }
+  },
+  "endpoint_stats": {
+    "/api/item/list.do": {
+      "total_requests": 24,
+      "successful_requests": 24,
+      "failed_requests": 0,
+      "rate_limit_hits": 0,
+      "total_records": 2326,
+      "null_values_count": 0,
+      "processing_time": 7.472172975540161
+    },
+    "/api/warehouse/list.do": {
+      "total_requests": 1,
+      "successful_requests": 1,
+      "failed_requests": 0,
+      "rate_limit_hits": 0,
+      "total_records": 7,
+      "null_values_count": 0,
+      "processing_time": 0.25191450119018555
+    },
+    "/api/customer/list.do": {
+      "total_requests": 9,
+      "successful_requests": 9,
+      "failed_requests": 0,
+      "rate_limit_hits": 0,
+      "total_records": 888,
+      "null_values_count": 0,
+      "processing_time": 3.604931116104126
+    },
+    "/api/vendor/list.do": {
+      "total_requests": 2,
+      "successful_requests": 2,
+      "failed_requests": 0,
+      "rate_limit_hits": 0,
+      "total_records": 108,
+      "null_values_count": 0,
+      "processing_time": 0.5383329391479492
+    },
+    "/api/item/get-selling-price.do": {
+      "total_requests": 2488,
+      "successful_requests": 2272,
+      "failed_requests": 219,
+      "rate_limit_hits": 0,
+      "total_records": 0,
+      "null_values_count": 0,
+      "processing_time": 1331.6556146144867
+    },
+    "/api/item/list-stock.do": {
+      "total_requests": 22,
+      "successful_requests": 22,
+      "failed_requests": 0,
+      "rate_limit_hits": 0,
+      "total_records": 2118,
+      "null_values_count": 0,
+      "processing_time": 8.538418054580688
+    },
+    "/api/item/stock-mutation-history.do": {
+      "total_requests": 2171,
+      "successful_requests": 2171,
+      "failed_requests": 3,
+      "rate_limit_hits": 0,
+      "total_records": 0,
+      "null_values_count": 0,
+      "processing_time": 785.1778817176819
+    },
+    "/api/sales-invoice/list.do": {
+      "total_requests": 50,
+      "successful_requests": 50,
+      "failed_requests": 0,
+      "rate_limit_hits": 0,
+      "total_records": 5000,
+      "null_values_count": 0,
+      "processing_time": 24.355496644973755
+    },
+    "/api/sales-invoice/detail.do": {
+      "total_requests": 5000,
+      "successful_requests": 5000,
+      "failed_requests": 1,
+      "rate_limit_hits": 0,
+      "total_records": 0,
+      "null_values_count": 0,
+      "processing_time": 3026.12210893631
+    },
+    "/api/purchase-order/list.do": {
+      "total_requests": 20,
+      "successful_requests": 20,
+      "failed_requests": 0,
+      "rate_limit_hits": 0,
+      "total_records": 1941,
+      "null_values_count": 0,
+      "processing_time": 10.14293909072876
+    },
+    "/api/purchase-order/detail.do": {
+      "total_requests": 1941,
+      "successful_requests": 1941,
+      "failed_requests": 0,
+      "rate_limit_hits": 0,
+      "total_records": 0,
+      "null_values_count": 0,
+      "processing_time": 1197.653603553772
+    }
+  },
+  "status": {
+    "items": "completed",
+    "warehouses": "completed",
+    "customers": "completed",
+    "vendors": "completed",
+    "selling_prices": "completed",
+    "current_stock": "completed",
+    "stock_mutations": "completed",
+    "sales_invoices": "completed",
+    "sales_details": "completed",
+    "purchase_orders": "completed",
+    "purchase_details": "completed"
+  },
+  "data_counts": {
+    "items": 2326,
+    "warehouses": 7,
+    "customers": 888,
+    "vendors": 108,
+    "selling_prices": 2326,
+    "current_stock": 2118,
+    "stock_mutations_partial": 42960,
+    "stock_mutations": 43420,
+    "sales_invoices": 5000,
+    "sales_details": 10041,
+    "purchase_orders": 1941,
+    "purchase_details": 5293
+  }
+}

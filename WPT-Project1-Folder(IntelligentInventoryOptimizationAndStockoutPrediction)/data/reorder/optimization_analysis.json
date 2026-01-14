@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-01-14T14:34:08.247370",
+  "holding_cost_analysis": {
+    "total_annual_holding_cost": 2848585680.0,
+    "avg_holding_cost_per_item": 1225198.0,
+    "top_holding_costs": [
+      {
+        "item_id": 20502,
+        "current_stock": 42.0,
+        "unit_cost": 21898511.581666667,
+        "annual_holding_cost": 183947497.0
+      },
+      {
+        "item_id": 1506,
+        "current_stock": 1.0,
+        "unit_cost": 799728563.52,
+        "annual_holding_cost": 159945713.0
+      },
+      {
+        "item_id": 19155,
+        "current_stock": 9.0,
+        "unit_cost": 65223399.400000006,
+        "annual_holding_cost": 117402119.0
+      },
+      {
+        "item_id": 26802,
+        "current_stock": 44.0,
+        "unit_cost": 12835948.01,
+        "annual_holding_cost": 112956342.0
+      },
+      {
+        "item_id": 321,
+        "current_stock": 278.0,
+        "unit_cost": 1718983.3333333333,
+        "annual_holding_cost": 95575473.0
+      },
+      {
+        "item_id": 33700,
+        "current_stock": 8.0,
+        "unit_cost": 46500000.0,
+        "annual_holding_cost": 74400000.0
+      },
+      {
+        "item_id": 29450,
+        "current_stock": 410.0,
+        "unit_cost": 844529.6875,
+        "annual_holding_cost": 69251434.0
+      },
+      {
+        "item_id": 29451,
+        "current_stock": 253.0,
+        "unit_cost": 1171604.567142857,
+        "annual_holding_cost": 59283191.0
+      },
+      {
+        "item_id": 322,
+        "current_stock": 164.0,
+        "unit_cost": 1718983.3333333333,
+        "annual_holding_cost": 56382653.0
+      },
+      {
+        "item_id": 35752,
+        "current_stock": 2.0,
+        "unit_cost": 118490000.0,
+        "annual_holding_cost": 47396000.0
+      }
+    ]
+  },
+  "savings_analysis": {
+    "current_annual_cost": 273825666867.0,
+    "optimized_annual_cost": 7837207906.0,
+    "potential_savings": 265988458962.0,
+    "savings_percentage": 97.14
+  },
+  "config": {
+    "ordering_cost": 150000.0,
+    "holding_rate": 0.2,
+    "lead_time_days": 31,
+    "service_level": 0.95
+  }
+}

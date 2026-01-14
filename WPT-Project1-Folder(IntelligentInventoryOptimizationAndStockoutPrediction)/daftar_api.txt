@@ -1,5 +1,5 @@
 Area DeveloperAplikasiDaftar APIAccurate StoreWahana Piranti Teknologi 
-Rakean Wisnudharma 
+Muhammad Rif'at Syarief
 Dokumentasi API 
 API Dasar 
 https://account.accurate.id 

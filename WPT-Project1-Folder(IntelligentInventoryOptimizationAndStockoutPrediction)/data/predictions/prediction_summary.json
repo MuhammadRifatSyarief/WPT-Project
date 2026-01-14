@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-01-14T11:01:07.148290",
+  "total_items": 2325,
+  "risk_distribution": {
+    "critical": 1776,
+    "low": 504,
+    "high": 36,
+    "medium": 9
+  },
+  "urgency_distribution": {
+    "immediate": 1788,
+    "not_needed": 501,
+    "soon": 24,
+    "planned": 12
+  },
+  "model_metrics": {
+    "accuracy": 1.0,
+    "f1_score": 1.0,
+    "feature_importance": {
+      "demand_cv": 0.0084,
+      "turnover_ratio": 0.0297,
+      "days_in_inventory": 0.0157,
+      "stock_coverage_days": 0.9143,
+      "gross_margin": 0.0302,
+      "next_7_days_avg": 0.0005,
+      "next_30_days_avg": 0.0011
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "accuracy": 1.0,
+  "f1_score": 1.0,
+  "feature_importance": {
+    "demand_cv": 0.0084,
+    "turnover_ratio": 0.0297,
+    "days_in_inventory": 0.0157,
+    "stock_coverage_days": 0.9143,
+    "gross_margin": 0.0302,
+    "next_7_days_avg": 0.0005,
+    "next_30_days_avg": 0.0011
+  }
+}
