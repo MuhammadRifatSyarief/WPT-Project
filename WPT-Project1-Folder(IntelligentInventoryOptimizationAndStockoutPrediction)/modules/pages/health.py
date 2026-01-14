@@ -61,11 +61,12 @@ def render_page(df: pd.DataFrame):
     with col1:
         service_level = (df['current_stock_qty'] > 0).sum() / len(df) * 100
         health_score = service_level * 0.9  # Perhitungan sederhana
+        status_color = "#10b981" if health_score > 80 else "#f59e0b" if health_score > 60 else "#ef4444"
         st.markdown(f"""
-        <div class="metric-card">
+        <div class="metric-card" style="border-left: 3px solid {status_color};">
             <div class="metric-label">Overall Health</div>
             <div class="metric-value">{health_score:.0f}%</div>
-            <div class="metric-delta positive">✓ Good</div>
+            <div class="metric-delta positive">{'✓ Excellent' if health_score > 80 else '⚠ Good' if health_score > 60 else '✗ Poor'}</div>
         </div>
         """, unsafe_allow_html=True)
     

@@ -77,16 +77,41 @@ def render_page(df: pd.DataFrame = None):
     champions_count = len(rfm_df[rfm_df['segment'] == 'Champions']) if 'segment' in rfm_df.columns else 0
     
     with col1:
-        st.metric("Total Customers", f"{total_customers:,}")
+        st.markdown(f"""
+        <div class="metric-card" style="border-left: 3px solid #667eea;">
+            <div class="metric-label">Total Customers</div>
+            <div class="metric-value">{total_customers:,}</div>
+            <div class="metric-delta positive">Active accounts</div>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col2:
-        st.metric("Total Revenue", f"Rp {total_revenue:,.0f}")
+        st.markdown(f"""
+        <div class="metric-card" style="border-left: 3px solid #10b981;">
+            <div class="metric-label">Total Revenue</div>
+            <div class="metric-value">Rp {total_revenue/1_000_000:.1f}M</div>
+            <div class="metric-delta positive">Lifetime value</div>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col3:
-        st.metric("Avg Recency", f"{avg_recency:.0f} days")
+        recency_status = "positive" if avg_recency < 30 else "negative"
+        st.markdown(f"""
+        <div class="metric-card" style="border-left: 3px solid {'#10b981' if avg_recency < 30 else '#f59e0b'};">
+            <div class="metric-label">Avg Recency</div>
+            <div class="metric-value">{avg_recency:.0f}</div>
+            <div class="metric-delta {recency_status}">Days since last purchase</div>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col4:
-        st.metric("Champions", f"{champions_count:,}")
+        st.markdown(f"""
+        <div class="metric-card" style="border-left: 3px solid #10b981;">
+            <div class="metric-label">Champions</div>
+            <div class="metric-value">{champions_count:,}</div>
+            <div class="metric-delta positive">Best customers</div>
+        </div>
+        """, unsafe_allow_html=True)
     
     # ========================================================================
     # SEGMENT DISTRIBUTION

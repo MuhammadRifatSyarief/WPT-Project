@@ -332,7 +332,7 @@ def render_page_header(title: str, description: str = '', icon: str = ''):
 
 def apply_page_css():
     """
-    Apply global CSS styling ke halaman.
+    Apply global Glassmorphism CSS styling ke halaman.
     
     Harus dipanggil di awal main.py setelah st.set_page_config()
     
@@ -342,107 +342,410 @@ def apply_page_css():
     
     st.markdown(f"""
     <style>
-        /* Main theme colors */
+        /* ============================================================
+           GLASSMORPHISM DESIGN SYSTEM
+           ============================================================ */
+        
+        /* CSS Variables */
         :root {{
-            --primary-color: {COLORS['primary']};
-            --success-color: {COLORS['success']};
-            --warning-color: {COLORS['warning']};
-            --danger-color: {COLORS['danger']};
+            --primary: {COLORS['primary']};
+            --primary-light: {COLORS.get('primary_light', '#818cf8')};
+            --success: {COLORS['success']};
+            --warning: {COLORS['warning']};
+            --danger: {COLORS['danger']};
+            --info: {COLORS.get('info', '#3b82f6')};
             --bg-dark: {COLORS['bg_dark']};
             --bg-card: {COLORS['bg_card']};
+            --bg-glass: {COLORS.get('bg_glass', 'rgba(30, 41, 59, 0.7)')};
+            --bg-glass-hover: {COLORS.get('bg_glass_hover', 'rgba(30, 41, 59, 0.85)')};
+            --text-primary: {COLORS['text_primary']};
+            --text-secondary: {COLORS['text_secondary']};
+            --border: {COLORS['border']};
+            --border-glass: {COLORS.get('border_glass', 'rgba(255, 255, 255, 0.1)')};
+            --glass-blur: {COLORS.get('glass_blur', '16px')};
+            --glass-shadow: {COLORS.get('glass_shadow', '0 8px 32px rgba(0, 0, 0, 0.3)')};
+            --glass-radius: {COLORS.get('glass_radius', '16px')};
         }}
         
         /* Hide Streamlit branding */
         #MainMenu {{visibility: hidden;}}
         footer {{visibility: hidden;}}
         
+        /* Global dark background */
+        .stApp {{
+            background: linear-gradient(180deg, #0a0f1a 0%, #111827 100%);
+        }}
+        
         /* Reduce excessive spacing */
         .block-container {{
-            padding-top: 2rem;
+            padding-top: 1.5rem;
             padding-bottom: 1rem;
+            max-width: 1400px;
         }}
         
         div[data-testid="stVerticalBlock"] > div {{
-            gap: 0.5rem;
+            gap: 0.75rem;
         }}
         
-        /* Metric card styling */
+        /* ============================================================
+           GLASSMORPHISM CARDS
+           ============================================================ */
+        
+        .glass-card {{
+            background: var(--bg-glass);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border-glass);
+            border-radius: var(--glass-radius);
+            box-shadow: var(--glass-shadow);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }}
+        
+        .glass-card:hover {{
+            background: var(--bg-glass-hover);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }}
+        
+        /* ============================================================
+           METRIC CARDS (Glassmorphism)
+           ============================================================ */
+        
         .metric-card {{
-            background: linear-gradient(135deg, {COLORS['bg_card']} 0%, #334155 100%);
-            padding: 1.2rem;
-            border-radius: 10px;
-            border: 1px solid {COLORS['border']};
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-            margin-bottom: 0.5rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
         }}
         
         .metric-card:hover {{
-            transform: translateY(-2px);
-            border-color: {COLORS['primary']};
+            background: var(--bg-glass-hover);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
         }}
         
         .metric-value {{
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: {COLORS['text_primary']};
-            margin: 0.3rem 0;
+            color: var(--text-primary);
+            margin: 0.4rem 0;
+            letter-spacing: -0.5px;
         }}
         
         .metric-label {{
-            font-size: 0.8rem;
-            color: {COLORS['text_secondary']};
+            font-size: 0.75rem;
+            color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            font-weight: 500;
         }}
         
         .metric-delta {{
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 0.5rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            display: inline-block;
         }}
         
         .metric-delta.positive {{
-            color: {COLORS['success']};
+            color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
         }}
         
         .metric-delta.negative {{
-            color: {COLORS['danger']};
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
         }}
         
         .metric-insight {{
-            font-size: 0.75rem;
-            color: {COLORS['text_secondary']};
+            font-size: 0.7rem;
+            color: var(--text-secondary);
             margin-top: 0.5rem;
-            font-style: italic;
+            opacity: 0.8;
         }}
         
-        /* Alert styling */
+        /* ============================================================
+           ALERT CARDS (Glassmorphism)
+           ============================================================ */
+        
         .alert-critical {{
-            background: rgba(239, 68, 68, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid {COLORS['danger']};
+            background: rgba(239, 68, 68, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-left: 4px solid var(--danger);
+            transition: all 0.3s ease;
+        }}
+        
+        .alert-critical:hover {{
+            background: rgba(239, 68, 68, 0.2);
+            transform: translateX(4px);
         }}
         
         .alert-warning {{
-            background: rgba(245, 158, 11, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid {COLORS['warning']};
+            background: rgba(245, 158, 11, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-left: 4px solid var(--warning);
+            transition: all 0.3s ease;
+        }}
+        
+        .alert-warning:hover {{
+            background: rgba(245, 158, 11, 0.2);
+            transform: translateX(4px);
         }}
         
         .alert-info {{
-            background: rgba(99, 102, 241, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid {COLORS['primary']};
+            background: rgba(99, 102, 241, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }}
+        
+        .alert-info:hover {{
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateX(4px);
         }}
         
         .alert-success {{
-            background: rgba(16, 185, 129, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid {COLORS['success']};
+            background: rgba(16, 185, 129, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-left: 4px solid var(--success);
+            transition: all 0.3s ease;
         }}
+        
+        .alert-success:hover {{
+            background: rgba(16, 185, 129, 0.2);
+            transform: translateX(4px);
+        }}
+        
+        /* ============================================================
+           INSIGHT CARDS
+           ============================================================ */
+        
+        .insight-card {{
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }}
+        
+        .insight-card:hover {{
+            background: var(--bg-glass-hover);
+            transform: translateY(-2px);
+        }}
+        
+        /* ============================================================
+           SECTION HEADERS
+           ============================================================ */
+        
+        .section-header {{
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-glass);
+        }}
+        
+        /* ============================================================
+           DATA TABLES (Enhanced)
+           ============================================================ */
+        
+        .stDataFrame {{
+            border-radius: 12px;
+            overflow: hidden;
+        }}
+        
+        [data-testid="stDataFrame"] > div {{
+            background: var(--bg-glass);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+        }}
+        
+        /* ============================================================
+           BUTTONS (Glassmorphism)
+           ============================================================ */
+        
+        .stButton > button {{
+            background: {COLORS.get('gradient_primary', 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)')};
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }}
+        
+        .stButton > button:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }}
+        
+        /* Secondary button style */
+        .stButton > button[kind="secondary"] {{
+            background: var(--bg-glass);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+        }}
+        
+        /* ============================================================
+           SIDEBAR (Glassmorphism)
+           ============================================================ */
+        
+        [data-testid="stSidebar"] {{
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.95) 0%, rgba(10, 15, 26, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-glass);
+        }}
+        
+        [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{
+            padding: 0 0.5rem;
+        }}
+        
+        /* ============================================================
+           EXPANDERS (Glassmorphism)
+           ============================================================ */
+        
+        .streamlit-expanderHeader {{
+            background: var(--bg-glass);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }}
+        
+        .streamlit-expanderHeader:hover {{
+            background: var(--bg-glass-hover);
+            border-color: var(--primary);
+        }}
+        
+        .streamlit-expanderContent {{
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border-glass);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            padding: 1rem;
+        }}
+        
+        /* ============================================================
+           TABS (Glassmorphism)
+           ============================================================ */
+        
+        .stTabs [data-baseweb="tab-list"] {{
+            gap: 0.5rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(8px);
+            border-radius: 10px;
+            padding: 0.4rem;
+            border: 1px solid var(--border-glass);
+        }}
+        
+        .stTabs [data-baseweb="tab"] {{
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: var(--text-secondary);
+            background: transparent;
+            transition: all 0.3s ease;
+        }}
+        
+        .stTabs [aria-selected="true"] {{
+            background: {COLORS.get('gradient_primary', 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)')};
+            color: white;
+        }}
+        
+        /* ============================================================
+           POPOVER (Glassmorphism)
+           ============================================================ */
+        
+        [data-testid="stPopover"] {{
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+        }}
+        
+        /* ============================================================
+           DIVIDERS
+           ============================================================ */
+        
+        hr {{
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-glass), transparent);
+            margin: 1.5rem 0;
+        }}
+        
+        /* ============================================================
+           DETAIL BOX
+           ============================================================ */
+        
+        .detail-box {{
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 0.75rem 0;
+            color: var(--text-primary);
+        }}
+        
+        /* ============================================================
+           PROGRESS INDICATORS
+           ============================================================ */
+        
+        .progress-bar {{
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }}
+        
+        .progress-fill {{
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }}
+        
+        .progress-fill.success {{ background: var(--success); }}
+        .progress-fill.warning {{ background: var(--warning); }}
+        .progress-fill.danger {{ background: var(--danger); }}
+        .progress-fill.primary {{ background: var(--primary); }}
+        
     </style>
     """, unsafe_allow_html=True)
+

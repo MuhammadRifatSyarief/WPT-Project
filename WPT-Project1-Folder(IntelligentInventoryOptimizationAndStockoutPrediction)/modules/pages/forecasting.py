@@ -28,23 +28,98 @@ def render_page(df: pd.DataFrame):
     """
     
     # Semua logika halaman dimulai dari sini, di dalam fungsi
-    st.title("📈 Demand Forecasting")
-    st.markdown("Predict future demand and analyze trends")
+    # ========================================================================
+    # INJECT CSS - Hover Tooltips
+    # ========================================================================
     
-    with st.popover("ℹ️ Tentang Demand Forecasting"):
-        st.markdown("""
-        **Demand Forecasting** memprediksi permintaan produk di masa depan.
-        
-        **Manfaat:**
-        - Mencegah stockout dengan perencanaan lebih baik
-        - Mengurangi overstock dan biaya penyimpanan
-        - Optimasi cash flow
-        
-        **Data Source:**
-        - Historical sales data (90 hari)
-        - Trend analysis
-        - Seasonal patterns
-        """)
+    st.markdown("""
+    <style>
+    .tooltip-container {
+        position: relative;
+        display: inline-block;
+        cursor: help;
+    }
+    
+    .tooltip-container .tooltip-text {
+        visibility: hidden;
+        opacity: 0;
+        width: 280px;
+        background: rgba(30, 41, 59, 0.95);
+        color: #e2e8f0;
+        text-align: left;
+        border-radius: 10px;
+        padding: 12px 15px;
+        position: absolute;
+        z-index: 100;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -140px;
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        font-size: 0.85rem;
+        line-height: 1.5;
+        transition: opacity 0.3s, visibility 0.3s;
+    }
+    
+    .tooltip-container .tooltip-text::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -8px;
+        border-width: 8px;
+        border-style: solid;
+        border-color: rgba(30, 41, 59, 0.95) transparent transparent transparent;
+    }
+    
+    .tooltip-container:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .info-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(99, 102, 241, 0.15);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: #a5b4fc;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        cursor: help;
+        transition: all 0.2s;
+    }
+    
+    .info-badge:hover {
+        background: rgba(99, 102, 241, 0.25);
+        transform: translateY(-1px);
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # ========================================================================
+    # HEADER WITH HOVER TOOLTIPS
+    # ========================================================================
+    
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+        <h1 style="margin: 0;">📈 Demand Forecasting</h1>
+        <div class="tooltip-container">
+            <span class="info-badge">ℹ️ About</span>
+            <span class="tooltip-text">
+                <strong>Demand Forecasting</strong> memprediksi permintaan produk di masa depan.<br><br>
+                <strong>Manfaat:</strong><br>
+                • Mencegah stockout<br>
+                • Mengurangi overstock<br>
+                • Optimasi cash flow<br><br>
+                <em>Data: Historical sales 90 hari</em>
+            </span>
+        </div>
+    </div>
+    <p style="color: #94a3b8; margin-top: 0;">Predict future demand and analyze trends</p>
+    """, unsafe_allow_html=True)
     
     # ========================================================================
     # FILTER INPUTS

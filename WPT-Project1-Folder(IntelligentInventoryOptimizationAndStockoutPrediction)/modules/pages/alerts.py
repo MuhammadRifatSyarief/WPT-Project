@@ -54,8 +54,96 @@ def render_page(df: pd.DataFrame):
     high_products = df[df['risk_level'] == 'High']
     medium_products = df[df['risk_level'] == 'Medium']
     
-    st.title("⚠️ Stockout Alerts")
-    st.markdown("Monitor and manage stockout risks")
+    # ========================================================================
+    # INJECT CSS - Hover Tooltips
+    # ========================================================================
+    
+    st.markdown("""
+    <style>
+    .tooltip-container {
+        position: relative;
+        display: inline-block;
+        cursor: help;
+    }
+    
+    .tooltip-container .tooltip-text {
+        visibility: hidden;
+        opacity: 0;
+        width: 260px;
+        background: rgba(30, 41, 59, 0.95);
+        color: #e2e8f0;
+        text-align: left;
+        border-radius: 10px;
+        padding: 12px 15px;
+        position: absolute;
+        z-index: 100;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -130px;
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        font-size: 0.85rem;
+        line-height: 1.5;
+        transition: opacity 0.3s, visibility 0.3s;
+    }
+    
+    .tooltip-container .tooltip-text::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -8px;
+        border-width: 8px;
+        border-style: solid;
+        border-color: rgba(30, 41, 59, 0.95) transparent transparent transparent;
+    }
+    
+    .tooltip-container:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .info-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(99, 102, 241, 0.15);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: #a5b4fc;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        cursor: help;
+        transition: all 0.2s;
+    }
+    
+    .info-badge:hover {
+        background: rgba(99, 102, 241, 0.25);
+        transform: translateY(-1px);
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # ========================================================================
+    # HEADER WITH HOVER TOOLTIPS
+    # ========================================================================
+    
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+        <h1 style="margin: 0;">⚠️ Stockout Alerts</h1>
+        <div class="tooltip-container">
+            <span class="info-badge">ℹ️ Risk Levels</span>
+            <span class="tooltip-text">
+                <strong>🔴 Critical:</strong> < 7 hari stok tersisa<br>
+                <strong>🟡 High:</strong> 7-14 hari stok tersisa<br>
+                <strong>🔵 Medium:</strong> 15-30 hari stok tersisa<br>
+                <strong>🟢 Low:</strong> > 30 hari stok tersisa
+            </span>
+        </div>
+    </div>
+    <p style="color: #94a3b8; margin-top: -10px;">Monitor and manage stockout risks</p>
+    """, unsafe_allow_html=True)
     
     # ========================================================================
     # METRICS
@@ -66,27 +154,39 @@ def render_page(df: pd.DataFrame):
     with col1:
         st.markdown(f"""
         <div class="alert-critical">
-            <h3 style="margin: 0; color: white;">🔴 Critical</h3>
-            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(critical_products):,}</div>
-            <div style="color: #fca5a5;">&lt;7 days stock</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin: 0; color: #fca5a5; font-size: 1rem;">🔴 Critical</h3>
+                    <div style="color: #fca5a5; font-size: 0.8rem; margin-top: 0.25rem;">&lt;7 days stock</div>
+                </div>
+                <div style="font-size: 2.2rem; font-weight: 700; color: white;">{len(critical_products):,}</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown(f"""
         <div class="alert-warning">
-            <h3 style="margin: 0; color: white;">🟡 High</h3>
-            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(high_products):,}</div>
-            <div style="color: #fcd34d;">7-14 days stock</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin: 0; color: #fcd34d; font-size: 1rem;">🟡 High</h3>
+                    <div style="color: #fcd34d; font-size: 0.8rem; margin-top: 0.25rem;">7-14 days stock</div>
+                </div>
+                <div style="font-size: 2.2rem; font-weight: 700; color: white;">{len(high_products):,}</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown(f"""
         <div class="alert-info">
-            <h3 style="margin: 0; color: white;">🔵 Medium</h3>
-            <div style="font-size: 2rem; font-weight: 700; margin: 0.5rem 0;">{len(medium_products):,}</div>
-            <div style="color: #93c5fd;">15-30 days stock</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin: 0; color: #93c5fd; font-size: 1rem;">🔵 Medium</h3>
+                    <div style="color: #93c5fd; font-size: 0.8rem; margin-top: 0.25rem;">15-30 days stock</div>
+                </div>
+                <div style="font-size: 2.2rem; font-weight: 700; color: white;">{len(medium_products):,}</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     

@@ -169,43 +169,45 @@ def render_page(df: pd.DataFrame):
     with col2:
         st.markdown("### ⚠️ Today's Alerts")
 
-        # Gaya CSS yang lebih kuat untuk mengatasi tumpang tindih tema
-        alert_box_style = """
-            padding: 1rem; 
-            border-radius: 8px; 
-            margin-bottom: 0.75rem; 
-            color: white; 
-            border-left: 5px solid {border_color};
-            background-color: {bg_color};
-        """
-
-        # Kotak Critical Alert
+        # Glassmorphism Alert Boxes
         st.markdown(f"""
-        <div style="{alert_box_style.format(bg_color='#4A1D1D', border_color='#EF4444')}">
-            <strong>🔴 Critical ({critical_count})</strong>
-            <div style="font-size: 0.85rem; color: #F8B4B4;">Stockout in &lt; 7 days</div>
+        <div class="alert-critical">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="font-size: 1.1rem;">🔴 Critical</strong>
+                    <div style="font-size: 0.8rem; color: #fca5a5; margin-top: 0.25rem;">Stockout in < 7 days</div>
+                </div>
+                <div style="font-size: 1.8rem; font-weight: 700; color: #fca5a5;">{critical_count}</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Kotak High Risk Alert
         st.markdown(f"""
-        <div style="{alert_box_style.format(bg_color='#4A3A1D', border_color='#F59E0B')}">
-            <strong>🟡 High Risk ({high_count})</strong>
-            <div style="font-size: 0.85rem; color: #F8DAB4;">Need reorder soon</div>
+        <div class="alert-warning">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="font-size: 1.1rem;">🟡 High Risk</strong>
+                    <div style="font-size: 0.8rem; color: #fcd34d; margin-top: 0.25rem;">Need reorder soon</div>
+                </div>
+                <div style="font-size: 1.8rem; font-weight: 700; color: #fcd34d;">{high_count}</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Kotak Slow-Moving Alert
         slow_moving_count = len(df[df['turnover_ratio_90d'] < 1.0])
         st.markdown(f"""
-        <div style="{alert_box_style.format(bg_color='#1D3A4A', border_color='#3B82F6')}">
-            <strong>🔵 Slow-Moving ({slow_moving_count})</strong>
-            <div style="font-size: 0.85rem; color: #B4D4F8;">Low turnover products</div>
+        <div class="alert-info">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="font-size: 1.1rem;">🔵 Slow-Moving</strong>
+                    <div style="font-size: 0.8rem; color: #93c5fd; margin-top: 0.25rem;">Low turnover products</div>
+                </div>
+                <div style="font-size: 1.8rem; font-weight: 700; color: #93c5fd;">{slow_moving_count}</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Tombol View All Alerts tetap sama
-        if st.button("View All Alerts →", width='stretch'):
+        if st.button("View All Alerts →", use_container_width=True):
             st.session_state.show_all_alerts = not st.session_state.get('show_all_alerts', False)
 
     

@@ -35,19 +35,45 @@ PAGES = [
 ]
 
 # ============================================================================
-# COLOR SCHEME & STYLING
+# COLOR SCHEME & STYLING (Glassmorphism Enhanced)
 # ============================================================================
 
 COLORS = {
-    'primary': '#6366f1',           # Indigo
+    # Primary colors
+    'primary': '#667eea',           # Purple-Blue (updated for glass effect)
+    'primary_light': '#818cf8',     # Lighter purple
     'success': '#10b981',           # Emerald
     'warning': '#f59e0b',           # Amber
     'danger': '#ef4444',            # Red
-    'bg_dark': '#0f172a',           # Slate very dark
+    'info': '#3b82f6',              # Blue
+    
+    # Background colors (Glassmorphism)
+    'bg_dark': '#0a0f1a',           # Deep dark (darker for glass contrast)
     'bg_card': '#1e293b',           # Slate dark
+    'bg_glass': 'rgba(30, 41, 59, 0.7)',     # Glass surface
+    'bg_glass_hover': 'rgba(30, 41, 59, 0.85)',  # Glass hover
+    'bg_glass_light': 'rgba(51, 65, 85, 0.5)',   # Lighter glass
+    
+    # Text colors
     'text_primary': '#f8fafc',      # Slate 50
     'text_secondary': '#94a3b8',    # Slate 400
+    'text_muted': '#64748b',        # Slate 500
+    
+    # Border & Effects
     'border': '#334155',            # Slate 700
+    'border_glass': 'rgba(255, 255, 255, 0.1)',  # Glass border
+    'border_glass_hover': 'rgba(99, 102, 241, 0.3)',  # Hover border
+    
+    # Gradients
+    'gradient_primary': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    'gradient_success': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    'gradient_danger': 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+    'gradient_warning': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+    
+    # Glassmorphism effects
+    'glass_blur': '16px',
+    'glass_shadow': '0 8px 32px rgba(0, 0, 0, 0.3)',
+    'glass_radius': '16px',
 }
 
 # ============================================================================
