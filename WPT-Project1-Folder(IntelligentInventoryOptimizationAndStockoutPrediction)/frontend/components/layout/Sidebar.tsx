@@ -16,7 +16,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { icon: '🏠', label: 'Dashboard', href: '/dashboard', description: 'Overview & Analytics' },
-    { icon: '📈', label: 'Forecasting', href: '/forecasting', description: 'Demand Prediction' },
+    { icon: '📈', label: 'Forecasting', href: '/demand-forecasting', description: 'Demand Prediction' },
     { icon: '📦', label: 'Inventory', href: '/inventory', description: 'Stock Management' },
     { icon: '📊', label: 'Health', href: '/health', description: 'Inventory Health' },
     { icon: '⚠️', label: 'Stockout Alerts', href: '/alerts', description: 'Risk Monitoring' },

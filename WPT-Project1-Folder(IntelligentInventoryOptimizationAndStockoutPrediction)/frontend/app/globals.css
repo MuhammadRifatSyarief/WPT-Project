@@ -475,6 +475,81 @@ body {
   animation-delay: 0.25s;
 }
 
+.stagger-children>*:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.stagger-children>*:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+.stagger-children>*:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+/* =========================================================
+   NEW ADVANCED ANIMATIONS
+   ========================================================= */
+
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes background-shine {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam calc(var(--duration) * 1s) infinite linear;
+}
+
+.bg-shine {
+  background: linear-gradient(110deg,
+      rgba(255, 255, 255, 0),
+      45%,
+      rgba(255, 255, 255, 0.1),
+      55%,
+      rgba(255, 255, 255, 0));
+  background-size: 200% 100%;
+  animation: background-shine 3s linear infinite;
+}
+
+/* Glass Card Enhanced Hover */
+.glass-card-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.glass-card-enhanced::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.06),
+      transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.glass-card-enhanced:hover::after {
+  opacity: 1;
+}
+
+
 /* =========================================================
    CUSTOM SCROLLBAR
    ========================================================= */

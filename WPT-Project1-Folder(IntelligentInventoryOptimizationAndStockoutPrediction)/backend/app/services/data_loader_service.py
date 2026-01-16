@@ -451,3 +451,54 @@ class DataLoaderService:
             })
             
         return results
+
+    @classmethod
+    def get_forecasting_data(cls, 
+                           search_query: str = None, 
+                           category_filter: str = None, 
+                           abc_filter: str = None):
+        """
+        Get data for Demand Forecasting page with filtering
+        Replicates forecasting.py logic
+        """
+        df = cls.load_products_data()
+        if df.empty: return []
+
+        # 1. Search Filter
+        if search_query:
+            search_query = search_query.lower()
+            mask = (
+                df['product_code'].astype(str).str.lower().str.contains(search_query, na=False) |
+                df['product_name'].astype(str).str.lower().str.contains(search_query, na=False)
+            )
+            df = df[mask]
+
+        # 2. Category Filter
+        if category_filter and category_filter != 'All':
+            df = df[df['product_category'] == category_filter]
+
+        # 3. ABC Filter
+        if abc_filter and abc_filter != 'All':
+            df = df[df['ABC_class'] == abc_filter]
+
+        # Select cols
+        # Equivalent to forecasting.py logic
+        
+        results = []
+        for _, row in df.iterrows():
+            item = {
+                'product_code': row['product_code'],
+                'product_name': row.get('product_name', 'Unknown'),
+                'product_category': row.get('product_category', 'OTHER'),
+                'ABC_class': row.get('ABC_class', 'C'),
+                'current_stock_qty': int(row.get('current_stock_qty', 0)),
+                'stock_value': float(row.get('stock_value', 0)),
+                'avg_daily_demand': float(row.get('avg_daily_demand', 0)),
+                # Forecast fields
+                'forecast_30d': float(row.get('forecast_30d', 0)) if pd.notna(row.get('forecast_30d')) else None,
+                'forecast_model': row.get('forecast_model', None) if pd.notna(row.get('forecast_model')) else None,
+                'forecast_mape': float(row.get('forecast_mape', 0)) if pd.notna(row.get('forecast_mape')) else None
+            }
+            results.append(item)
+            
+        return results

@@ -8,8 +8,11 @@ import FilterGroups from '@/components/dashboard/FilterGroups';
 import FilterABC from '@/components/dashboard/FilterABC';
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-    BarChart, Bar, Cell, PieChart, Pie, Legend, LabelList
+    BarChart, Bar, Cell, PieChart, Pie, Legend, LabelList, Sector, Area
 } from 'recharts';
+import { motion } from 'framer-motion';
+import { GlowingCard } from '@/components/ui/GlowingCard';
+import { BackgroundBeams } from '@/components/ui/BackgroundBeams';
 
 // --- TYPES ---
 interface DashboardMetrics {
@@ -55,6 +58,58 @@ interface CategorySummary {
     count: number;
     percentage: number;
 }
+
+// --- CUSTOM ACTIVE SHAPE FOR PIE CHART ---
+const renderActiveShape = (props: any) => {
+    const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
+    const sin = Math.sin(-RADIAN * midAngle);
+    const cos = Math.cos(-RADIAN * midAngle);
+    const sx = cx + (outerRadius + 10) * cos;
+    const sy = cy + (outerRadius + 10) * sin;
+    const mx = cx + (outerRadius + 30) * cos;
+    const my = cy + (outerRadius + 30) * sin;
+    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+    const ey = my;
+    const textAnchor = cos >= 0 ? 'start' : 'end';
+
+    return (
+        <g>
+            {/* Glow Effect Filter Definition usually needs to be in <defs> but we can simulate glow with multiple layers or just a larger opaque sector behind */}
+            <defs>
+                <filter id="glow-pie" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+            </defs>
+
+            {/* Removed center percentage to avoid overlap with Total Products count */}
+
+            {/* Expanded Sector with Glow */}
+            <Sector
+                cx={cx}
+                cy={cy}
+                innerRadius={innerRadius}
+                outerRadius={outerRadius + 8}
+                startAngle={startAngle}
+                endAngle={endAngle}
+                fill={fill}
+                filter="url(#glow-pie)"
+                stroke="#fff"
+                strokeWidth={2}
+            />
+
+            {/* Connecting Lines & Labels */}
+            <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" strokeWidth={2} />
+            <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+            <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="var(--text-primary)" fontSize={12} fontWeight="bold">{payload.name}</text>
+            <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={14} textAnchor={textAnchor} fill="var(--text-muted)" fontSize={10}>
+                {`${value} Products (${(percent * 100).toFixed(0)}%)`}
+            </text>
+        </g>
+    );
+};
+
+const RADIAN = Math.PI / 180;
 
 // --- METRIC TOOLTIP DATA ---
 const METRIC_TOOLTIPS = {
@@ -124,12 +179,12 @@ function MetricCard({
     deltaText?: string;
 }) {
     return (
-        <div className="metric-card h-[150px] relative overflow-hidden group hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all duration-300">
+        <GlowingCard className="h-[150px] !p-0" glowColor={colorClass.includes('f59e0b') ? '#f59e0b' : colorClass.includes('ef4444') ? '#ef4444' : '#6366f1'}>
             {/* FRONT FACE (Value) */}
-            <div className="absolute inset-0 p-5 flex flex-col justify-between transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-2">
+            <div className="absolute inset-0 p-5 flex flex-col justify-between transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-2 z-20">
                 <div>
                     <div className="text-sm font-medium text-[var(--text-secondary)] mb-1">{tooltip.title.split(' (')[0]}</div>
-                    <div className="text-[10px] text-[var(--accent-primary)] opacity-0 group-hover:opacity-100 transition-opacity animate-pulse">Hover for info</div>
+                    <div className="text-[10px] text-[var(--accent-primary)] opacity-0 group-hover/glow:opacity-100 transition-opacity animate-pulse">Hover for info</div>
                     <div className={`text-3xl font-bold ${colorClass} tracking-tight`}>
                         {prefix}{value}{suffix}
                     </div>
@@ -143,7 +198,7 @@ function MetricCard({
             </div>
 
             {/* BACK FACE (Details - Overlay on Hover) */}
-            <div className="absolute inset-0 z-20 p-5 flex flex-col justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-[var(--bg-elevated)]/95 backdrop-blur-md">
+            <div className="absolute inset-0 z-30 p-5 flex flex-col justify-center opacity-0 translate-y-4 group-hover/glow:opacity-100 group-hover/glow:translate-y-0 transition-all duration-300 bg-[var(--bg-elevated)]/95 backdrop-blur-md">
                 <div className="text-xs font-bold text-[var(--text-primary)] mb-2 border-b border-[var(--border-subtle)] pb-1">{tooltip.title}</div>
 
                 <p className="text-[10px] leading-relaxed text-[var(--text-secondary)] mb-2">
@@ -154,10 +209,7 @@ function MetricCard({
                     {tooltip.formula}
                 </div>
             </div>
-
-            {/* Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-        </div>
+        </GlowingCard>
     );
 }
 
@@ -169,6 +221,8 @@ export default function DashboardPage() {
     const [showAllAlerts, setShowAllAlerts] = useState(false);
     const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }>({ key: 'days_coverage', direction: 'asc' });
     const [riskFilter, setRiskFilter] = useState<RiskFilter>('all'); // NEW: Risk filter state
+
+    const [activeIndex, setActiveIndex] = useState(0); // For Pie Chart interactions
 
     // Filter State
     const { selectedGroups, selectedABC } = useDashboardFiltersStore();
@@ -265,6 +319,10 @@ export default function DashboardPage() {
         }));
     };
 
+    const onPieEnter = (_: any, index: number) => {
+        setActiveIndex(index);
+    };
+
     // Handle alert box click - filter and show table
     const handleAlertClick = (filter: RiskFilter) => {
         setRiskFilter(filter);
@@ -304,10 +362,17 @@ export default function DashboardPage() {
     return (
         <div className="space-y-8 p-4 pb-16">
 
+            <BackgroundBeams />
+
             {/* ========== HEADER ========== */}
-            <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 fade-in relative z-[50]">
+            <motion.header
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 relative z-[50]"
+            >
                 <div>
-                    <h1 className="text-3xl font-bold text-gradient bg-clip-text">Inventory Intelligence Hub</h1>
+                    <h1 className="text-3xl font-bold text-gradient bg-clip-text animate-text-shimmer bg-[size:200%]">Inventory Intelligence Hub</h1>
                     <p className="text-[var(--text-muted)] mt-1">Real-time overview of your inventory health</p>
                     <p className="text-[var(--text-dim)] text-xs mt-2 border-l-2 border-[var(--accent-primary)] pl-2 opacity-80">
                         💡 Hover over metric cards for details | Click alert boxes to filter table
@@ -320,15 +385,28 @@ export default function DashboardPage() {
                         <span className="animate-spin-slow">↻</span> Refresh
                     </button>
                 </div>
-            </header>
+            </motion.header>
 
             {/* ========== 1. TOP METRICS WITH FLIP CARDS ========== */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                        opacity: 1,
+                        transition: {
+                            staggerChildren: 0.1
+                        }
+                    }
+                }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+            >
                 <MetricCard
                     tooltip={METRIC_TOOLTIPS.serviceLevel}
                     value={serviceLevel.toFixed(1)}
                     suffix="%"
-                    colorClass="bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] to-[var(--text-secondary)]"
+                    colorClass="bg-clip-text text-transparent bg-gradient-to-r from-[#10b981] to-[#34d399]"
                     delta={serviceLevel > 92 ? '↑' : '↓'}
                     deltaClass={serviceLevel > 92 ? 'positive' : 'negative'}
                     deltaText="vs 95% target"
@@ -347,7 +425,7 @@ export default function DashboardPage() {
                 <MetricCard
                     tooltip={METRIC_TOOLTIPS.stockoutRisk}
                     value={stockoutRisk.total}
-                    colorClass="text-[var(--text-primary)]"
+                    colorClass="text-[#ef4444]"
                     delta={`${stockoutRisk.critical}`}
                     deltaClass="negative"
                     deltaText="critical items"
@@ -362,35 +440,86 @@ export default function DashboardPage() {
                     deltaClass="info"
                     deltaText="Age"
                 />
-            </div>
+            </motion.div>
 
             {/* ========== 2. CHARTS ROW: Performance + Alerts ========== */}
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 fade-in" style={{ animationDelay: '0.1s' }}>
                 {/* Performance Trends */}
                 {/* Performance Trends */}
-                <div className="lg:col-span-3 chart-container hover:border-[var(--accent-primary)]/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(99,102,241,0.15)] relative group bg-[var(--bg-surface)] border border-[var(--border-visible)] rounded-2xl overflow-hidden">
-                    {/* Ambient Background Gradient */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-primary)]/5 blur-[100px] rounded-full pointer-events-none group-hover:bg-[var(--accent-primary)]/10 transition-colors duration-500"></div>
+                {/* Performance Trends */}
+                <GlowingCard className="lg:col-span-3 !p-0">
+                    <div className="chart-container border-none shadow-none h-full !p-6">
+                        {/* Ambient Background Gradient */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-primary)]/5 blur-[100px] rounded-full pointer-events-none group-hover:bg-[var(--accent-primary)]/10 transition-colors duration-500"></div>
 
-                    <h3 className="chart-title relative z-10 flex items-center gap-2">
-                        <span className="text-xl">📈</span>
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] to-[var(--text-secondary)] font-bold">Performance Trends</span>
-                    </h3>
-                    <div className="h-[280px] w-full relative z-10 mt-2">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <LineChart data={performanceData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                                <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                                <YAxis yAxisId="left" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} domain={[85, 100]} />
-                                <YAxis yAxisId="right" orientation="right" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                                <Tooltip contentStyle={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-visible)', borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }} />
-                                <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
-                                <Line yAxisId="left" type="monotone" dataKey="serviceLevel" name="Service Level (%)" stroke={COLORS.success} strokeWidth={3} dot={{ r: 4, strokeWidth: 0 }} activeDot={{ r: 8, fill: COLORS.success, stroke: '#fff', strokeWidth: 2, className: "animate-pulse" }} />
-                                <Line yAxisId="right" type="monotone" dataKey="turnover" name="Turnover Rate" stroke={COLORS.primary} strokeWidth={3} dot={{ r: 4, strokeWidth: 0 }} activeDot={{ r: 8, fill: COLORS.primary, stroke: '#fff', strokeWidth: 2, className: "animate-pulse" }} />
-                            </LineChart>
-                        </ResponsiveContainer>
+                        <h3 className="chart-title relative z-10 flex items-center gap-2">
+                            <span className="text-xl">📈</span>
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] to-[var(--text-secondary)] font-bold">Performance Trends</span>
+                        </h3>
+                        <div className="h-[280px] w-full relative z-10 mt-2">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={performanceData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+                                    <defs>
+                                        <linearGradient id="colorService" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor={COLORS.success} stopOpacity={0.8} />
+                                            <stop offset="95%" stopColor={COLORS.success} stopOpacity={0} />
+                                        </linearGradient>
+                                        <linearGradient id="colorTurnover" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.8} />
+                                            <stop offset="95%" stopColor={COLORS.primary} stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+                                    <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                                    <YAxis yAxisId="left" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} domain={[85, 100]} />
+                                    <YAxis yAxisId="right" orientation="right" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                                    <Tooltip contentStyle={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-visible)', borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }} />
+                                    <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
+                                    {/* Using Area for a glow effect under the line? Or stick to Line with thick stroke */}
+                                    <Line
+                                        yAxisId="left"
+                                        type="monotone"
+                                        dataKey="serviceLevel"
+                                        name="Service Level (%)"
+                                        stroke={COLORS.success}
+                                        strokeWidth={4}
+                                        dot={{ r: 4, strokeWidth: 0, fill: COLORS.success }}
+                                        activeDot={{ r: 8, fill: COLORS.success, stroke: '#fff', strokeWidth: 2, className: "animate-pulse" }}
+                                        filter="url(#glow-line-success)"
+                                    />
+                                    <Line
+                                        yAxisId="right"
+                                        type="monotone"
+                                        dataKey="turnover"
+                                        name="Turnover Rate"
+                                        stroke={COLORS.primary}
+                                        strokeWidth={4}
+                                        dot={{ r: 4, strokeWidth: 0, fill: COLORS.primary }}
+                                        activeDot={{ r: 8, fill: COLORS.primary, stroke: '#fff', strokeWidth: 2, className: "animate-pulse" }}
+                                        filter="url(#glow-line-primary)"
+                                    />
+                                    {/* Definitions for filters */}
+                                    <defs>
+                                        <filter id="glow-line-success" height="300%" width="300%" x="-75%" y="-75%">
+                                            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                                            <feMerge>
+                                                <feMergeNode in="coloredBlur" />
+                                                <feMergeNode in="SourceGraphic" />
+                                            </feMerge>
+                                        </filter>
+                                        <filter id="glow-line-primary" height="300%" width="300%" x="-75%" y="-75%">
+                                            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                                            <feMerge>
+                                                <feMergeNode in="coloredBlur" />
+                                                <feMergeNode in="SourceGraphic" />
+                                            </feMerge>
+                                        </filter>
+                                    </defs>
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
-                </div>
+                </GlowingCard>
 
                 {/* Today's Alerts - VERTICAL STACKED Layout */}
                 <div className="lg:col-span-2 space-y-4">
@@ -560,63 +689,97 @@ export default function DashboardPage() {
             {/* ========== 4. STOCK HEALTH + TOP PRODUCTS ========== */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 fade-in" style={{ animationDelay: '0.2s' }}>
                 {/* Stock Health Pie */}
-                <div className="chart-container hover:border-[var(--success)]/30 transition-all duration-300">
+                <GlowingCard>
                     <h3 className="chart-title">🏥 Stock Health Distribution</h3>
                     <p className="text-[var(--text-dim)] text-xs mb-4">Healthy: &gt;2x turnover + &gt;30d | Stable: &gt;1x + &gt;14d</p>
                     <div className="flex items-center justify-center relative h-[280px]">
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
+                                <defs>
+                                    <linearGradient id="gradHealthy" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stopColor="#10b981" />
+                                        <stop offset="100%" stopColor="#059669" />
+                                    </linearGradient>
+                                    <linearGradient id="gradStable" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stopColor="#6366f1" />
+                                        <stop offset="100%" stopColor="#4f46e5" />
+                                    </linearGradient>
+                                    <linearGradient id="gradWarning" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stopColor="#f59e0b" />
+                                        <stop offset="100%" stopColor="#d97706" />
+                                    </linearGradient>
+                                    <linearGradient id="gradCritical" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stopColor="#ef4444" />
+                                        <stop offset="100%" stopColor="#dc2626" />
+                                    </linearGradient>
+                                </defs>
                                 <Pie
+                                    activeIndex={activeIndex}
+                                    activeShape={renderActiveShape}
                                     data={pieData}
                                     cx="50%" cy="50%"
-                                    innerRadius={60} outerRadius={90}
-                                    paddingAngle={3}
+                                    innerRadius={70}
+                                    outerRadius={90}
+                                    paddingAngle={4}
                                     dataKey="value"
                                     nameKey="name"
                                     stroke="none"
-                                    label={({ name, percentage }) => `${name} ${percentage}%`}
-                                    labelLine={true}
+                                    onMouseEnter={onPieEnter}
                                 >
-                                    {pieData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={HEALTH_COLORS[entry.name] || '#64748b'} />
-                                    ))}
+                                    {pieData.map((entry, index) => {
+                                        let fillId = 'gradStable';
+                                        if (entry.name === 'Healthy') fillId = 'gradHealthy';
+                                        if (entry.name === 'Warning') fillId = 'gradWarning';
+                                        if (entry.name === 'Critical') fillId = 'gradCritical';
+
+                                        return <Cell key={`cell-${index}`} fill={`url(#${fillId})`} stroke="rgba(255,255,255,0.05)" strokeWidth={1} />;
+                                    })}
                                 </Pie>
-                                <Tooltip formatter={(value, name) => [`${value} products`, name]} contentStyle={{ backgroundColor: 'var(--bg-elevated)', border: 'none', borderRadius: '8px' }} />
-                                <Legend />
+                                {/* Removed tooltip since activeShape shows info, or keep for simple view? ActiveShape is better */}
                             </PieChart>
                         </ResponsiveContainer>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                            <span className="text-3xl font-bold text-[var(--text-primary)]">{totalProducts}</span>
-                            <span className="text-xs text-[var(--text-muted)]">Products</span>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none fade-in">
+                            <span className="text-4xl font-black text-[var(--text-primary)] drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]">{totalProducts}</span>
+                            <span className="text-xs text-[var(--text-muted)] tracking-widest uppercase">Products</span>
                         </div>
                     </div>
-                </div>
+                </GlowingCard>
 
                 {/* Top 5 Fast-Moving */}
-                <div className="chart-container hover:border-[var(--primary)]/30 transition-all duration-300">
+                <GlowingCard>
                     <h3 className="chart-title">🏆 Top 5 Fast-Moving Products</h3>
                     <div className="h-[280px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart layout="vertical" data={topProducts || []} margin={{ top: 0, right: 30, left: 10, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="barGradient" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stopColor={COLORS.primary} stopOpacity={0.6} />
+                                        <stop offset="100%" stopColor={COLORS.primary} stopOpacity={1} />
+                                    </linearGradient>
+                                    <linearGradient id="barGradientTop" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stopColor={COLORS.success} stopOpacity={0.6} />
+                                        <stop offset="100%" stopColor={COLORS.success} stopOpacity={1} />
+                                    </linearGradient>
+                                </defs>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
                                 <XAxis type="number" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
                                 <YAxis type="category" dataKey="product_code" stroke="var(--text-muted)" fontSize={10} tickLine={false} axisLine={false} width={70} />
                                 <Tooltip
-                                    cursor={{ fill: 'rgba(255,255,255,0.03)' }}
-                                    contentStyle={{ backgroundColor: 'var(--bg-elevated)', border: 'none', borderRadius: '8px' }}
+                                    cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                                    contentStyle={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-visible)', borderRadius: '8px' }}
                                     formatter={(value) => [`${Number(value).toFixed(2)} units/day`, 'Daily Demand']}
                                     labelFormatter={(label, payload) => payload?.[0]?.payload?.product_name || label}
                                 />
-                                <Bar dataKey="daily_demand" radius={[0, 4, 4, 0]} barSize={20}>
+                                <Bar dataKey="daily_demand" radius={[0, 4, 4, 0]} barSize={20} animationDuration={1500}>
                                     {(topProducts || []).map((_, index) => (
-                                        <Cell key={`cell-${index}`} fill={index === 0 ? COLORS.success : COLORS.primary} />
+                                        <Cell key={`cell-${index}`} fill={index === 0 ? 'url(#barGradientTop)' : 'url(#barGradient)'} />
                                     ))}
-                                    <LabelList dataKey="product_name" position="insideLeft" fill="white" fontSize={9} formatter={(v: string) => v.length > 18 ? v.substring(0, 15) + '...' : v} />
+                                    <LabelList dataKey="product_name" position="insideLeft" fill="white" fontSize={9} formatter={(v: string) => v.length > 18 ? v.substring(0, 15) + '...' : v} style={{ textShadow: '0 0 4px rgba(0,0,0,0.8)' }} />
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
-                </div>
+                </GlowingCard>
             </div>
 
             {/* ========== 5. CATEGORY SUMMARY CARDS ========== */}
@@ -654,41 +817,58 @@ export default function DashboardPage() {
             </div>
 
             {/* ========== 6. STOCK VALUE BY ABC CLASS ========== */}
-            <div className="chart-container fade-in hover:border-[var(--warning)]/30 transition-all duration-300" style={{ animationDelay: '0.4s' }}>
+            <GlowingCard className="hover:border-[var(--warning)]/30 transition-all duration-300" style={{ animationDelay: '0.4s' }}>
                 <h3 className="chart-title">💰 Stock Value & Performance by ABC Class</h3>
                 <div className="h-[300px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={abcChartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                            <defs>
+                                <linearGradient id="gradA" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#10b981" stopOpacity={0.8} />
+                                    <stop offset="100%" stopColor="#059669" stopOpacity={0.3} />
+                                </linearGradient>
+                                <linearGradient id="gradB" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.8} />
+                                    <stop offset="100%" stopColor="#2563eb" stopOpacity={0.3} />
+                                </linearGradient>
+                                <linearGradient id="gradC" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.8} />
+                                    <stop offset="100%" stopColor="#d97706" stopOpacity={0.3} />
+                                </linearGradient>
+                            </defs>
                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                             <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={12} />
                             <YAxis stroke="var(--text-muted)" fontSize={12} tickFormatter={(v) => `Rp ${v}M`} />
                             <Tooltip
-                                contentStyle={{ backgroundColor: 'var(--bg-elevated)', border: 'none', borderRadius: '8px' }}
+                                cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                                contentStyle={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-visible)', borderRadius: '8px' }}
                                 formatter={(value) => [`Rp ${Number(value).toFixed(1)}M`, 'Stock Value']}
                             />
-                            <Bar dataKey="stockValue" radius={[4, 4, 0, 0]} barSize={80}>
-                                {abcChartData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={ABC_COLORS[entry.abc_class] || '#64748b'} />
-                                ))}
-                                <LabelList dataKey="stockValue" position="top" formatter={(v: number) => `Rp ${v.toFixed(1)}M`} fill="var(--text-primary)" fontSize={12} />
+                            <Bar dataKey="stockValue" radius={[4, 4, 0, 0]} barSize={80} animationDuration={1500}>
+                                {abcChartData.map((entry, index) => {
+                                    let fillId = 'gradC';
+                                    if (entry.abc_class === 'A') fillId = 'gradA';
+                                    if (entry.abc_class === 'B') fillId = 'gradB';
+                                    return <Cell key={`cell-${index}`} fill={`url(#${fillId})`} />;
+                                })}
+                                <LabelList dataKey="stockValue" position="top" formatter={(v: number) => `Rp ${v.toFixed(1)}M`} fill="var(--text-primary)" fontSize={12} fontWeight="bold" />
                             </Bar>
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-            </div>
+            </GlowingCard>
 
             {/* ========== 7. ABC CLASS PERFORMANCE SUMMARY ========== */}
             <div className="fade-in py-2" style={{ animationDelay: '0.5s' }}>
                 <h3 className="text-[var(--text-primary)] font-bold text-lg mb-4">📈 ABC Class Performance Summary</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-2">
                     {(abcPerformance || []).map((item, idx) => (
-                        <div
+                        <GlowingCard
                             key={idx}
-                            className={`abc-card class-${item.abc_class.toLowerCase()} group cursor-pointer transition-all duration-300 hover:scale-[1.03] relative`}
+                            className={`abc-card class-${item.abc_class.toLowerCase()} cursor-pointer relative !p-6`}
+                            glowColor={ABC_COLORS[item.abc_class]}
                             title={`Class ${item.abc_class}: ${item.product_count} products, Rp ${(item.stock_value / 1_000_000).toFixed(1)}M value, ${item.turnover_ratio.toFixed(2)}x turnover`}
                         >
-                            {/* Glow effect */}
-                            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 40px ${ABC_COLORS[item.abc_class]}30` }}></div>
                             <div className="relative z-10">
                                 <div className="abc-label group-hover:scale-110 transition-transform">Class {item.abc_class}</div>
                                 <div className="grid grid-cols-2 gap-4 mt-4 text-left">
@@ -710,7 +890,7 @@ export default function DashboardPage() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </GlowingCard>
                     ))}
                 </div>
             </div>

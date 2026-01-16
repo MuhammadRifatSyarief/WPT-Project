@@ -44,6 +44,10 @@ export const authApi = {
         api.post('/auth/login', { username, password }),
 
     getMe: () => api.get('/auth/me'),
+
+    // Forecasting endpoints
+    getForecastingData: (params?: { search?: string; category?: string; abc_class?: string }) =>
+        api.get('/forecasting/data', { params }),
 }
 
 // Default export for convenience
