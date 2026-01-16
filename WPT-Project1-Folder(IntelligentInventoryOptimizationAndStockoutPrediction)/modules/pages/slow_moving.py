@@ -69,7 +69,7 @@ def render_page(df: pd.DataFrame):
     # HEADER
     # ========================================================================
     
-    st.title("📋 Slow-Moving Analysis")
+    st.title("Slow-Moving Analysis")
     st.markdown("Identifikasi produk dengan pergerakan lambat")
     
     # ========================================================================
@@ -126,42 +126,42 @@ def render_page(df: pd.DataFrame):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        with st.expander("📖 Klasifikasi Movement"):
-            st.markdown("""
-            | Status | Kriteria |
-            |--------|----------|
-            | 🔴 **Dead Stock** | Tidak ada penjualan 90 hari |
-            | 🟡 **Slow Moving** | Turnover < 2x dalam 90 hari |
-            | 🟢 **Normal** | Turnover 2-6x dalam 90 hari |
-            | 🚀 **Fast Moving** | Turnover > 6x dalam 90 hari |
-            """)
+        st.markdown("**Klasifikasi Movement**")
+        st.markdown("""
+        | Status | Kriteria |
+        |--------|----------|
+        | **Dead Stock** | Tidak ada penjualan 90 hari |
+        | **Slow Moving** | Turnover < 2x dalam 90 hari |
+        | **Normal** | Turnover 2-6x dalam 90 hari |
+        | **Fast Moving** | Turnover > 6x dalam 90 hari |
+        """)
     
     with col2:
-        with st.expander("📊 ABC Class"):
-            st.markdown("""
-            | Class | Kontribusi | Prioritas |
-            |-------|------------|-----------|
-            | **A** | ~80% revenue | Tinggi - monitoring ketat |
-            | **B** | ~15% revenue | Sedang - monitoring reguler |
-            | **C** | ~5% revenue | Rendah - review kebutuhan |
-            """)
+        st.markdown("**ABC Class**")
+        st.markdown("""
+        | Class | Kontribusi | Prioritas |
+        |-------|------------|-----------|
+        | **A** | ~80% revenue | Tinggi - monitoring ketat |
+        | **B** | ~15% revenue | Sedang - monitoring reguler |
+        | **C** | ~5% revenue | Rendah - review kebutuhan |
+        """)
     
     with col3:
-        with st.expander("🔤 ABC-XYZ Segment"):
-            st.markdown("""
-            | Segment | Artinya | Rekomendasi |
-            |---------|---------|-------------|
-            | **AX, BX** | Demand stabil | Fokus utama |
-            | **AY, BY** | Demand fluktuatif | Safety stock lebih |
-            | **AZ, BZ** | Demand tidak stabil | Monitoring intensif |
-            | **CX, CY, CZ** | Revenue rendah | Evaluasi discontinue |
-            """)
+        st.markdown("**ABC-XYZ Segment**")
+        st.markdown("""
+        | Segment | Artinya | Rekomendasi |
+        |---------|---------|-------------|
+        | **AX, BX** | Demand stabil | Fokus utama |
+        | **AY, BY** | Demand fluktuatif | Safety stock lebih |
+        | **AZ, BZ** | Demand tidak stabil | Monitoring intensif |
+        | **CX, CY, CZ** | Revenue rendah | Evaluasi discontinue |
+        """)
     
     # ========================================================================
     # FILTERS
     # ========================================================================
     
-    st.markdown("### 📋 Product List")
+    st.markdown("### Product List")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -229,13 +229,13 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 💡 Recommended Actions")
+    st.markdown("### Recommended Actions")
     
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""
         <div class="insight-card" style="border-left: 4px solid #ef4444;">
-            <h4 style="color: #fca5a5; margin-top: 0; font-size: 0.95rem;">🔴 High Priority</h4>
+            <h4 style="color: #fca5a5; margin-top: 0; font-size: 0.95rem;">High Priority</h4>
             <ul style="margin: 0; padding-left: 1.2rem; color: #cbd5e1; font-size: 0.85rem;">
                 <li>Clearance sale (30-50% off)</li>
                 <li>Bundle dengan fast-moving products</li>
@@ -245,7 +245,7 @@ def render_page(df: pd.DataFrame):
     with col2:
         st.markdown("""
         <div class="insight-card" style="border-left: 4px solid #f59e0b;">
-            <h4 style="color: #fcd34d; margin-top: 0; font-size: 0.95rem;">🟡 Medium Priority</h4>
+            <h4 style="color: #fcd34d; margin-top: 0; font-size: 0.95rem;">Medium Priority</h4>
             <ul style="margin: 0; padding-left: 1.2rem; color: #cbd5e1; font-size: 0.85rem;">
                 <li>Kampanye promosi</li>
                 <li>Cross-selling strategy</li>
@@ -255,7 +255,7 @@ def render_page(df: pd.DataFrame):
     with col3:
         st.markdown("""
         <div class="insight-card" style="border-left: 4px solid #667eea;">
-            <h4 style="color: #818cf8; margin-top: 0; font-size: 0.95rem;">🔵 Monitoring</h4>
+            <h4 style="color: #818cf8; margin-top: 0; font-size: 0.95rem;">Monitoring</h4>
             <ul style="margin: 0; padding-left: 1.2rem; color: #cbd5e1; font-size: 0.85rem;">
                 <li>Track demand trend</li>
                 <li>Monitor competitor pricing</li>
@@ -271,7 +271,7 @@ def render_page(df: pd.DataFrame):
     
     csv_data = slow_filtered.to_csv(index=False).encode('utf-8')
     st.download_button(
-        label="📥 Download Report",
+        label="Download Report",
         data=csv_data,
         file_name=f"slow_moving_{datetime.now().strftime('%Y%m%d')}.csv",
         mime="text/csv",

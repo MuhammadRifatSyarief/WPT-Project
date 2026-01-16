@@ -37,14 +37,14 @@ def render_page(df: pd.DataFrame):
         df (pd.DataFrame): DataFrame utama, digunakan untuk info dan metrik.
     """
     
-    st.title("⚙️ Settings")
+    st.title("Settings")
     st.markdown("Application settings and configuration")
     
     # ========================================================================
     # DISPLAY SETTINGS (Visual Placeholder)
     # ========================================================================
     
-    with st.expander("📊 Display Settings", expanded=False):
+    with st.expander("Display Settings", expanded=False):
         col1, col2 = st.columns(2)
         with col1:
             st.radio("Theme (Visual only)", options=['Dark', 'Light'], horizontal=True, help="This is a visual placeholder and does not change the app's theme.")
@@ -61,10 +61,10 @@ def render_page(df: pd.DataFrame):
             st.info(f"**Products Loaded:** {len(df):,}")
             st.info(f"**Data Source:** `master_features_final.csv` & others")
         with col2:
-            if st.button("🔄 Refresh Data Cache", width='stretch', help="Clears the server cache to reload all data from source files on the next interaction."):
+            if st.button("Refresh Data Cache", use_container_width=True, help="Clears the server cache to reload all data from source files on the next interaction."):
                 st.cache_data.clear()
-                log_activity("🔄 Data Cache Cleared", '#10b981')
-                st.success("✅ Cache cleared! Data will be reloaded.")
+                log_activity("Data Cache Cleared", '#10b981')
+                st.success("Cache cleared! Data will be reloaded.")
                 st.rerun()
 
     # ========================================================================
@@ -72,16 +72,16 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 🔄 Data Puller Configuration")
-    st.info("💡 Konfigurasikan data puller untuk menjalankan pull data secara otomatis setiap minggu. Hanya admin yang dapat mengakses fitur ini.")
+    st.markdown("### Data Puller Configuration")
+    st.info("Konfigurasikan data puller untuk menjalankan pull data secara otomatis setiap minggu. Hanya admin yang dapat mengakses fitur ini.")
     
     if not is_admin():
-        st.warning("⚠️ Hanya admin yang dapat mengakses konfigurasi data puller.")
+        st.warning("Hanya admin yang dapat mengakses konfigurasi data puller.")
     else:
         # Get current config
         current_config = get_puller_config()
         
-        with st.expander("⚙️ Configure Data Puller", expanded=True):
+        with st.expander("Configure Data Puller", expanded=True):
             # Project selection
             project_option = st.selectbox(
                 "Select Project",
@@ -135,7 +135,7 @@ def render_page(df: pd.DataFrame):
             
             # Validate date range
             if end_date < start_date:
-                st.error("⚠️ End date must be after start date!")
+                st.error("End date must be after start date!")
             
             # Schedule type
             schedule_type = st.radio(
@@ -150,9 +150,9 @@ def render_page(df: pd.DataFrame):
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                if st.button("💾 Save Configuration", use_container_width=True, type="primary"):
+                if st.button("Save Configuration", use_container_width=True, type="primary"):
                     if end_date < start_date:
-                        st.error("⚠️ Please fix the date range before saving.")
+                        st.error("Please fix the date range before saving.")
                     else:
                         current_user = get_current_user()
                         username = current_user['username'] if current_user else 'admin'
@@ -166,16 +166,16 @@ def render_page(df: pd.DataFrame):
                         )
                         
                         if success:
-                            st.success(f"✅ {message}")
-                            log_activity("💾 Data Puller Configuration Saved", '#6366f1')
+                            st.success(f"{message}")
+                            log_activity("Data Puller Configuration Saved", '#6366f1')
                             st.rerun()
                         else:
-                            st.error(f"❌ {message}")
+                            st.error(f"{message}")
             
             with col2:
-                if st.button("▶️ Run Puller Now", use_container_width=True):
+                if st.button("Run Puller Now", use_container_width=True):
                     if end_date < start_date:
-                        st.error("⚠️ Please fix the date range before running.")
+                        st.error("Please fix the date range before running.")
                     else:
                         current_user = get_current_user()
                         username = current_user['username'] if current_user else 'admin'
@@ -185,7 +185,7 @@ def render_page(df: pd.DataFrame):
                         config_id = config['id'] if config else None
                         
                         # Run puller
-                        with st.spinner(f"🔄 Running {project_option} puller... This may take several minutes."):
+                        with st.spinner(f"Running {project_option} puller... This may take several minutes."):
                             try:
                                 service = get_puller_service()
                                 
@@ -212,24 +212,24 @@ def render_page(df: pd.DataFrame):
                                     )
                                 
                                 if success:
-                                    st.success(f"✅ {message}")
-                                    log_activity(f"🔄 Data Puller Executed: {project_option}", '#10b981')
+                                    st.success(f"{message}")
+                                    log_activity(f"Data Puller Executed: {project_option}", '#10b981')
                                 else:
-                                    st.error(f"❌ {message}")
-                                    log_activity(f"❌ Data Puller Failed: {project_option}", '#ef4444')
+                                    st.error(f"{message}")
+                                    log_activity(f"Data Puller Failed: {project_option}", '#ef4444')
                                     
                             except Exception as e:
-                                st.error(f"❌ Error running puller: {str(e)}")
-                                log_activity(f"❌ Data Puller Error: {str(e)}", '#ef4444')
+                                st.error(f"Error running puller: {str(e)}")
+                                log_activity(f"Data Puller Error: {str(e)}", '#ef4444')
             
             with col3:
-                if st.button("📊 View History", use_container_width=True):
+                if st.button("View History", use_container_width=True):
                     st.session_state.show_puller_history = True
         
         # Show execution history
         if st.session_state.get('show_puller_history', False):
             st.markdown("---")
-            st.markdown("### 📊 Puller Execution History")
+            st.markdown("### Puller Execution History")
             
             history = get_puller_execution_history(limit=20)
             
@@ -241,11 +241,11 @@ def render_page(df: pd.DataFrame):
                 # Display in a nice format
                 for idx, row in history_df.iterrows():
                     status_color = {
-                        'completed': '🟢',
-                        'running': '🟡',
-                        'failed': '🔴',
-                        'cancelled': '⚪'
-                    }.get(row['status'], '⚪')
+                        'completed': '[OK]',
+                        'running': '[...]',
+                        'failed': '[X]',
+                        'cancelled': '[-]'
+                    }.get(row['status'], '[-]')
                     
                     with st.expander(f"{status_color} {row['project_name']} - {row['started_at']} ({row['status']})"):
                         col1, col2 = st.columns(2)
@@ -263,14 +263,14 @@ def render_page(df: pd.DataFrame):
             else:
                 st.info("No execution history found.")
             
-            if st.button("❌ Close History"):
+            if st.button("Close History"):
                 st.session_state.show_puller_history = False
                 st.rerun()
         
         # Show current configuration
         if current_config:
             st.markdown("---")
-            st.markdown("### 📋 Current Configuration")
+            st.markdown("### Current Configuration")
             col1, col2, col3 = st.columns(3)
             with col1:
                 st.metric("Project", current_config.get('project_name', 'N/A').upper())
@@ -288,11 +288,11 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📧 Email Configuration")
-    st.info("💡 Konfigurasikan kredensial SMTP Anda di sini. Pengaturan ini akan disimpan dalam session ini dan digunakan untuk semua fitur pengiriman email.")
+    st.markdown("### Email Configuration")
+    st.info("Konfigurasikan kredensial SMTP Anda di sini. Pengaturan ini akan disimpan dalam session ini dan digunakan untuk semua fitur pengiriman email.")
     
     with st.form("email_settings_form"):
-        st.markdown("#### 🔐 Sender Configuration")
+        st.markdown("#### Sender Configuration")
         col1, col2 = st.columns(2)
         with col1:
             # Gunakan kunci unik untuk widget di dalam form untuk menghindari konflik
@@ -300,26 +300,26 @@ def render_page(df: pd.DataFrame):
         with col2:
             app_password = st.text_input("App Password", type="password", value=st.session_state.get('email_password', ''), key="form_app_password", help="16-digit App Password from Gmail (get from: https://myaccount.google.com/apppasswords)")
         
-        st.markdown("#### 📮 Default Recipient Configuration")
+        st.markdown("#### Default Recipient Configuration")
         default_recipients = st.text_area("Default Recipients (comma-separated)", value=st.session_state.get('email_recipients', ''), key="form_recipients", height=100)
         
         # Tombol Submit Form
         col1, col2 = st.columns(2)
         with col1:
-            save_button = st.form_submit_button("💾 Save Email Settings", width='stretch', type="primary")
+            save_button = st.form_submit_button("Save Email Settings", use_container_width=True, type="primary")
         with col2:
-            reset_button = st.form_submit_button("🔄 Reset to Defaults", width='stretch')
+            reset_button = st.form_submit_button("Reset to Defaults", use_container_width=True)
 
     # Logika setelah form disubmit
     if save_button:
         if "@" not in sender_email or len(app_password) < 16:
-            st.error("⚠️ Please provide a valid Sender Email and a 16-character App Password.")
+            st.error("Please provide a valid Sender Email and a 16-character App Password.")
         else:
             st.session_state.email_sender = sender_email
             st.session_state.email_password = app_password
             st.session_state.email_recipients = default_recipients
-            log_activity("💾 Email Settings Saved", '#6366f1')
-            st.success("✅ Email settings saved successfully for this session!")
+            log_activity("Email Settings Saved", '#6366f1')
+            st.success("Email settings saved successfully for this session!")
             st.balloons()
 
     if reset_button:
@@ -327,7 +327,7 @@ def render_page(df: pd.DataFrame):
         st.session_state.email_password = ""
         st.session_state.email_recipients = ""
         st.session_state.custom_recipients_list = []
-        log_activity("🔄 Reset Email Settings", '#f59e0b')
+        log_activity("Reset Email Settings", '#f59e0b')
         st.info("Settings have been reset. Rerunning page...")
         st.rerun()
 
@@ -336,16 +336,16 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 🧪 Test Email Configuration")
+    st.markdown("### Test Email Configuration")
     test_email_address = st.text_input("Test Email Address", placeholder="Enter an email to send a test to", key="settings_test_email_input")
     
-    if st.button("📧 Send Test Email", width='stretch', key="send_test_email_btn"):
+    if st.button("Send Test Email", use_container_width=True, key="send_test_email_btn"):
         # Ambil kredensial dari session state
         sender = st.session_state.get('email_sender')
         password = st.session_state.get('email_password')
         
         if not all([sender, password, test_email_address]):
-            st.error("⚠️ Please save your Sender Email & App Password first, and provide a test email address.")
+            st.error("Please save your Sender Email & App Password first, and provide a test email address.")
         else:
             with st.spinner("Sending test email..."):
                 try:
@@ -361,14 +361,14 @@ def render_page(df: pd.DataFrame):
                         server.login(sender, password)
                         server.send_message(msg)
                     
-                    st.success(f"✅ Test email sent successfully to {test_email_address}!")
-                    log_activity(f"📧 Sent Test Email to {test_email_address}", '#10b981')
+                    st.success(f"Test email sent successfully to {test_email_address}!")
+                    log_activity(f"Sent Test Email to {test_email_address}", '#10b981')
                 except smtplib.SMTPAuthenticationError:
-                    st.error("❌ Authentication failed. Please double-check your email and 16-digit App Password.")
-                    log_activity("❌ Test Email Failed (Auth Error)", '#ef4444')
+                    st.error("Authentication failed. Please double-check your email and 16-digit App Password.")
+                    log_activity("Test Email Failed (Auth Error)", '#ef4444')
                 except Exception as e:
-                    st.error(f"❌ An error occurred: {e}")
-                    log_activity("❌ Test Email Failed (General Error)", '#ef4444')
+                    st.error(f"An error occurred: {e}")
+                    log_activity("Test Email Failed (General Error)", '#ef4444')
     
     st.markdown("---")
     
@@ -376,7 +376,7 @@ def render_page(df: pd.DataFrame):
     # SYSTEM INFORMATION
     # ========================================================================
     
-    st.markdown("### ℹ️ Application & Data Info")
+    st.markdown("### Application & Data Info")
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("**System Information**")
@@ -402,14 +402,14 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
 
     st.markdown("---")
-    st.markdown("### 📋 Current Session Configuration")
+    st.markdown("### Current Session Configuration")
     
     col1, col2, col3 = st.columns(3)
     with col1:
         sender_email = st.session_state.get('email_sender', 'Not Configured')
         st.metric("Sender Email", sender_email if len(sender_email) < 20 else sender_email[:17] + "...")
     with col2:
-        password_status = "✅ Configured" if st.session_state.get('email_password') else "❌ Not Set"
+        password_status = "Configured" if st.session_state.get('email_password') else "Not Set"
         st.metric("App Password Status", password_status)
     with col3:
         recipients = st.session_state.get('email_recipients', '')

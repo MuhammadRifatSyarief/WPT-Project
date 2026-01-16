@@ -28,98 +28,14 @@ def render_page(df: pd.DataFrame):
     """
     
     # Semua logika halaman dimulai dari sini, di dalam fungsi
-    # ========================================================================
-    # INJECT CSS - Hover Tooltips
-    # ========================================================================
-    
-    st.markdown("""
-    <style>
-    .tooltip-container {
-        position: relative;
-        display: inline-block;
-        cursor: help;
-    }
-    
-    .tooltip-container .tooltip-text {
-        visibility: hidden;
-        opacity: 0;
-        width: 280px;
-        background: rgba(30, 41, 59, 0.95);
-        color: #e2e8f0;
-        text-align: left;
-        border-radius: 10px;
-        padding: 12px 15px;
-        position: absolute;
-        z-index: 100;
-        bottom: 125%;
-        left: 50%;
-        margin-left: -140px;
-        border: 1px solid rgba(255,255,255,0.1);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        font-size: 0.85rem;
-        line-height: 1.5;
-        transition: opacity 0.3s, visibility 0.3s;
-    }
-    
-    .tooltip-container .tooltip-text::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -8px;
-        border-width: 8px;
-        border-style: solid;
-        border-color: rgba(30, 41, 59, 0.95) transparent transparent transparent;
-    }
-    
-    .tooltip-container:hover .tooltip-text {
-        visibility: visible;
-        opacity: 1;
-    }
-    
-    .info-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(99, 102, 241, 0.15);
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        color: #a5b4fc;
-        border: 1px solid rgba(99, 102, 241, 0.3);
-        cursor: help;
-        transition: all 0.2s;
-    }
-    
-    .info-badge:hover {
-        background: rgba(99, 102, 241, 0.25);
-        transform: translateY(-1px);
-    }
-    </style>
-    """, unsafe_allow_html=True)
     
     # ========================================================================
-    # HEADER WITH HOVER TOOLTIPS
+    # HEADER
     # ========================================================================
     
-    st.markdown("""
-    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-        <h1 style="margin: 0;">📈 Demand Forecasting</h1>
-        <div class="tooltip-container">
-            <span class="info-badge">ℹ️ About</span>
-            <span class="tooltip-text">
-                <strong>Demand Forecasting</strong> memprediksi permintaan produk di masa depan.<br><br>
-                <strong>Manfaat:</strong><br>
-                • Mencegah stockout<br>
-                • Mengurangi overstock<br>
-                • Optimasi cash flow<br><br>
-                <em>Data: Historical sales 90 hari</em>
-            </span>
-        </div>
-    </div>
-    <p style="color: #94a3b8; margin-top: 0;">Predict future demand and analyze trends</p>
-    """, unsafe_allow_html=True)
+    st.title("Demand Forecasting")
+    st.markdown("Predict future demand and analyze trends")
+    st.caption("Demand Forecasting predicts future product demand using historical sales (90 days). Benefits: prevent stockout, reduce overstock, optimize cash flow.")
     
     # ========================================================================
     # FILTER INPUTS
@@ -129,7 +45,7 @@ def render_page(df: pd.DataFrame):
     
     with col1:
         search_product = st.text_input(
-            "🔍 Search Product", 
+            "Search Product", 
             placeholder="Search by code or name..."
         )
     
@@ -175,7 +91,7 @@ def render_page(df: pd.DataFrame):
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("### 📊 Demand Distribution")
+        st.markdown("### Demand Distribution")
         # Use forecast_30d if available, otherwise fallback to avg_daily_demand
         demand_col = 'forecast_30d' if 'forecast_30d' in forecast_df.columns else 'avg_daily_demand'
         valid_demand_df = forecast_df[forecast_df[demand_col].notna() & (forecast_df[demand_col] > 0)]
@@ -191,9 +107,9 @@ def render_page(df: pd.DataFrame):
             st.caption(f"Max: {valid_demand_df[demand_col].max():.2f} | Mean: {valid_demand_df[demand_col].mean():.2f} units/day")
     
     with col2:
-        # 🎯 NEW: Add slider to control number of top products shown
+        # NEW: Add slider to control number of top products shown
         top_n_products = st.slider("Top N Products", 5, 50, 10, key="forecast_top_n")
-        st.markdown(f"### 📈 Top {top_n_products} Products Forecast ({forecast_days} Days)")
+        st.markdown(f"### Top {top_n_products} Products Forecast ({forecast_days} Days)")
         
         # Use forecast_30d if available (from demand forecasting module)
         if 'forecast_30d' in forecast_df.columns:
@@ -270,25 +186,29 @@ def render_page(df: pd.DataFrame):
     # ABC & SEGMENT CLASSIFICATION LEGENDS (NEW)
     # ========================================================================
     st.markdown("---")
-    st.markdown("### 📖 Keterangan Klasifikasi")
+    st.markdown("### Classification Reference")
     
-    with st.expander("📊 Penjelasan ABC Class", expanded=False):
+    legend_col1, legend_col2 = st.columns(2)
+    
+    with legend_col1:
+        st.markdown("**ABC Classification**")
         st.markdown("""
-        | Class | Kontribusi Revenue | Prioritas | Aksi |
-        |-------|-------------------|-----------|------|
-        | **A** | ~80% total | Tinggi | Monitoring ketat, stock optimal |
-        | **B** | ~15% total | Sedang | Monitoring reguler |
-        | **C** | ~5% total | Rendah | Review kebutuhan |
+        | Class | Revenue Contribution | Priority | Action |
+        |-------|---------------------|----------|--------|
+        | **A** | ~80% total | High | Tight monitoring, optimal stock |
+        | **B** | ~15% total | Medium | Regular monitoring |
+        | **C** | ~5% total | Low | Review necessity |
         """)
     
-    with st.expander("🔤 Penjelasan Segment (ABC-XYZ)", expanded=False):
+    with legend_col2:
+        st.markdown("**ABC-XYZ Segments**")
         st.markdown("""
-        | Segment | Artinya | Rekomendasi |
-        |---------|---------|-------------|
-        | **AX, BX** | Revenue tinggi/sedang, demand stabil | Fokus utama, forecast akurat |
-        | **AY, BY** | Revenue tinggi/sedang, demand fluktuatif | Butuh safety stock lebih |
-        | **AZ, BZ** | Revenue tinggi/sedang, demand tidak stabil | Perlu monitoring intensif |
-        | **CX, CY, CZ** | Revenue rendah | Evaluasi untuk discontinue |
+        | Segment | Meaning | Recommendation |
+        |---------|---------|----------------|
+        | **AX, BX** | High/medium revenue, stable demand | Primary focus, accurate forecast |
+        | **AY, BY** | High/medium revenue, fluctuating demand | More safety stock needed |
+        | **AZ, BZ** | High/medium revenue, unstable demand | Intensive monitoring required |
+        | **CX, CY, CZ** | Low revenue | Evaluate for discontinuation |
         """)
     
     # ========================================================================
@@ -296,14 +216,14 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📤 Export & Share Forecast")
+    st.markdown("### Export & Share Forecast")
     
     col1, col2 = st.columns(2)
     
     with col1:
         csv_data = top_df.to_csv(index=False).encode('utf-8')
         download_button_clicked = st.download_button(
-            label="📥 Download Forecast Report",
+            label="Download Forecast Report",
             data=csv_data,
             file_name=f"demand_forecast_{datetime.now().strftime('%Y%m%d')}.csv",
             mime="text/csv",
@@ -311,10 +231,10 @@ def render_page(df: pd.DataFrame):
             key="forecast_download_csv"
         )
         if download_button_clicked:
-            log_activity("📥 Downloaded Demand Forecast Report", '#6366f1')
+            log_activity("Downloaded Demand Forecast Report", '#6366f1')
     
     with col2:
-        if st.button("📧 Email Forecast",  width='stretch', key="forecast_email_button"):
+        if st.button("Email Forecast",  width='stretch', key="forecast_email_button"):
             # Toggle visibilitas form email
             st.session_state.show_email_forecast = not st.session_state.get('show_email_forecast', False)
     

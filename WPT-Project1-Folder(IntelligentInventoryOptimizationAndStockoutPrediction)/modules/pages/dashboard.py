@@ -20,7 +20,7 @@ def render_page(df: pd.DataFrame):
     
     # Validate required columns exist
     if df is None or len(df) == 0:
-        st.error("❌ No data available. Please check your data sources.")
+        st.error("No data available. Please check your data sources.")
         return
     
     # Ensure required columns exist
@@ -28,7 +28,7 @@ def render_page(df: pd.DataFrame):
     missing_cols = [col for col in required_cols if col not in df.columns]
     
     if missing_cols:
-        st.warning(f"⚠️ Missing columns: {', '.join(missing_cols)}. Some features may not work correctly.")
+        st.warning(f"Missing columns: {', '.join(missing_cols)}. Some features may not work correctly.")
         # Create placeholder columns if missing
         if 'product_code' not in df.columns:
             if 'product_id' in df.columns:
@@ -38,24 +38,19 @@ def render_page(df: pd.DataFrame):
         if 'product_name' not in df.columns:
             df['product_name'] = 'Product ' + df['product_code'].astype(str)
     
-    st.title("🏠 Inventory Intelligence Hub")
+    st.title("Inventory Intelligence Hub")
     st.markdown("Real-time overview of your inventory health")
 
     # ========================================================================
-    # TOP METRICS ROW WITH DETAILED POPOVERS
+    # TOP METRICS ROW
     # ========================================================================
+    
+    st.caption("Service Level = % orders fulfilled from stock | Turnover = inventory sold per period | Stockout Risk = products at risk within 30 days | Stock Age = days since purchase")
     
     col1, col2, col3, col4 = st.columns(4)
 
     # Metric 1: Service Level
     with col1:
-        with st.popover("ℹ️"):
-            st.markdown("### 📊 Service Level")
-            st.markdown("**Definisi:** Persentase pesanan yang dapat dipenuhi dari stok tersedia.")
-            st.markdown("**Formula:**")
-            st.code("Service Level = (Pesanan Terpenuhi / Total Pesanan) × 100%")
-            st.markdown("**Benchmark Industry:** >95%: Excellent")
-        
         service_level = (df['current_stock_qty'] > 0).sum() / len(df) * 100
         prev_service_level = 92.1  # Mock
         delta = service_level - prev_service_level
@@ -73,11 +68,6 @@ def render_page(df: pd.DataFrame):
     
     # Metric 2: Inventory Turnover
     with col2:
-        with st.popover("ℹ️"):
-            st.markdown("### 🔄 Inventory Turnover Ratio (30-day)")
-            st.markdown("**Definisi:** Kecepatan inventory terjual dalam periode 30 hari.")
-            st.markdown("**Formula:** Units Sold (30d) / Average Inventory")
-            st.markdown("**Benchmark IT Products:** 1-3x per 30 hari = Ideal")
 
         # USE PRE-CALCULATED VALUES FROM DATA_LOADER
         # Average turnover weighted by stock value
@@ -108,10 +98,6 @@ def render_page(df: pd.DataFrame):
     
     # Metric 3: Stockout Risk Index
     with col3:
-        with st.popover("ℹ️"):
-            st.markdown("### ⚠️ Stockout Risk Index")
-            st.markdown("**Definisi:** Jumlah produk berisiko kehabisan stok dalam 30 hari.")
-            st.markdown("**Level Risiko:** Critical (<7 hari), High (7-14 hari), Medium (14-30 hari)")
         
         critical_count = len(df[df['days_until_stockout'] < 7])
         high_count = len(df[(df['days_until_stockout'] >= 7) & (df['days_until_stockout'] < 14)])
@@ -129,10 +115,6 @@ def render_page(df: pd.DataFrame):
     
     # Metric 4: Average Stock Age
     with col4:
-        with st.popover("ℹ️"):
-            st.markdown("### 📅 Average Stock Age")
-            st.markdown("**Definisi:** Rata-rata hari sejak produk dibeli / Days Inventory Outstanding (DIO).")
-            st.markdown("**Interpretasi:** <30 hari (Excellent), 30-60 hari (Good), >60 hari (Warning)")
         
         valid_dio = df[df['days_in_inventory_90d'] > 0]['days_in_inventory_90d']
         avg_stock_age = valid_dio.median() if not valid_dio.empty else 60
@@ -153,7 +135,7 @@ def render_page(df: pd.DataFrame):
     col1, col2 = st.columns([3, 2])
     
     with col1:
-        st.markdown("### 📊 Performance Trends")
+        st.markdown("### Performance Trends")
         months = pd.date_range(end=datetime.now(), periods=6, freq='M')
         performance_data = pd.DataFrame({
             'Month': months.strftime('%b %Y'),
@@ -167,14 +149,15 @@ def render_page(df: pd.DataFrame):
         st.plotly_chart(fig, width='stretch')
 
     with col2:
-        st.markdown("### ⚠️ Today's Alerts")
+        st.markdown("### Today's Alerts")
+        st.caption("Critical: <7 days | High: 7-14 days | Medium: 14-30 days")
 
         # Glassmorphism Alert Boxes
         st.markdown(f"""
         <div class="alert-critical">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <strong style="font-size: 1.1rem;">🔴 Critical</strong>
+                    <strong style="font-size: 1.1rem;">Critical</strong>
                     <div style="font-size: 0.8rem; color: #fca5a5; margin-top: 0.25rem;">Stockout in < 7 days</div>
                 </div>
                 <div style="font-size: 1.8rem; font-weight: 700; color: #fca5a5;">{critical_count}</div>
@@ -186,7 +169,7 @@ def render_page(df: pd.DataFrame):
         <div class="alert-warning">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <strong style="font-size: 1.1rem;">🟡 High Risk</strong>
+                    <strong style="font-size: 1.1rem;">High Risk</strong>
                     <div style="font-size: 0.8rem; color: #fcd34d; margin-top: 0.25rem;">Need reorder soon</div>
                 </div>
                 <div style="font-size: 1.8rem; font-weight: 700; color: #fcd34d;">{high_count}</div>
@@ -199,7 +182,7 @@ def render_page(df: pd.DataFrame):
         <div class="alert-info">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <strong style="font-size: 1.1rem;">🔵 Slow-Moving</strong>
+                    <strong style="font-size: 1.1rem;">Slow-Moving</strong>
                     <div style="font-size: 0.8rem; color: #93c5fd; margin-top: 0.25rem;">Low turnover products</div>
                 </div>
                 <div style="font-size: 1.8rem; font-weight: 700; color: #93c5fd;">{slow_moving_count}</div>
@@ -216,7 +199,7 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     if st.session_state.get('show_all_alerts', False):
-        st.markdown("### 📋 All Alerts")
+        st.markdown("### All Alerts")
         
         # Prepare comprehensive alert data
         alert_products = df[
@@ -228,23 +211,23 @@ def render_page(df: pd.DataFrame):
         def get_risk_level(row):
             days = row['days_until_stockout']
             if days < 7:
-                return '🔴 Critical'
+                return 'Critical'
             elif days < 14:
-                return '🟡 High'
+                return 'High'
             elif days < 30:
-                return '🔵 Medium'
+                return 'Medium'
             elif row['turnover_ratio_90d'] < 1.0:
-                return '🔵 Slow-Moving'
+                return 'Slow-Moving'
             else:
-                return '🟢 Low'
+                return 'Low'
         
         alert_products['Risk Level'] = alert_products.apply(get_risk_level, axis=1)
         
         # Recommended actions
         def get_action(risk):
-            if '🔴' in risk:
+            if 'Critical' in risk:
                 return 'Reorder Now'
-            elif '🟡' in risk:
+            elif 'High' in risk:
                 return 'Plan Reorder'
             else:
                 return 'Monitor'
@@ -252,7 +235,7 @@ def render_page(df: pd.DataFrame):
         alert_products['Action'] = alert_products['Risk Level'].apply(get_action)
         
         # Sort by urgency
-        priority_order = {'🔴 Critical': 0, '🟡 High': 1, '🔵 Medium': 2, '🔵 Slow-Moving': 3, '🟢 Low': 4}
+        priority_order = {'Critical': 0, 'High': 1, 'Medium': 2, 'Slow-Moving': 3, 'Low': 4}
         alert_products['priority_rank'] = alert_products['Risk Level'].map(priority_order)
         alert_products = alert_products.sort_values('priority_rank')
         
@@ -280,23 +263,23 @@ def render_page(df: pd.DataFrame):
         with col1:
             csv_data = alert_products.to_csv(index=False).encode('utf-8')
             if st.download_button(
-                label="📥 Export Alerts",
+                label="Export Alerts",
                 data=csv_data,
                 file_name=f"alerts_{datetime.now().strftime('%Y%m%d')}.csv",
                 mime="text/csv",
                 width='stretch',
                 key="dashboard_alert_download_btn"
             ):
-                 log_activity("📥 Exported Alerts Report", '#6366f1')
+                 log_activity("Exported Alerts Report", '#6366f1')
                  
         with col2:
-            if st.button("📅 Schedule Review", width='stretch'):
-                st.info("📅 Review scheduled for tomorrow 9:00 AM")
-                log_activity("📅 Scheduled Alert Review", '#f59e0b')
+            if st.button("Schedule Review", width='stretch'):
+                st.info("Review scheduled for tomorrow 9:00 AM")
+                log_activity("Scheduled Alert Review", '#f59e0b')
         with col3:
-            if st.button("📝 Create Action Plan", width='stretch'):
-                st.success("✅ Action plan created!")
-                log_activity("📝 Created Alert Action Plan", '#10b981')
+            if st.button("Create Action Plan", width='stretch'):
+                st.success("Action plan created!")
+                log_activity("Created Alert Action Plan", '#10b981')
     
     # ========================================================================
     # TOP FAST-MOVING PRODUCTS & QUICK ACTIONS
@@ -305,7 +288,7 @@ def render_page(df: pd.DataFrame):
     col1, col2 = st.columns([3, 2])
     
     with col1:
-        st.markdown("### 🚀 Top 5 Fast-Moving Products")
+        st.markdown("### Top 5 Fast-Moving Products")
         
         # Use forecast_30d from demand forecasting module if available (more bounded)
         if 'forecast_30d' in df.columns:
@@ -371,10 +354,10 @@ def render_page(df: pd.DataFrame):
         )
         
         st.plotly_chart(fig, width='stretch')
-        st.caption(f"📊 Data source: {demand_col}")
+        st.caption(f"Data source: {demand_col}")
     
     with col2:
-        st.markdown("### 🎬 Quick Actions")
+        st.markdown("### Quick Actions")
         
         # Initialize session states if not exists
         if 'show_bulk_order_detail' not in st.session_state:
@@ -385,7 +368,7 @@ def render_page(df: pd.DataFrame):
             st.session_state.show_export_detail = False
         
         # Quick Action 1: Bulk Order
-        if st.button("🚀 Bulk Order", width='stretch', key="quick_bulk_order_btn"):
+        if st.button("Bulk Order", width='stretch', key="quick_bulk_order_btn"):
             st.session_state.show_bulk_order_detail = not st.session_state.show_bulk_order_detail
         
         if st.session_state.show_bulk_order_detail:
@@ -394,7 +377,7 @@ def render_page(df: pd.DataFrame):
             
             st.markdown("""
             <div class="detail-box">
-                <strong>📦 Bulk Order Details</strong><br><br>
+                <strong>Bulk Order Details</strong><br><br>
                 <strong>Products to Order:</strong><br>
             """, unsafe_allow_html=True)
             
@@ -415,14 +398,14 @@ def render_page(df: pd.DataFrame):
             </div>
             """, unsafe_allow_html=True)
             
-            if st.button("✅ Confirm Order", key="confirm_bulk_order_dashboard"):
-                st.success("✅ Bulk Order confirmed! Order ID: #ORD-" + datetime.now().strftime('%Y%m%d-%H%M'))
-                log_activity("🚀 Confirmed Quick Bulk Order", '#10b981')
+            if st.button("Confirm Order", key="confirm_bulk_order_dashboard"):
+                st.success("Bulk Order confirmed! Order ID: #ORD-" + datetime.now().strftime('%Y%m%d-%H%M'))
+                log_activity("Confirmed Quick Bulk Order", '#10b981')
                 st.session_state.show_bulk_order_detail = False
                 st.rerun()
         
         # Quick Action 2: Send Email (FIXED to use render_email_form)
-        if st.button("📧 Send Quick Alert Email", width='stretch', key="quick_alert_email_btn", help="Langsung mengirim laporan item kritis ke penerima default yang dikonfigurasi di Settings."):
+        if st.button("Send Quick Alert Email", width='stretch', key="quick_alert_email_btn", help="Langsung mengirim laporan item kritis ke penerima default yang dikonfigurasi di Settings."):
             
             # 1. Validasi konfigurasi terlebih dahulu
             sender = st.session_state.get('email_sender')
@@ -431,9 +414,9 @@ def render_page(df: pd.DataFrame):
             recipient_list = [r.strip() for r in recipients_str.split(',') if r.strip()]
 
             if not sender or not password:
-                st.error("❌ Email Sender/Password belum diatur. Silakan atur di halaman 'Settings'.")
+                st.error("Email Sender/Password belum diatur. Silakan atur di halaman 'Settings'.")
             elif not recipient_list:
-                st.error("❌ 'Default Recipients' belum diatur. Silakan atur di halaman 'Settings'.")
+                st.error("'Default Recipients' belum diatur. Silakan atur di halaman 'Settings'.")
             else:
                 # 2. Jika valid, panggil fungsi send_quick_alert_email
                 from modules.email_utils import send_quick_alert_email
@@ -445,13 +428,13 @@ def render_page(df: pd.DataFrame):
                 send_quick_alert_email(alert_products_for_email)
         
         # Quick Action 3: Export Report
-        if st.button("📥 Export Report", width='stretch', key="quick_export_report_btn"):
+        if st.button("Export Report", width='stretch', key="quick_export_report_btn"):
             st.session_state.show_export_detail = not st.session_state.show_export_detail
         
         if st.session_state.show_export_detail:
             st.markdown(f"""
             <div class="detail-box">
-                <strong>📊 Report Details</strong><br><br>
+                <strong>Report Details</strong><br><br>
                 <strong>Report Type:</strong> Weekly Inventory Summary<br>
                 <strong>Period:</strong> {datetime.now().strftime('%b %d, %Y')}<br>
                 <strong>Format:</strong> CSV<br><br>
@@ -466,14 +449,14 @@ def render_page(df: pd.DataFrame):
             
             csv_data = df.to_csv(index=False).encode('utf-8')
             if st.download_button(
-                label="📥 Download Report",
+                label="Download Report",
                 data=csv_data,
                 file_name=f"inventory_report_{datetime.now().strftime('%Y%m%d')}.csv",
                 mime="text/csv",
                 width='stretch',
                 key="dashboard_quick_export_download"
             ):
-                log_activity("📥 Downloaded Full Inventory Report (Quick Action)", '#6366f1')
+                log_activity("Downloaded Full Inventory Report (Quick Action)", '#6366f1')
     
     # ========================================================================
     # STOCK HEALTH DISTRIBUTION & RECENT ACTIVITIES
@@ -482,63 +465,8 @@ def render_page(df: pd.DataFrame):
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.markdown("### 🎯 Stock Health Distribution")
-        
-        with st.popover("📖 Penjelasan Kategori"):
-            st.markdown("""
-            ### 🟢 Healthy
-            **Kriteria:** High turnover, adequate stock
-            
-            **Artinya:** Produk laku keras, stok optimal
-            
-            **Tindakan:** 
-            - Maintain stock level optimal
-            - Monitor untuk avoid stockout
-            - Consider increase order quantity
-            
-            ---
-            
-            ### 🔵 Stable
-            **Kriteria:** Normal movement, balanced stock
-            
-            **Artinya:** Produk bergerak normal
-            
-            **Tindakan:** 
-            - Monitor trend pergerakan
-            - Maintain current reorder policy
-            
-            ---
-            
-            ### 🟡 Warning
-            **Kriteria:** Low turnover or aging stock
-            
-            **Artinya:** Produk mulai lambat
-            
-            **Tindakan:** 
-            - Promosi atau discount
-            - Cross-sell strategy
-            - Review pricing
-            
-            ---
-            
-            ### 🔴 Critical
-            **Kriteria:** Very low turnover, dead stock
-            
-            **Artinya:** Stock bermasalah, action needed!
-            
-            **Tindakan:** 
-            - Aggressive discount 30-50%
-            - Bundle with fast-moving items
-            - Consider return to supplier
-            - STOP future orders
-            
-            ---
-            
-            **Target Ideal:**
-            - Healthy + Stable: >70%
-            - Warning: 15-20%
-            - Critical: <10%
-            """)
+        st.markdown("### Stock Health Distribution")
+        st.caption("Healthy = turnover >2x + >30 days stock | Stable = turnover >1x + >14 days | Warning = slow movement | Critical = dead stock")
         
         # Classify products into health categories
         def classify_health(row):
@@ -617,7 +545,7 @@ def render_page(df: pd.DataFrame):
         st.plotly_chart(fig, width='stretch')
     
     with col2:
-        st.markdown("### 📋 Recent Activities")
+        st.markdown("### Recent Activities")
         
         # PERBAIKAN: Import dan tampilkan dari activity log
         from modules.activity_logger import get_activity_log
@@ -644,7 +572,7 @@ def render_page(df: pd.DataFrame):
                 st.caption(f"_Showing 5 of {total_activities} activities. Check sidebar for full log._")
 
     
-    st.markdown("### 📊 Category Summary")
+    st.markdown("### Category Summary")
     
     num_categories = len(health_counts)
     summary_cols = st.columns(num_categories)
@@ -665,7 +593,7 @@ def render_page(df: pd.DataFrame):
     # DETAILED PRODUCT TABLE WITH ADVANCED FILTERS
     # ========================================================================
     
-    st.markdown("### 📋 Detail Produk per Kategori")
+    st.markdown("### Product Detail by Category")
     
     # Advanced Filter Section
     col1, col2, col3, col4 = st.columns([1, 1, 1, 1]) 
@@ -789,26 +717,26 @@ def render_page(df: pd.DataFrame):
     # ABC CLASSIFICATION LEGEND (NEW)
     # ========================================================================
     st.markdown("---")
-    st.markdown("### 📖 Keterangan Klasifikasi")
+    st.markdown("### Classification Legend")
     
     legend_cols = st.columns(3)
     with legend_cols[0]:
         st.markdown("""
-        **🅰️ Class A - Fast Moving**
+        **Class A - Fast Moving**
         - Produk dengan kontribusi revenue tinggi (80% total)
         - Prioritas utama untuk ketersediaan stok
         - Monitoring harian, reorder cepat
         """)
     with legend_cols[1]:
         st.markdown("""
-        **🅱️ Class B - Moderate Moving**
+        **Class B - Moderate Moving**
         - Kontribusi revenue sedang (15% total)
         - Prioritas menengah
         - Monitoring mingguan
         """)
     with legend_cols[2]:
         st.markdown("""
-        **©️ Class C - Slow Moving**
+        **Class C - Slow Moving**
         - Kontribusi revenue rendah (5% total)
         - Prioritas rendah, perlu evaluasi
         - Pertimbangkan promosi atau discontinue
@@ -819,26 +747,26 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📤 Export & Share")
+    st.markdown("### Export & Share")
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        if st.button("📥 Export to CSV", width='stretch', key="dashboard_export_btn"):
+        if st.button("Export to CSV", width='stretch', key="dashboard_export_btn"):
             st.session_state.show_export_options = not st.session_state.get('show_export_options', False)
     
     with col2:
-        if st.button("📧 Email Report", width='stretch', key="dashboard_email_btn"):
+        if st.button("Email Report", width='stretch', key="dashboard_email_btn"):
             st.session_state.show_email_form = not st.session_state.get('show_email_form', False)
     
     with col3:
-        if st.button("📊 Generate PDF Report", width='stretch', key="dashboard_pdf_btn"):
-            st.info("📊 PDF generation feature coming soon!")
-            log_activity("❌ Attempted PDF Report Generation (Feature Missing)", '#ef4444')
+        if st.button("Generate PDF Report", width='stretch', key="dashboard_pdf_btn"):
+            st.info("PDF generation feature coming soon!")
+            log_activity("Attempted PDF Report Generation (Feature Missing)", '#ef4444')
     
     # Export Options
     if st.session_state.get('show_export_options', False):
-        st.markdown("#### 📥 Export Options")
+        st.markdown("#### Export Options")
         
         col1, col2 = st.columns(2)
         
@@ -864,17 +792,17 @@ def render_page(df: pd.DataFrame):
             
             csv_data = export_df.to_csv(index=False).encode('utf-8')
             if st.download_button(
-                label="⬇️ Download CSV",
+                label="Download CSV",
                 data=csv_data,
                 file_name=f"inventory_dashboard_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                 mime="text/csv",
                 width='stretch',
                 key="export_dashboard_csv_final"
             ):
-                 log_activity(f"📥 Downloaded Dashboard data as {export_format}", '#6366f1')
+                 log_activity(f"Downloaded Dashboard data as {export_format}", '#6366f1')
         
         elif export_format == "Excel (XLSX)":
-            st.info("📊 Excel export feature coming soon!")
+            st.info("Excel export feature coming soon!")
         
         else:  # JSON
             json_export = {
@@ -890,14 +818,14 @@ def render_page(df: pd.DataFrame):
             
             json_data = pd.io.json.dumps(json_export, indent=2)
             if st.download_button(
-                label="⬇️ Download JSON",
+                label="Download JSON",
                 data=json_data,
                 file_name=f"inventory_dashboard_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
                 mime="application/json",
                 width='stretch',
                 key="export_dashboard_json_final"
             ):
-                 log_activity(f"📥 Downloaded Dashboard data as {export_format}", '#6366f1')
+                 log_activity(f"Downloaded Dashboard data as {export_format}", '#6366f1')
 
     # Email Form
     if st.session_state.get('show_email_form', False):
@@ -908,7 +836,7 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 💡 AI-Powered Insights & Recommendations")
+    st.markdown("### AI-Powered Insights & Recommendations")
     
     # Generate dynamic insights based on data
     insights = []
@@ -917,14 +845,14 @@ def render_page(df: pd.DataFrame):
     if service_level < 90:
         insights.append({
             'type': 'warning',
-            'title': '⚠️ Service Level Below Target',
+            'title': 'Service Level Below Target',
             'message': f'Current service level is {service_level:.1f}%, below the 95% target. Consider increasing safety stock for critical items.',
             'action': 'Review stockout alerts and adjust reorder points'
         })
     else:
         insights.append({
             'type': 'success',
-            'title': '✅ Excellent Service Level',
+            'title': 'Excellent Service Level',
             'message': f'Service level at {service_level:.1f}% exceeds target. Great inventory management!',
             'action': 'Maintain current policies'
         })
@@ -934,7 +862,7 @@ def render_page(df: pd.DataFrame):
     if avg_turnover_30d < 0.5:
         insights.append({
             'type': 'warning',
-            'title': '📉 Low Inventory Turnover',
+            'title': 'Low Inventory Turnover',
             'message': f'Turnover rate of {avg_turnover_30d:.2f}x (30d) is below target (>0.5x). Consider reducing slow-moving inventory.',
             'action': 'Implement promotions for slow-moving items'
         })
@@ -943,7 +871,7 @@ def render_page(df: pd.DataFrame):
     if critical_count > 0:
         insights.append({
             'type': 'critical',
-            'title': '🔴 Critical Stockout Risk',
+            'title': 'Critical Stockout Risk',
             'message': f'{critical_count} products will run out in less than 7 days. Immediate action required!',
             'action': 'Process emergency orders immediately'
         })
@@ -953,7 +881,7 @@ def render_page(df: pd.DataFrame):
     if dead_stock_count > 0:
         insights.append({
             'type': 'warning',
-            'title': '📦 Dead Stock Detected',
+            'title': 'Dead Stock Detected',
             'message': f'{dead_stock_count} products have very low turnover (<0.1x). Consider clearance sale.',
             'action': 'Identify and discount dead stock'
         })
@@ -983,7 +911,7 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📊 Stock Value & Performance by ABC Class")
+    st.markdown("### Stock Value & Performance by ABC Class")
     
     # Group by ABC class
     abc_performance = df.groupby('ABC_class').agg({
@@ -1025,7 +953,7 @@ def render_page(df: pd.DataFrame):
     st.plotly_chart(fig, width='stretch')
     
     # ABC Performance Summary Cards
-    st.markdown("### 📈 ABC Class Performance Summary")
+    st.markdown("### ABC Class Performance Summary")
     
     abc_cols = st.columns(3)
     for idx, (class_name, row) in enumerate(abc_performance.iterrows()):
@@ -1053,14 +981,14 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 🎯 Key Takeaways")
+    st.markdown("### Key Takeaways")
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.markdown("""
         <div class="insight-card">
-            <h4 style="color: #10b981; margin-top: 0;">✅ Strengths</h4>
+            <h4 style="color: #10b981; margin-top: 0;">Strengths</h4>
             <ul style="font-size: 0.9rem;">
                 <li>Service level within target range</li>
                 <li>Fast-moving products well-stocked</li>
@@ -1072,7 +1000,7 @@ def render_page(df: pd.DataFrame):
     with col2:
         st.markdown("""
         <div class="insight-card">
-            <h4 style="color: #f59e0b; margin-top: 0;">⚠️ Areas for Improvement</h4>
+            <h4 style="color: #f59e0b; margin-top: 0;">Areas for Improvement</h4>
             <ul style="font-size: 0.9rem;">
                 <li>Address critical stockout risks</li>
                 <li>Optimize slow-moving inventory</li>
@@ -1084,7 +1012,7 @@ def render_page(df: pd.DataFrame):
     with col3:
         st.markdown("""
         <div class="insight-card">
-            <h4 style="color: #6366f1; margin-top: 0;">🚀 Next Actions</h4>
+            <h4 style="color: #6366f1; margin-top: 0;">Next Actions</h4>
             <ul style="font-size: 0.9rem;">
                 <li>Process urgent reorders today</li>
                 <li>Schedule weekly inventory review</li>

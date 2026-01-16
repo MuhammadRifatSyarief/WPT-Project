@@ -23,7 +23,7 @@ from config.constants import RFM_CONFIG, CUSTOMER_VALUE_CONFIG
 def render_page(df: pd.DataFrame = None):
     """Render RFM Analysis page."""
     
-    st.title("👥 RFM Customer Segmentation Analysis")
+    st.title("RFM Customer Segmentation Analysis")
     st.markdown("**Segment customers based on Recency, Frequency, and Monetary value**")
     
     # Load Project 2 data
@@ -32,7 +32,7 @@ def render_page(df: pd.DataFrame = None):
     
     # Check if required data is available
     if not project2_data or '6_Sales_By_Customer.csv' not in project2_data:
-        st.error("⚠️ Customer data not found. Please ensure Project 2 data files are in the data folder.")
+        st.error("Customer data not found. Please ensure Project 2 data files are in the data folder.")
         st.info("""
         **Required files:**
         - `6_Sales_By_Customer.csv` - Customer sales aggregations
@@ -48,7 +48,7 @@ def render_page(df: pd.DataFrame = None):
     rfm_precomputed = project2_data.get('1_RFM_Analysis.csv')
     
     if rfm_precomputed is not None and not rfm_precomputed.empty:
-        st.success("✅ Using pre-computed RFM analysis")
+        st.success("Using pre-computed RFM analysis")
         rfm_df = rfm_precomputed
         analyzer = None
     else:
@@ -58,7 +58,7 @@ def render_page(df: pd.DataFrame = None):
             rfm_df = analyzer.calculate_rfm_scores()
             rfm_df = analyzer.segment_customers()
         except Exception as e:
-            st.error(f"❌ Error computing RFM analysis: {str(e)}")
+            st.error(f"Error computing RFM analysis: {str(e)}")
             st.info("Please check that customer data has required columns: customer_id, recency_days, frequency, monetary")
             return
     
@@ -67,7 +67,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📊 Key Metrics Overview")
+    st.markdown("### Key Metrics Overview")
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -118,7 +118,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📈 Customer Segment Distribution")
+    st.markdown("### Customer Segment Distribution")
     
     if 'segment' in rfm_df.columns:
         segment_counts = rfm_df['segment'].value_counts()
@@ -230,7 +230,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 🎯 RFM Score Analysis")
+    st.markdown("### RFM Score Analysis")
     
     if all(col in rfm_df.columns for col in ['r_score', 'f_score', 'm_score']):
         # RFM Score Distribution
@@ -266,7 +266,7 @@ def render_page(df: pd.DataFrame = None):
                     showlegend=False
                 ))
             fig_r.update_layout(
-                title="📅 Recency Score Distribution",
+                title="Recency Score Distribution",
                 xaxis_title="Recency Score (1=Oldest, 5=Recent)",
                 yaxis_title="Number of Customers",
                 plot_bgcolor='rgba(0,0,0,0)',
@@ -298,7 +298,7 @@ def render_page(df: pd.DataFrame = None):
                     showlegend=False
                 ))
             fig_f.update_layout(
-                title="🔄 Frequency Score Distribution",
+                title="Frequency Score Distribution",
                 xaxis_title="Frequency Score (1=Low, 5=High)",
                 yaxis_title="Number of Customers",
                 plot_bgcolor='rgba(0,0,0,0)',
@@ -330,7 +330,7 @@ def render_page(df: pd.DataFrame = None):
                     showlegend=False
                 ))
             fig_m.update_layout(
-                title="💰 Monetary Score Distribution",
+                title="Monetary Score Distribution",
                 xaxis_title="Monetary Score (1=Low, 5=High)",
                 yaxis_title="Number of Customers",
                 plot_bgcolor='rgba(0,0,0,0)',
@@ -396,7 +396,7 @@ def render_page(df: pd.DataFrame = None):
             st.plotly_chart(fig_matrix, use_container_width=True)
         
         with col2:
-            st.markdown("**📊 Insights:**")
+            st.markdown("**Insights:**")
             st.markdown("""
             - **Top Right (High R, High F):** Best customers - Recent & Frequent
             - **Top Left (Low R, High F):** At Risk - Frequent but not recent
@@ -416,7 +416,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 💡 Segment Insights & Recommendations")
+    st.markdown("### Segment Insights & Recommendations")
     
     if 'segment' in rfm_df.columns and analyzer:
         recommendations = analyzer.get_segment_recommendations()
@@ -432,7 +432,7 @@ def render_page(df: pd.DataFrame = None):
             if segment in recommendations:
                 rec = recommendations[segment]
                 
-                with st.expander(f"📌 {segment} - {rec['customer_count']:,} customers ({rec['total_revenue']:,.0f} revenue)"):
+                with st.expander(f"{segment} - {rec['customer_count']:,} customers ({rec['total_revenue']:,.0f} revenue)"):
                     col1, col2, col3 = st.columns(3)
                     
                     with col1:
@@ -458,7 +458,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### ⚠️ At-Risk Customers")
+    st.markdown("### At-Risk Customers")
     
     if analyzer:
         at_risk = analyzer.identify_at_risk_customers()
@@ -476,14 +476,14 @@ def render_page(df: pd.DataFrame = None):
                 use_container_width=True
             )
         else:
-            st.info("✅ No at-risk customers identified")
+            st.info("No at-risk customers identified")
     
     # ========================================================================
     # CUSTOMER SEARCH & FILTER
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 🔍 Customer Search & Analysis")
+    st.markdown("### Customer Search & Analysis")
     
     col1, col2 = st.columns([2, 1])
     
@@ -530,12 +530,12 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📥 Export Data")
+    st.markdown("### Export Data")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        if st.button("📊 Export RFM Analysis"):
+        if st.button("Export RFM Analysis"):
             csv = rfm_df.to_csv(index=False)
             st.download_button(
                 label="Download CSV",

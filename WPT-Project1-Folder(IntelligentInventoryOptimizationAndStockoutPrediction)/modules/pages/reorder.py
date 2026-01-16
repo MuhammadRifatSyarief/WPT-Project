@@ -47,99 +47,15 @@ def render_page(df: pd.DataFrame):
         excluded_count = 0
     
     # ========================================================================
-    # INJECT CSS - Hover Tooltips
+    # HEADER
     # ========================================================================
     
-    st.markdown("""
-    <style>
-    .tooltip-container {
-        position: relative;
-        display: inline-block;
-        cursor: help;
-    }
-    
-    .tooltip-container .tooltip-text {
-        visibility: hidden;
-        opacity: 0;
-        width: 300px;
-        background: rgba(30, 41, 59, 0.95);
-        color: #e2e8f0;
-        text-align: left;
-        border-radius: 10px;
-        padding: 12px 15px;
-        position: absolute;
-        z-index: 100;
-        bottom: 125%;
-        left: 50%;
-        margin-left: -150px;
-        border: 1px solid rgba(255,255,255,0.1);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        font-size: 0.85rem;
-        line-height: 1.5;
-        transition: opacity 0.3s, visibility 0.3s;
-    }
-    
-    .tooltip-container .tooltip-text::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -8px;
-        border-width: 8px;
-        border-style: solid;
-        border-color: rgba(30, 41, 59, 0.95) transparent transparent transparent;
-    }
-    
-    .tooltip-container:hover .tooltip-text {
-        visibility: visible;
-        opacity: 1;
-    }
-    
-    .info-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(99, 102, 241, 0.15);
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        color: #a5b4fc;
-        border: 1px solid rgba(99, 102, 241, 0.3);
-        cursor: help;
-        transition: all 0.2s;
-    }
-    
-    .info-badge:hover {
-        background: rgba(99, 102, 241, 0.25);
-        transform: translateY(-1px);
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    # ========================================================================
-    # HEADER WITH HOVER TOOLTIPS
-    # ========================================================================
-    
-    st.markdown("""
-    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-        <h1 style="margin: 0;">🔄 Reorder Optimization</h1>
-        <div class="tooltip-container">
-            <span class="info-badge">ℹ️ Formulas</span>
-            <span class="tooltip-text">
-                <strong>Safety Stock (SS):</strong><br>
-                <code>Z × σ × √LT</code> = Buffer untuk uncertainty<br><br>
-                <strong>Reorder Point (ROP):</strong><br>
-                <code>(Demand × Lead Time) + SS</code><br><br>
-                <em>Dead Stock/Slow Moving items excluded.</em>
-            </span>
-        </div>
-    </div>
-    <p style="color: #94a3b8; margin-top: 0;">Safety Stock & Reorder Point Calculation</p>
-    """, unsafe_allow_html=True)
+    st.title("Reorder Optimization")
+    st.markdown("Safety Stock & Reorder Point Calculation")
+    st.caption("Safety Stock = Z × σ × √LT (buffer for uncertainty) | Reorder Point = (Demand × Lead Time) + Safety Stock | Dead Stock/Slow Moving items excluded")
     
     if excluded_count > 0:
-        st.info(f"ℹ️ Excluded {excluded_count:,} Dead Stock/Slow Moving items")
+        st.info(f"Excluded {excluded_count:,} Dead Stock/Slow Moving items")
     
     # ========================================================================
     # METRICS
@@ -191,7 +107,7 @@ def render_page(df: pd.DataFrame):
     # FILTER BY GROUP
     # ========================================================================
     
-    st.markdown("### 🎯 Reorder Recommendations")
+    st.markdown("### Reorder Recommendations")
     
     groups = ['All'] + sorted([g for g in df_filtered['product_category'].dropna().unique() 
                                if g and g not in ['OTHER', 'NUMERIC_CODE']])
@@ -244,7 +160,7 @@ def render_page(df: pd.DataFrame):
     
     csv_data = reorder_df.to_csv(index=False).encode('utf-8')
     st.download_button(
-        label="📥 Download Reorder Report",
+        label="Download Reorder Report",
         data=csv_data,
         file_name=f"reorder_{datetime.now().strftime('%Y%m%d')}.csv",
         mime="text/csv",

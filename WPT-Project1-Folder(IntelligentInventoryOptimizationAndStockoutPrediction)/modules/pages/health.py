@@ -33,24 +33,9 @@ def render_page(df: pd.DataFrame):
     df['turnover_ratio_90d'] = pd.to_numeric(df['turnover_ratio_90d'], errors='coerce').fillna(1.0)
     
     # Semua logika halaman dimulai dari sini, di dalam fungsi
-    st.title("📊 Inventory Health")
+    st.title("Inventory Health")
     st.markdown("Monitor inventory status and health indicators")
-    
-    with st.popover("ℹ️ Panduan Inventory Health"):
-        st.markdown("""
-        **Inventory Health Monitor** menampilkan kesehatan inventory secara real-time.
-        
-        **Metrik Utama:**
-        - **Overall Health**: Skor kesehatan inventaris (0-100%)
-        - **Stock Coverage**: Berapa hari stok dapat bertahan
-        - **Turnover Rate**: Kecepatan perputaran inventaris
-        
-        **Status:**
-        - 80-100%: Excellent ✅
-        - 60-80%: Good 
-        - 40-60%: Fair ⚠️
-        - <40%: Poor 🔴
-        """)
+    st.caption("Overall Health = composite inventory health score (0-100%) | Stock Coverage = days stock can last | Turnover Rate = annual inventory rotation | Status: 80-100% Excellent, 60-80% Good, 40-60% Fair, <40% Poor")
     
     # ========================================================================
     # METRIK UTAMA
@@ -66,7 +51,7 @@ def render_page(df: pd.DataFrame):
         <div class="metric-card" style="border-left: 3px solid {status_color};">
             <div class="metric-label">Overall Health</div>
             <div class="metric-value">{health_score:.0f}%</div>
-            <div class="metric-delta positive">{'✓ Excellent' if health_score > 80 else '⚠ Good' if health_score > 60 else '✗ Poor'}</div>
+            <div class="metric-delta positive">{'Excellent' if health_score > 80 else 'Good' if health_score > 60 else 'Poor'}</div>
         </div>
         """, unsafe_allow_html=True)
     
@@ -111,7 +96,7 @@ def render_page(df: pd.DataFrame):
     # ANALISIS VISUAL: STOCK VS DEMAND
     # ========================================================================
     
-    st.markdown("### 📈 Stock Level vs Daily Demand Analysis")
+    st.markdown("### Stock Level vs Daily Demand Analysis")
     
     # Ambil sampel produk teratas untuk visualisasi agar tidak terlalu padat
     sample_df = df.nlargest(100, 'avg_daily_demand')
@@ -141,7 +126,7 @@ def render_page(df: pd.DataFrame):
     # KATEGORI KESEHATAN INVENTARIS
     # ========================================================================
     
-    st.markdown("### 🏥 Health Categories")
+    st.markdown("### Health Categories")
     
     # Fungsi helper untuk mengklasifikasikan kesehatan produk
     def classify_health(row):
@@ -169,7 +154,7 @@ def render_page(df: pd.DataFrame):
         count = health_counts.get('Critical', 0)
         st.markdown(f"""
         <div class="metric-card" style="border-left: 4px solid #ef4444;">
-            <div class="metric-label">🔴 Critical</div>
+            <div class="metric-label">Critical</div>
             <div class="metric-value">{count}</div>
             <div style="color: #94a3b8; font-size: 0.8rem;">&lt; 7 days stock</div>
         </div>
@@ -179,7 +164,7 @@ def render_page(df: pd.DataFrame):
         count = health_counts.get('Warning', 0)
         st.markdown(f"""
         <div class="metric-card" style="border-left: 4px solid #f59e0b;">
-            <div class="metric-label">🟡 Warning</div>
+            <div class="metric-label">Warning</div>
             <div class="metric-value">{count}</div>
             <div style="color: #94a3b8; font-size: 0.8rem;">7-30 days stock</div>
         </div>
@@ -189,7 +174,7 @@ def render_page(df: pd.DataFrame):
         count = health_counts.get('Healthy', 0)
         st.markdown(f"""
         <div class="metric-card" style="border-left: 4px solid #10b981;">
-            <div class="metric-label">🟢 Healthy</div>
+            <div class="metric-label">Healthy</div>
             <div class="metric-value">{count}</div>
             <div style="color: #94a3b8; font-size: 0.8rem;">30-90 days stock</div>
         </div>
@@ -199,7 +184,7 @@ def render_page(df: pd.DataFrame):
         count = health_counts.get('Overstock', 0)
         st.markdown(f"""
         <div class="metric-card" style="border-left: 4px solid #6366f1;">
-            <div class="metric-label">🔵 Overstock</div>
+            <div class="metric-label">Overstock</div>
             <div class="metric-value">{count}</div>
             <div style="color: #94a3b8; font-size: 0.8rem;">&gt; 90 days stock</div>
         </div>
@@ -244,14 +229,14 @@ def render_page(df: pd.DataFrame):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📤 Export & Share Health Report")
+    st.markdown("### Export & Share Health Report")
     
     col1, col2 = st.columns(2)
     
     with col1:
         csv_data = filtered_df.to_csv(index=False).encode('utf-8')
         download_clicked = st.download_button(
-            label="📥 Download Health Report",
+            label="Download Health Report",
             data=csv_data,
             file_name=f"inventory_health_{datetime.now().strftime('%Y%m%d')}.csv",
             mime="text/csv",
@@ -259,10 +244,10 @@ def render_page(df: pd.DataFrame):
             key="inventory_health_csv"
         )
         if download_clicked:
-            log_activity("📥 Downloaded Inventory Health Report", '#6366f1')
+            log_activity("Downloaded Inventory Health Report", '#6366f1')
     
     with col2:
-        if st.button("📧 Email Health Report", width='stretch', key="inventory_health_email_button"):
+        if st.button("Email Health Report", use_container_width=True, key="inventory_health_email_button"):
             st.session_state.show_email_health = not st.session_state.get('show_email_health', False)
     
     if st.session_state.get('show_email_health', False):

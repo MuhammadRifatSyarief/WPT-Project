@@ -24,7 +24,7 @@ from config.constants import MBA_CONFIG
 def render_page(df: pd.DataFrame = None):
     """Render Market Basket Analysis page."""
     
-    st.title("🛒 Market Basket Analysis")
+    st.title("Market Basket Analysis")
     st.markdown("**Discover product associations and cross-selling opportunities**")
     
     # Load Project 2 data
@@ -33,7 +33,7 @@ def render_page(df: pd.DataFrame = None):
     
     # Check if required data is available
     if not project2_data or '5_Sales_Details.csv' not in project2_data:
-        st.error("⚠️ Sales transaction data not found. Please ensure Project 2 data files are in the data folder.")
+        st.error("Sales transaction data not found. Please ensure Project 2 data files are in the data folder.")
         st.info("""
         **Required files:**
         - `5_Sales_Details.csv` - Transaction-level sales data
@@ -63,7 +63,7 @@ def render_page(df: pd.DataFrame = None):
             transaction_col=transaction_col
         )
     except Exception as e:
-        st.error(f"❌ Error initializing Market Basket Analyzer: {str(e)}")
+        st.error(f"Error initializing Market Basket Analyzer: {str(e)}")
         st.info("Please check that sales data has required columns: product_id, product_name, invoice_id")
         return
     
@@ -72,7 +72,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📊 Transaction Overview")
+    st.markdown("### Transaction Overview")
     
     summary = analyzer.export_summary()
     
@@ -92,7 +92,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### ⚙️ Analysis Configuration")
+    st.markdown("### Analysis Configuration")
     
     col1, col2, col3 = st.columns(3)
     
@@ -130,7 +130,7 @@ def render_page(df: pd.DataFrame = None):
         )
     
     # Run analysis
-    if st.button("🔍 Run Market Basket Analysis", type="primary"):
+    if st.button("Run Market Basket Analysis", type="primary"):
         with st.spinner("Analyzing product associations..."):
             # Find frequent itemsets
             itemsets = analyzer.find_frequent_itemsets(
@@ -146,7 +146,7 @@ def render_page(df: pd.DataFrame = None):
             
             st.session_state['mba_rules'] = rules_df
             st.session_state['mba_itemsets'] = itemsets
-            st.success("✅ Analysis complete!")
+            st.success("Analysis complete!")
     
     # ========================================================================
     # ASSOCIATION RULES
@@ -156,7 +156,7 @@ def render_page(df: pd.DataFrame = None):
         rules_df = st.session_state['mba_rules']
         
         st.markdown("---")
-        st.markdown("### 🔗 Association Rules")
+        st.markdown("### Association Rules")
         
         # Filter options
         col1, col2 = st.columns(2)
@@ -194,7 +194,7 @@ def render_page(df: pd.DataFrame = None):
             )
             
             # Business-Focused Visualizations
-            st.markdown("#### 💼 Business Impact Analysis")
+            st.markdown("#### Business Impact Analysis")
             
             # Calculate Business Impact Score (Lift × Confidence × Support × 1000)
             # This score represents the potential business value of each rule
@@ -218,7 +218,7 @@ def render_page(df: pd.DataFrame = None):
             ]
             
             # Business Impact Analysis - Simplified to single column
-            with st.expander("ℹ️ About Business Impact Score", expanded=False):
+            with st.expander("About Business Impact Score", expanded=False):
                 st.info("""
                 **Business Impact Score** = Lift × Confidence × Support × 1000
                 
@@ -274,7 +274,7 @@ def render_page(df: pd.DataFrame = None):
             
             fig_impact.update_layout(
                 title=dict(
-                    text="🎯 Top 10 Rules by Business Impact",
+                    text="Top 10 Rules by Business Impact",
                     font=dict(size=16, color='rgba(255,255,255,0.95)')
                 ),
                 xaxis=dict(
@@ -300,7 +300,7 @@ def render_page(df: pd.DataFrame = None):
             st.plotly_chart(fig_impact, use_container_width=True)
             
             # Business Actionable Insights
-            st.markdown("**💡 Actionable Business Insights:**")
+            st.markdown("** Actionable Business Insights:**")
             
             strong_count = len(filtered_rules[filtered_rules['lift_category'] == 'Strong'])
             moderate_count = len(filtered_rules[filtered_rules['lift_category'] == 'Moderate'])
@@ -312,7 +312,7 @@ def render_page(df: pd.DataFrame = None):
             
             insights_html = f"""
             <div style='background-color: rgba(13,8,135,0.2); padding: 15px; border-radius: 10px; margin: 10px 0;'>
-                <h4 style='color: rgba(255,255,255,0.95); margin-bottom: 10px;'>📈 Key Findings:</h4>
+                <h4 style='color: rgba(255,255,255,0.95); margin-bottom: 10px;'>Key Findings:</h4>
                 <ul style='color: rgba(255,255,255,0.9); line-height: 1.8;'>
                     <li><strong>{strong_count} High-Value Rules:</strong> Create product bundles for maximum cross-sell impact</li>
                     <li><strong>{high_confidence_rules} High-Confidence Rules:</strong> {high_confidence_rules/len(filtered_rules)*100:.0f}% of rules have >70% confidence - very reliable for recommendations</li>
@@ -331,8 +331,8 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 🛍️ Frequently Bought Together")
-    with st.expander("ℹ️ About Product Pairs", expanded=False):
+    st.markdown("### Frequently Bought Together")
+    with st.expander("About Product Pairs", expanded=False):
         st.info("""
         This section shows products that are frequently purchased together in the same transaction.
         
@@ -418,7 +418,7 @@ def render_page(df: pd.DataFrame = None):
                 
                 fig_pairs.update_layout(
                     title=dict(
-                        text="🛍️ Top 10 Product Pairs",
+                        text="Top 10 Product Pairs",
                         font=dict(size=16, color='rgba(255,255,255,0.95)')
                     ),
                     xaxis=dict(
@@ -449,8 +449,8 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 💡 Product Recommendations")
-    with st.expander("ℹ️ How Product Recommendations Work", expanded=False):
+    st.markdown("### Product Recommendations")
+    with st.expander("How Product Recommendations Work", expanded=False):
         st.info("""
         Select a product to see which other products you should recommend to customers who buy it.
         
@@ -542,8 +542,8 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 🎯 Cross-Selling Opportunities")
-    st.info("💡 **Tip**: Use the filter options in 'Association Rules' section above to view cross-selling opportunities. Filter by 'Strong' or 'Moderate' lift category to see the best opportunities.")
+    st.markdown("### Cross-Selling Opportunities")
+    st.info("**Tip**: Use the filter options in 'Association Rules' section above to view cross-selling opportunities. Filter by 'Strong' or 'Moderate' lift category to see the best opportunities.")
     
     if 'mba_rules' in st.session_state:
         opportunities = analyzer.get_cross_selling_opportunities()
@@ -552,7 +552,7 @@ def render_page(df: pd.DataFrame = None):
             st.success(f"Found {len(opportunities):,} cross-selling opportunities")
             
             # Business Actionable Recommendations - Focus on actionable insights, not redundant table
-            st.markdown("#### 💼 Strategic Business Recommendations")
+            st.markdown("#### Strategic Business Recommendations")
             
             # Calculate top opportunities with business context
             top_opps = opportunities.head(20).copy()
@@ -570,8 +570,8 @@ def render_page(df: pd.DataFrame = None):
             col1, col2 = st.columns(2)
             
             with col1:
-                st.markdown("**🎯 Top 5 High-Value Opportunities:**")
-                with st.expander("ℹ️ How to Read These Opportunities", expanded=False):
+                st.markdown("**Top 5 High-Value Opportunities:**")
+                with st.expander("How to Read These Opportunities", expanded=False):
                     st.info("""
                     Each opportunity shows:
                     - **When customer buys**: The trigger product
@@ -586,7 +586,7 @@ def render_page(df: pd.DataFrame = None):
                 # Display top 5 opportunities in a clear, actionable format with full text
                 for idx, (_, opp) in enumerate(top_opps.head(5).iterrows(), 1):
                     success_rate = opp['confidence'] * 100
-                    strength = "🔥 Very Strong" if opp['lift'] > 3.0 else "✅ Strong" if opp['lift'] > 1.5 else "📊 Moderate"
+                    strength = "Very Strong" if opp['lift'] > 3.0 else "Strong" if opp['lift'] > 1.5 else "Moderate"
                     
                     # Get full product names without truncation
                     trigger_product = str(opp['if_customer_buys'])
@@ -614,7 +614,7 @@ def render_page(df: pd.DataFrame = None):
                     st.markdown(opp_html, unsafe_allow_html=True)
             
             with col2:
-                st.markdown("**📊 Opportunity Summary:**")
+                st.markdown("**Opportunity Summary:**")
                 
                 # Calculate summary metrics
                 total_potential = top_opps['transactions'].sum()
@@ -656,7 +656,7 @@ def render_page(df: pd.DataFrame = None):
                 
                 
                 # Actionable insights
-                st.markdown("**💡 Key Insights:**")
+                st.markdown("**Key Insights:**")
                 insights_text = f"""
                 <div style='background-color: rgba(13,8,135,0.2); padding: 12px; border-radius: 8px; margin-top: 10px;'>
                     <ul style='color: rgba(255,255,255,0.9); line-height: 1.6; font-size: 0.9em; margin: 0; padding-left: 20px;'>
@@ -676,7 +676,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📋 Analysis Summary")
+    st.markdown("### Analysis Summary")
     
     col1, col2 = st.columns(2)
     
@@ -719,7 +719,7 @@ def render_page(df: pd.DataFrame = None):
     # ========================================================================
     
     st.markdown("---")
-    st.markdown("### 📥 Export Data")
+    st.markdown("### Export Data")
     
     col1, col2 = st.columns(2)
     
@@ -727,7 +727,7 @@ def render_page(df: pd.DataFrame = None):
         if 'mba_rules' in st.session_state and not st.session_state['mba_rules'].empty:
             csv = st.session_state['mba_rules'].to_csv(index=False)
             st.download_button(
-                label="📊 Download Association Rules (CSV)",
+                label="Download Association Rules (CSV)",
                 data=csv,
                 file_name=f"mba_association_rules_{datetime.now().strftime('%Y%m%d')}.csv",
                 mime="text/csv"
